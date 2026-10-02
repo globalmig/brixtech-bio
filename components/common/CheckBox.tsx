@@ -1,0 +1,112 @@
+'use client';
+
+import { Checkbox as CheckboxPrimitive } from '@base-ui/react/checkbox';
+import { cva, type VariantProps } from 'class-variance-authority';
+import type { CSSProperties, ReactNode } from 'react';
+
+import { cn } from '@/lib/utils';
+
+// 바깥 박스
+const checkboxControlVariants = cva(
+  'group/checkbox relative flex shrink-0 items-center justify-center rounded-[4px] border-[1.5px] border-gray-300 outline-none focus-visible:ring-2 focus-visible:ring-primary data-checked:border-primary data-disabled:cursor-not-allowed data-disabled:border-gray-400 data-disabled:bg-gray-200',
+  {
+    variants: {
+      size: {
+        large: 'size-6',
+        medium: 'size-4.5',
+      },
+    },
+    defaultVariants: {
+      size: 'large',
+    },
+  }
+);
+
+// 체크 아이콘
+const checkboxIndicatorVariants = cva(
+  'mask-(--checkbox-icon) mask-center mask-contain mask-no-repeat block bg-primary group-data-disabled/checkbox:bg-gray-400',
+  {
+    variants: {
+      size: {
+        large: 'size-4',
+        medium: 'size-3',
+      },
+    },
+    defaultVariants: {
+      size: 'large',
+    },
+  }
+);
+
+const checkboxLabelClassName = 'text-gray-800';
+const checkboxDescriptionClassName = 'text-gray-600';
+
+type CheckboxSize = VariantProps<typeof checkboxControlVariants>['size'];
+
+type CheckBoxProps = Omit<
+  CheckboxPrimitive.Root.Props,
+  'className' | 'children'
+> & {
+  size?: CheckboxSize;
+  className?: string;
+  label?: ReactNode;
+  description?: ReactNode;
+};
+
+function CheckBox({
+  size = 'large',
+  className,
+  label,
+  description,
+  ...props
+}: CheckBoxProps) {
+  const control = (
+    <CheckboxPrimitive.Root
+      data-slot="checkbox"
+      className={cn(
+        checkboxControlVariants({ size }),
+        !label && !description && className
+      )}
+      {...props}
+    >
+      <CheckboxPrimitive.Indicator
+        data-slot="checkbox-indicator"
+        className={checkboxIndicatorVariants({ size })}
+        style={
+          {
+            '--checkbox-icon': `url(/icons/checkbox-check.svg)`,
+          } as CSSProperties
+        }
+      />
+    </CheckboxPrimitive.Root>
+  );
+
+  if (!label && !description) {
+    return control;
+  }
+
+  return (
+    <label
+      className={cn(
+        'flex cursor-pointer items-center gap-3 has-data-disabled:cursor-not-allowed',
+        className
+      )}
+    >
+      {control}
+      <span
+        className={cn(
+          'flex min-w-0 flex-col items-start',
+          checkboxLabelClassName
+        )}
+      >
+        {label != null && <span>{label}</span>}
+        {description != null && (
+          <span className={checkboxDescriptionClassName}>{description}</span>
+        )}
+      </span>
+    </label>
+  );
+}
+
+export { CheckBox };
+export type { CheckBoxProps };

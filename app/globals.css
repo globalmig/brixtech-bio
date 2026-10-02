@@ -1,0 +1,143 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  /*
+   * Primary Brand Color — 프로젝트마다 바뀌는 값입니다.
+   * 기본은 1개만 둡니다. 보조 브랜드 색이 필요하면 그때 변수를
+   * 추가해서 직접 확장하세요 (예: --color-primary-2).
+   */
+  --color-primary: #1E9D70;
+  --color-primary-2: #173026;
+  --color-primary-3: #1C231F;
+  --color-primary-4: #788975;
+  --color-primary-5: #F4F1E9;
+
+  --color-gray-50: #fafafa;
+  --color-gray-100: #f5f5f5;
+  --color-gray-200: #efefef;
+  --color-gray-300: #e2e2e2;
+  --color-gray-400: #bfbfbf;
+  --color-gray-500: #a0a0a0;
+  --color-gray-600: #777777;
+  --color-gray-700: #636363;
+  --color-gray-800: #444444;
+  --color-gray-900: #232527;
+
+  /* System Colors */
+  --color-system-alert: #882022;
+  --color-system-success: #1E9D70;
+  --color-system-information: #1E9D70;
+  --color-system-warning: #ffcc00;
+
+  /* Layout */
+  --width-app-canvas: 1400px;
+  --min-width-app-canvas: var(--width-app-canvas);
+  /* width-app-canvas와 같은 값: 뷰포트가 이 값 미만이면 좌우 padding 유지, 이상이면 0 (mx-auto로 중앙 정렬되므로) */
+  --breakpoint-canvas: 1400px;
+
+  /* Font Family */
+  --font-sans:
+    var(--font-noto-sans-kr), 'Pretendard', -apple-system, BlinkMacSystemFont,
+    'Malgun Gothic', sans-serif;
+
+  /*
+   * Typography — 실제 시맨틱 태그 기준 스케일입니다.
+   * 마크업에서는 태그와 1:1로 대응하는 클래스를 그대로 씁니다.
+   * 예: <h4 className="text-h4">, <p className="text-body">
+   * 공통 컴포넌트(components/common)는 이 클래스를 직접 쓰지 않습니다 —
+   * 크기는 프로젝트마다 바뀌므로, 사용하는 쪽 마크업에서 지정합니다.
+   * 새 프로젝트를 시작할 때는 아래 rem/line-height 값만 교체하면 됩니다.
+   */
+  --text-h1: 2.5rem;
+  --text-h1--line-height: 3rem;
+  --text-h1--font-weight: 700;
+
+  --text-h2: 2rem;
+  --text-h2--line-height: 2.5rem;
+  --text-h2--font-weight: 700;
+
+  --text-h3: 1.75rem;
+  --text-h3--line-height: 2.25rem;
+  --text-h3--font-weight: 700;
+
+  --text-h4: 1.5rem;
+  --text-h4--line-height: 2rem;
+  --text-h4--font-weight: 700;
+
+  --text-h5: 1.25rem;
+  --text-h5--line-height: 1.75rem;
+  --text-h5--font-weight: 600;
+
+  --text-h6: 1rem;
+  --text-h6--line-height: 1.5rem;
+  --text-h6--font-weight: 600;
+
+  --text-body: 1rem;
+  --text-body--line-height: 1.5rem;
+  --text-body--font-weight: 400;
+
+  --text-small: 0.875rem;
+  --text-small--line-height: 1.25rem;
+  --text-small--font-weight: 400;
+}
+
+body {
+  font-family: var(--font-sans);
+}
+
+:root {
+  /* Semantic - Text */
+  --text-default: var(--color-gray-900);
+  --text-sub: var(--color-gray-800);
+  --text-info: var(--color-gray-600);
+  --text-disabled: var(--color-gray-500);
+
+  /* Semantic - Icon */
+  --icon-default: var(--color-gray-800);
+  --icon-sub: var(--color-gray-600);
+  --icon-disabled: var(--color-gray-400);
+
+  /* Semantic - Border */
+  --border-default: var(--color-gray-400);
+  --border-strong: var(--color-gray-600);
+  --border-disabled: var(--color-gray-300);
+
+  /* Semantic - Divider */
+  --divider-default: var(--color-gray-300);
+  --divider-strong: var(--color-gray-500);
+
+  /* Semantic - Background */
+  --bg-default: var(--color-white);
+}
+
+@theme inline {
+  --color-text-default: var(--text-default);
+  --color-text-sub: var(--text-sub);
+  --color-text-info: var(--text-info);
+  --color-text-disabled: var(--text-disabled);
+  --color-icon-default: var(--icon-default);
+  --color-icon-sub: var(--icon-sub);
+  --color-icon-disabled: var(--icon-disabled);
+  --color-border-default: var(--border-default);
+  --color-border-strong: var(--border-strong);
+  --color-border-disabled: var(--border-disabled);
+  --color-divider-default: var(--divider-default);
+  --color-divider-strong: var(--divider-strong);
+  --color-bg-default: var(--bg-default);
+  --color-bg-light: var(--bg-light);
+  --color-bg-deep: var(--bg-deep);
+}
+
+@layer base {
+  * {
+    @apply border-border-default outline-primary/50;
+  }
+  body {
+    @apply bg-bg-light text-text-default;
+  }
+  html {
+    @apply font-sans;
+  }
+}
