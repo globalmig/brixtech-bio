@@ -29,27 +29,24 @@ export default function HeroSection() {
         ))}
       </Slider>
 
-      <div className="absolute inset-x-0 top-1/4 mx-auto w-full max-w-(--width-app-canvas) px-5 text-white md:px-8 lg:bottom-1/2 canvas:px-0">
-        <p data-aos="fade-up" className="lg:text-h5 mb-10 font-semibold">
+      <div
+      data-aos="fade-up"
+          data-aos-delay="300"
+      className="absolute inset-x-0 top-1/4 mx-auto w-full max-w-(--width-app-canvas) px-5 text-white md:px-8 lg:bottom-1/2 canvas:px-0">
+        <p className="lg:text-h5 mb-10 font-semibold">
           MICROALGAE BIO PLATFORM
         </p>
         <h1
-          data-aos="fade-up"
-          data-aos-delay="300"
           className="text-h3 mb-5 lg:text-[3.5rem] lg:leading-16 lg:mb-10 font-semibold whitespace-pre-line"
         >
           {'기술에서 브랜드까지,\n하나의 흐름으로.'}
         </h1>
         <p
-          data-aos="fade-up"
-          data-aos-delay="400"
           className="lg:text-h3 font-normal text-white mb-10 lg:mb-20"
         >
           스피루리나 배양을 기반으로 원료·제품·유통을 연결합니다.
         </p>
         <Button
-          data-aos="fade-up"
-          data-aos-delay="500"
           size={{ base: 'small', md: 'medium', lg: 'large' }}
           variant="blur"
         >

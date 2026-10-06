@@ -7,21 +7,13 @@ export default function OurCompanySection() {
     <section className="mx-auto w-full max-w-(--width-app-canvas) px-5 py-16 md:px-8 md:py-20 canvas:px-0 lg:pt-28 lg:pb-12">
       <div className="grid gap-10 lg:flex lg:items-center lg:justify-between">
         <div className="lg:w-215 lg:shrink-0">
-          <p data-aos="fade-up" className="text-small text-primary mb-4 font-bold tracking-widest lg:mb-8">
+          <p className="text-small text-primary mb-4 font-bold tracking-widest lg:mb-8">
             OUR COMPANY
           </p>
-          <h2
-            data-aos="fade-up"
-            data-aos-delay="300"
-            className="text-h3 mb-5 whitespace-pre-line lg:text-[3rem] lg:leading-14"
-          >
+          <h2 className="text-h3 mb-5 whitespace-pre-line lg:text-[3rem] lg:leading-14">
             {'미세조류에서 시작해\n지속가능한 바이오 산업을 만들어갑니다.'}
           </h2>
-          <p
-            data-aos="fade-up"
-            data-aos-delay="400"
-            className="text-[1rem] lg:text-[1.5rem] leading-6 lg:leading-8 text-primary-4 mb-10 lg:mb-20"
-          >
+          <p className="text-[1rem] lg:text-[1.5rem] leading-6 lg:leading-8 text-primary-4 mb-10 lg:mb-20">
             브릭스텍바이오는 미세조류 기반 기능성 원료와 <br className='hidden lg:block'/>친환경 바이오 응용 제품을 개발합니다.
           </p>
 
@@ -29,8 +21,6 @@ export default function OurCompanySection() {
             {COMPANY_STATS.map((stat, index) => (
               <article
                 key={stat.label}
-                data-aos="fade-up"
-                data-aos-delay={500 + index * 100}
                 className={
                   index > 0
                     ? 'border-gray-400 ml-4 border-l-2 border-dashed pl-4 sm:ml-15 sm:pl-15'
@@ -61,8 +51,6 @@ export default function OurCompanySection() {
         {COMPANY_FEATURES.map((feature, index) => (
           <div
             key={feature.title}
-            data-aos="fade-up"
-            data-aos-delay={index * 300}
             className={`flex min-w-0 items-start gap-3
               ${index > 0
                 ? 'border-gray-400 border-t border-dashed pt-6 sm:border-t-0 sm:border-l-2 sm:pt-0 sm:pl-5'

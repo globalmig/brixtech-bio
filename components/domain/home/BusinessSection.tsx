@@ -37,21 +37,13 @@ export default function BusinessSection() {
       <div className="mx-auto w-full max-w-(--width-app-canvas) px-5 pt-16 md:px-8 md:pt-20 canvas:px-0 lg:pt-28">
         <div className="mb-10 flex items-end justify-between lg:mb-12">
           <div>
-            <p data-aos="fade-up" className="text-small text-primary mb-4 lg:mb-8 font-bold tracking-widest">
+            <p className="text-small text-primary mb-4 lg:mb-8 font-bold tracking-widest">
               BUSINESS
             </p>
-            <h2
-              data-aos="fade-up"
-              data-aos-delay="300"
-              className="text-h3 mb-5 lg:text-[3rem] lg:leading-14"
-            >
+            <h2 className="text-h3 mb-5 lg:text-[3rem] lg:leading-14">
              하나로 이어지는 <br className='lg:hidden'/>바이오 비즈니스
             </h2>
-            <p
-              data-aos="fade-up"
-              data-aos-delay="400"
-              className="text-[1rem] lg:text-[1.5rem] leading-6 lg:leading-8 text-primary-4"
-            >
+            <p className="text-[1rem] lg:text-[1.5rem] leading-6 lg:leading-8 text-primary-4">
               5가지 핵심 사업 영역의 유기적인 시너지를 통해 <br className='hidden lg:block'/>지속가능한 미래 바이오 시장을 선도합니다.
             </p>
           </div>
