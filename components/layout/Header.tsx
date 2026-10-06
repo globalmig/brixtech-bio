@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { NAV_ITEMS } from '@/constants/nav';
 
@@ -10,34 +10,60 @@ export default function Header() {
   const [isDesktopNavOpen, setIsDesktopNavOpen] = useState(false);
   const [hoveredNavItem, setHoveredNavItem] = useState<string | null>(null);
   const [openMobileItem, setOpenMobileItem] = useState<string | null>(null);
+  const [subMenuLeft, setSubMenuLeft] = useState(0);
+  const [columnWidths, setColumnWidths] = useState<number[]>(() => NAV_ITEMS.map(() => 0));
+  const logoRef = useRef<HTMLAnchorElement>(null);
+  const navItemRefs = useRef<(HTMLAnchorElement | null)[]>([]);
 
   const closeMobileMenu = () => {
     setIsMenuOpen(false);
     setOpenMobileItem(null);
   };
 
+  useEffect(() => {
+    const updateSubMenuLayout = () => {
+      const logoEl = logoRef.current;
+      const itemEls = navItemRefs.current;
+      if (!logoEl || itemEls.some((el) => !el)) return;
+      const logoRect = logoEl.getBoundingClientRect();
+      const itemRects = itemEls.map((el) => el!.getBoundingClientRect());
+      setSubMenuLeft(itemRects[0].left - logoRect.left);
+      setColumnWidths(itemRects.map((rect) => rect.width));
+    };
+    updateSubMenuLayout();
+    window.addEventListener('resize', updateSubMenuLayout);
+    return () => window.removeEventListener('resize', updateSubMenuLayout);
+  }, []);
+
   return (
     <header
       className={`absolute inset-x-0 top-0 z-20 transition-colors duration-200 ${
         isDesktopNavOpen ? 'bg-white text-text-default' : 'text-white'
       }`}
+      onMouseLeave={() => {
+        setIsDesktopNavOpen(false);
+        setHoveredNavItem(null);
+      }}
     >
       <div className="mx-auto flex w-full max-w-(--width-app-canvas) items-center justify-between px-5 py-6 md:px-8 canvas:px-0">
-        <Link href="/" className="text-h3 lg:text-h2 font-bold tracking-tight">
+        <Link
+          ref={logoRef}
+          href="/"
+          className="text-h4 lg:text-h2 font-bold tracking-tight"
+        >
           BRIXTECHBIO
         </Link>
 
         <nav
-          className="hidden lg:flex lg:gap-x-15"
+          className="hidden lg:flex lg:gap-x-17"
           onMouseEnter={() => setIsDesktopNavOpen(true)}
-          onMouseLeave={() => {
-            setIsDesktopNavOpen(false);
-            setHoveredNavItem(null);
-          }}
         >
-          {NAV_ITEMS.map((item) => (
+          {NAV_ITEMS.map((item, index) => (
             <Link
               key={item.href}
+              ref={(el) => {
+                navItemRefs.current[index] = el;
+              }}
               href={item.href}
               onClick={() => setIsDesktopNavOpen(false)}
               onMouseEnter={() => setHoveredNavItem(item.href)}
@@ -64,35 +90,39 @@ export default function Header() {
         <div
           className="border-divider-default hidden border-t bg-white lg:block"
           onMouseEnter={() => setIsDesktopNavOpen(true)}
-          onMouseLeave={() => {
-            setIsDesktopNavOpen(false);
-            setHoveredNavItem(null);
-          }}
         >
-          <div className="mx-auto grid w-full max-w-(--width-app-canvas) grid-cols-6 gap-x-15 px-5 py-6 md:px-8 canvas:px-0">
-            {NAV_ITEMS.map((item) => (
-              <ul
-                key={item.href}
-                className="flex flex-col items-center gap-4"
-                onMouseEnter={() => setHoveredNavItem(item.href)}
-              >
-                {item.children?.map((child) => (
-                  <li key={child.href}>
-                    <Link
-                      href={child.href}
-                      onClick={() => setIsDesktopNavOpen(false)}
-                      className={`text-small hover:font-bold block text-center whitespace-nowrap ${
-                        hoveredNavItem === item.href
-                          ? 'text-text-default'
-                          : 'text-text-info'
-                      }`}
-                    >
-                      {child.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            ))}
+          <div className="mx-auto w-full max-w-(--width-app-canvas) px-5 py-6 md:px-8 canvas:px-0">
+            <div
+              className="grid gap-x-17"
+              style={{
+                marginLeft: subMenuLeft,
+                gridTemplateColumns: columnWidths.map((width) => `${width}px`).join(' '),
+              }}
+            >
+              {NAV_ITEMS.map((item) => (
+                <ul
+                  key={item.href}
+                  className="flex flex-col items-center gap-5"
+                  onMouseEnter={() => setHoveredNavItem(item.href)}
+                >
+                  {item.children?.map((child) => (
+                    <li key={child.href}>
+                      <Link
+                        href={child.href}
+                        onClick={() => setIsDesktopNavOpen(false)}
+                        className={`text-small lg:text-[1rem] hover:font-bold block text-center whitespace-nowrap ${
+                          hoveredNavItem === item.href
+                            ? 'text-text-default'
+                            : 'text-text-info'
+                        }`}
+                      >
+                        {child.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              ))}
+            </div>
           </div>
         </div>
       ) : null}

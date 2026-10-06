@@ -141,3 +141,38 @@ body {
     @apply font-sans;
   }
 }
+
+.business-slider .slick-dots {
+  bottom: -40px;
+}
+
+.business-slider .slick-dots li,
+.business-slider .slick-dots li button {
+  width: 7px;
+  height: 7px;
+}
+
+.business-slider .slick-dots li button:before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 9999px;
+  background-color: rgba(0, 0, 0, 0.2);
+  opacity: 1;
+  transition: background-color 0.2s ease;
+}
+
+.business-slider .slick-dots li.slick-active button:before {
+  background-color: var(--color-primary);
+}
+
+/* 문의하기 링크의 회전하는 원형 배지 */
+@keyframes badge-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-badge-spin {
+  animation: badge-spin 20s linear infinite;
+}

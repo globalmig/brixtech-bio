@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import { Noto_Sans_KR } from 'next/font/google';
 
+import AosInit from '@/components/common/AosInit';
+
 import './globals.css';
 
 const notoSansKR = Noto_Sans_KR({
@@ -40,7 +42,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<'/'>) {
   return (
     <html lang="ko" className={notoSansKR.variable}>
-      <body>{children}</body>
+      <body>
+        <AosInit />
+        {children}
+      </body>
     </html>
   );
 }

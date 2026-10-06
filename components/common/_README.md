@@ -22,7 +22,7 @@
 | prop        | type                                        | default     | 설명                 |
 | ----------- | ------------------------------------------- | ----------- | -------------------- |
 | `variant`   | `'primary' \| 'secondary' \| 'outline'`     | `'primary'` |                      |
-| `size`      | `'giant' \| 'large' \| 'medium' \| 'small'` | `'large'`   |                      |
+| `size`      | `'giant' \| 'large' \| 'medium' \| 'small'` \| `{ base?, sm?, md?, lg?: ButtonSize }` | `'large'`   | breakpoint별 객체로 반응형 크기 지정 가능 |
 | `leftIcon`  | `ReactNode`                                 | —           | 왼쪽 아이콘 슬롯     |
 | `rightIcon` | `ReactNode`                                 | —           | 오른쪽 아이콘 슬롯   |
 | `disabled`  | `boolean`                                   | `false`     |                      |
@@ -42,6 +42,11 @@ import { Button } from '@/components/common/Button';
   취소
 </Button>
 
+// 반응형 size (breakpoint별 다른 크기)
+<Button size={{ base: 'small', md: 'medium', lg: 'large' }}>
+  저장
+</Button>
+
 // 아이콘 (public/icons)
 <Button
   leftIcon={<img src="/icons/chevron-left.svg" alt="" aria-hidden />}
@@ -53,6 +58,10 @@ import { Button } from '@/components/common/Button';
 // disabled
 <Button disabled>비활성</Button>
 ```
+
+`size`를 breakpoint별 객체로 넘기면 지정하지 않은 breakpoint는 바로 아래 breakpoint 값을 그대로 물려받습니다(반응형 CSS와 동일한 동작). 지원 breakpoint는 프로젝트에서 실제 쓰는 `base`/`sm`/`md`/`lg`만 지원합니다(`xl`/`2xl`은 사용례가 없어 제외, 필요해지면 `Button.tsx`의 `RESPONSIVE_SIZE_CLASSES`에 추가).
+
+> `variant="outline"` + 반응형 `size` 조합에서는 size별로 다른 hover 배경색(`compoundVariants`)이 적용되지 않습니다(테두리 hover는 정상 적용). 필요해지면 `Button.tsx`에 보강하세요.
 
 ---
 
