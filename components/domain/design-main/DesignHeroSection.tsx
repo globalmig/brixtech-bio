@@ -1,7 +1,10 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef } from 'react';
+import Slider from 'react-slick';
+import { HERO_SLIDES } from '@/constants/home';
 
 function ArrowRightIcon({ className = 'text-text-default' }: { className?: string }) {
   return (
@@ -33,25 +36,42 @@ export default function DesignHeroSection() {
 
   return (
     <section className="relative h-180 w-full overflow-hidden lg:h-225">
-      <video
+      {/* <video
         ref={videoRef}
         src="/images/배양관_전경.mp4"
+        poster="/images/배양관_전경_poster.jpg"
         autoPlay
         loop
         muted
         playsInline
+        preload="auto"
         className="h-180 w-full object-cover lg:h-225"
       />
 
       <div
         aria-hidden
         className="absolute inset-x-0 top-0 h-180 w-full bg-linear-to-b from-black/80 to-transparent lg:h-225"
-      />
-
+      /> */}
+      <Slider
+        dots={false}
+        arrows={false}
+        infinite
+        autoplay
+        autoplaySpeed={5000}
+        speed={800}
+        fade
+        pauseOnHover={false}
+      >
+        {HERO_SLIDES.map((src) => (
+          <div key={src} className="relative h-180 lg:h-225">
+            <Image src={src} alt="메인 배너 이미지" width={2560} height={900} className="w-full h-full object-cover" />
+          </div>
+        ))}
+      </Slider>
       <div
-      data-aos="fade-up"
-          data-aos-delay="300"
-      className="text-white absolute inset-x-0 top-1/4 mx-auto w-full max-w-(--width-app-canvas) px-5 md:px-8 lg:bottom-1/2 canvas:px-0">
+        data-aos="fade-up"
+        data-aos-delay="300"
+        className="text-white absolute inset-x-0 top-1/4 mx-auto w-full max-w-(--width-app-canvas) px-5 md:px-8 lg:bottom-1/2 canvas:px-0">
         <p className="text-small lg:text-base mb-10 font-semibold">
           MICROALGAE BIO PLATFORM
         </p>
@@ -63,14 +83,14 @@ export default function DesignHeroSection() {
         <p
           className="lg:text-h5 font-normal mb-10 lg:mb-20"
         >
-          스피루리나 배양을 기반으로<br className='lg:hidden'/> 원료·제품·유통을 연결합니다.
+          스피루리나 배양을 기반으로<br className='lg:hidden' /> 원료·제품·유통을 연결합니다.
         </p>
         <Link
           href="#"
           className="text-small lg:text-base group inline-flex items-center gap-4 font-bold"
         >
           기술 알아보기
-          <ArrowRightIcon className='text-white'/>
+          <ArrowRightIcon className='text-white' />
         </Link>
       </div>
     </section>

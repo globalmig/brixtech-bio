@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { BUSINESS_CATEGORIES } from '@/constants/home';
+import { BUSINESS_CATEGORIES, BUSINESS_CATEGORIES2 } from '@/constants/home';
 
 export default function DesignBusinessSection() {
   return (
@@ -20,7 +20,7 @@ export default function DesignBusinessSection() {
       </div>
 
       <div className="mt-16 grid grid-cols-1 gap-5 lg:gap-2 px-[4%] lg:px-6 sm:grid-cols-2 lg:mt-20 lg:grid-cols-3 xl:grid-cols-5">
-        {BUSINESS_CATEGORIES.map((category) => (
+        {BUSINESS_CATEGORIES2.map((category) => (
           <Link
             key={category.title}
             href="#"

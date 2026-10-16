@@ -109,7 +109,7 @@ export default function DesignBrandSection() {
       </div>
 
       <div className="bg-bg-default hidden lg:block">
-        <div className="mx-auto flex w-full max-w-(--width-app-canvas) items-center justify-between px-5 py-15 md:px-8 canvas:px-0 lg:py-30">
+        <div className="mx-auto flex w-full max-w-(--width-app-canvas) items-center justify-between px-5 py-15 md:px-8 lg:pr-0 canvas:px-0 lg:py-30">
           <div className="max-w-xl shrink-0">
             <p className="text-small text-black mb-4 font-bold lg:mb-8">
               BRAND & PRODUCTS
@@ -135,20 +135,20 @@ export default function DesignBrandSection() {
             </Link>
           </div>
 
-          <div className="flex items-end gap-8">
+          <div className="flex items-end gap-5">
             <div
               key={`pc-image-${activeIndex}`}
-              className="animate-fade-left relative h-180 w-120 shrink-0 overflow-hidden"
+              className="relative h-180 w-138 shrink-0 overflow-hidden"
             >
               <Image
                 src={product.image}
                 alt={product.name}
                 fill
-                sizes="568px"
+                sizes="600px"
                 className="object-bottom object-cover"
               />
             </div>
-            <div key={`pc-info-${activeIndex}`} className="animate-fade-right w-48 shrink-0">
+            <div key={`pc-info-${activeIndex}`} className="w-fit shrink-0">
               <p className="text-small text-black mb-1 font-bold">
                 {product.brand}
               </p>

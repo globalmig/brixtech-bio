@@ -116,6 +116,7 @@ export default function DesignTechnologySection() {
               })}
             </div>
           </div>
+          
         </div>
       </div>
     </section>

@@ -36,13 +36,16 @@ export default function OurCompanySection() {
           </div>
         </div>
 
-        <div className="relative aspect-4/3 w-full lg:w-150 overflow-hidden rounded-2xl">
-          <Image
-            src="/images/home-our-company.png"
-            alt="브릭스텍바이오 미세조류"
-            fill
-            sizes="(min-width: 1024px) 50vw, 100vw"
-            className="object-cover"
+        <div className="relative aspect-4/3 w-full lg:w-150 overflow-hidden">
+          <video
+            src="/images/배양관_전경.mp4"
+            poster="/images/배양관_전경_poster.jpg"
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            className="h-full w-full object-cover"
           />
         </div>
       </div>
