@@ -26,7 +26,7 @@ export default function BrandSection() {
 
       <div className="relative mx-auto w-full max-w-(--width-app-canvas) px-5 py-20 md:px-8 md:py-28 canvas:px-0 lg:py-36">
         <div className="max-w-md lg:max-w-xl">
-          <p className="text-small text-white mb-4 font-bold tracking-widest lg:mb-8">
+          <p className="text-small text-white mb-4 font-bold lg:mb-8">
             BRAND & PRODUCTS
           </p>
           <h2 className="text-white text-h3 mb-5 lg:text-[3rem] lg:leading-14">

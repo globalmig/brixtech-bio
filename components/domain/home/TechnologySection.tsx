@@ -13,7 +13,7 @@ const PROCESS_TONES = [
 export default function TechnologySection() {
   return (
     <section className="mx-auto w-full max-w-(--width-app-canvas) px-5 py-16 md:px-8 md:py-20 canvas:px-0 lg:py-32">
-      <p className="text-small text-primary mb-4 font-bold tracking-widest lg:mb-8">
+      <p className="text-small text-primary mb-4 font-bold lg:mb-8">
         TECHNOLOGY
       </p>
       <h2

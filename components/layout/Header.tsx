@@ -1,11 +1,14 @@
 'use client';
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 
-import { NAV_ITEMS } from '@/constants/nav';
+import { DESIGN_REVIEW_ITEM, NAV_ITEMS } from '@/constants/nav';
 
 export default function Header() {
+  const pathname = usePathname();
+  const isHome = pathname === '/' || "/design";
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDesktopNavOpen, setIsDesktopNavOpen] = useState(false);
   const [hoveredNavItem, setHoveredNavItem] = useState<string | null>(null);
@@ -38,7 +41,11 @@ export default function Header() {
   return (
     <header
       className={`absolute inset-x-0 top-0 z-20 transition-colors duration-200 ${
-        isDesktopNavOpen ? 'bg-white text-text-default' : 'text-white'
+        isDesktopNavOpen
+          ? 'bg-white text-text-default'
+          : isHome
+            ? 'text-white'
+            : 'text-text-default'
       }`}
       onMouseLeave={() => {
         setIsDesktopNavOpen(false);
@@ -55,23 +62,49 @@ export default function Header() {
         </Link>
 
         <nav
-          className="hidden lg:flex lg:gap-x-17"
+          className="hidden lg:flex lg:items-center lg:gap-x-17"
           onMouseEnter={() => setIsDesktopNavOpen(true)}
         >
-          {NAV_ITEMS.map((item, index) => (
-            <Link
-              key={item.href}
-              ref={(el) => {
-                navItemRefs.current[index] = el;
-              }}
-              href={item.href}
-              onClick={() => setIsDesktopNavOpen(false)}
-              onMouseEnter={() => setHoveredNavItem(item.href)}
-              className="text-h5 font-semibold tracking-wide whitespace-nowrap hover:opacity-80"
-            >
-              {item.label}
-            </Link>
-          ))}
+          <Link
+            href={DESIGN_REVIEW_ITEM.href}
+            onClick={() => setIsDesktopNavOpen(false)}
+            onMouseEnter={() => setHoveredNavItem(null)}
+            className="text-h5 font-semibold tracking-wide whitespace-nowrap hover:opacity-80"
+          >
+            {DESIGN_REVIEW_ITEM.label}
+          </Link>
+
+          {NAV_ITEMS.map((item, index) =>
+            item.external ? (
+              <Link
+                key={item.href}
+                ref={(el) => {
+                  navItemRefs.current[index] = el;
+                }}
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-disabled="true"
+                onClick={(e) => e.preventDefault()}
+                className="text-h6 rounded-full border border-current px-4 py-1.5 tracking-wide whitespace-nowrap opacity-90"
+              >
+                {item.label}
+              </Link>
+            ) : (
+              <Link
+                key={item.href}
+                ref={(el) => {
+                  navItemRefs.current[index] = el;
+                }}
+                href={item.href}
+                onClick={() => setIsDesktopNavOpen(false)}
+                onMouseEnter={() => setHoveredNavItem(item.href)}
+                className="text-h5 font-semibold tracking-wide whitespace-nowrap hover:opacity-80"
+              >
+                {item.label}
+              </Link>
+            )
+          )}
         </nav>
 
         <button
@@ -81,8 +114,8 @@ export default function Header() {
           aria-label="메뉴 열기"
           aria-expanded={isMenuOpen}
         >
-          <span className="h-0.5 w-6 bg-white" />
-          <span className="h-0.5 w-4 bg-white" />
+          <span className={`h-0.5 w-6 ${isHome ? 'bg-white' : 'bg-text-default'}`} />
+          <span className={`h-0.5 w-4 ${isHome ? 'bg-white' : 'bg-text-default'}`} />
         </button>
       </div>
 
@@ -153,8 +186,28 @@ export default function Header() {
         </div>
 
         <nav className="mt-10 flex flex-col gap-1 overflow-y-auto">
+          <Link
+            href={DESIGN_REVIEW_ITEM.href}
+            onClick={closeMobileMenu}
+            className="text-h5 rounded-lg px-2 py-3 font-semibold hover:bg-white/10"
+          >
+            {DESIGN_REVIEW_ITEM.label}
+          </Link>
+
           {NAV_ITEMS.map((item) =>
-            item.children ? (
+            item.external ? (
+              <Link
+                key={item.href}
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-disabled="true"
+                onClick={(e) => e.preventDefault()}
+                className="text-small mt-2 w-fit rounded-full border border-current px-4 py-1.5 opacity-70"
+              >
+                {item.label}
+              </Link>
+            ) : item.children ? (
               <div key={item.href}>
                 <button
                   type="button"

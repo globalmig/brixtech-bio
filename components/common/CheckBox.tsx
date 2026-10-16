@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils';
 
 // 바깥 박스
 const checkboxControlVariants = cva(
-  'group/checkbox relative flex shrink-0 items-center justify-center rounded-[4px] border-[1.5px] border-gray-300 outline-none focus-visible:ring-2 focus-visible:ring-primary data-checked:border-primary data-disabled:cursor-not-allowed data-disabled:border-gray-400 data-disabled:bg-gray-200',
+  'group/checkbox relative flex shrink-0 items-center justify-center rounded-[4px] border-[1.5px] border-gray-300 outline-none focus-visible:ring-2 focus-visible:ring-primary data-checked:border-primary data-checked:bg-primary data-disabled:cursor-not-allowed data-disabled:border-gray-400 data-disabled:bg-gray-200',
   {
     variants: {
       size: {
@@ -24,7 +24,7 @@ const checkboxControlVariants = cva(
 
 // 체크 아이콘
 const checkboxIndicatorVariants = cva(
-  'mask-(--checkbox-icon) mask-center mask-contain mask-no-repeat block bg-primary group-data-disabled/checkbox:bg-gray-400',
+  'mask-(--checkbox-icon) mask-center mask-contain mask-no-repeat block bg-white group-data-disabled/checkbox:bg-gray-400',
   {
     variants: {
       size: {

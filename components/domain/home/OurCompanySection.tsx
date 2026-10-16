@@ -7,7 +7,7 @@ export default function OurCompanySection() {
     <section className="mx-auto w-full max-w-(--width-app-canvas) px-5 py-16 md:px-8 md:py-20 canvas:px-0 lg:pt-28 lg:pb-12">
       <div className="grid gap-10 lg:flex lg:items-center lg:justify-between">
         <div className="lg:w-215 lg:shrink-0">
-          <p className="text-small text-primary mb-4 font-bold tracking-widest lg:mb-8">
+          <p className="text-small text-primary mb-4 font-bold lg:mb-8">
             OUR COMPANY
           </p>
           <h2 className="text-h3 mb-5 whitespace-pre-line lg:text-[3rem] lg:leading-14">

@@ -62,7 +62,7 @@ function DialogContent({
         <DialogPrimitive.Popup
           data-slot="dialog-content"
           className={cn(
-            'flex w-max max-w-[calc(100vw-2rem)] flex-col gap-9 rounded-[12px] bg-white px-6 pt-10 pb-6 outline-none',
+            'flex w-max max-w-[calc(100vw-2rem)] flex-col gap-9 rounded-xl bg-white px-6 pt-10 pb-6 outline-none',
             className
           )}
           {...props}
@@ -97,7 +97,7 @@ function DialogHeader({
       )}
     >
       {icon != null && (
-        <div className="flex shrink-0 rounded-[8px] bg-gray-100 p-2">
+        <div className="flex shrink-0 rounded-lg bg-gray-100 p-2">
           <div className="size-8 [&_img]:size-8 [&_span]:size-8 [&_svg]:size-8">
             {icon}
           </div>

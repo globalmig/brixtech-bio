@@ -7,7 +7,7 @@ export default function NewsSection() {
     <section className="mx-auto w-full max-w-(--width-app-canvas) px-5 py-16 md:px-8 md:py-20 canvas:px-0 lg:py-28">
       <div className="grid gap-16 lg:grid-cols-2">
         <div>
-          <p className="text-small text-primary mb-4 font-bold tracking-widest lg:mb-8">
+          <p className="text-small text-primary mb-4 font-bold lg:mb-8">
             NEWS
           </p>
           <h2 className="text-h3 mb-10 lg:mb-20 whitespace-pre-line lg:text-[3rem] lg:leading-14">

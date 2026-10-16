@@ -7,6 +7,7 @@ export type NavItem = {
   label: string;
   href: string;
   children?: NavChild[];
+  external?: boolean;
 };
 
 export const NAV_ITEMS: NavItem[] = [
@@ -54,5 +55,13 @@ export const NAV_ITEMS: NavItem[] = [
       { label: '사업 제휴 및 제품 문의', href: '/news/inquiry' },
     ],
   },
-  { label: 'CONTACT', href: '/contact' },
+  // TODO: 실제 자사몰 URL로 교체 필요 (자사몰 오픈 시 버튼 활성화)
+  { label: '자사몰 바로가기', href: '#', external: true },
 ];
+
+/**
+ * 헤더에만 노출하는 내부 검토용 메뉴입니다.
+ * 운영 중인 메인페이지(NAV_ITEMS)와는 별도로, /design 시안을 확인하는 용도로만 사용합니다.
+ * 시안이 컨펌되면 이 메뉴와 /design 라우트를 제거하고 해당 디자인을 실제 메인페이지에 반영합니다.
+ */
+export const DESIGN_REVIEW_ITEM: NavItem = { label: 'DESIGN', href: '/design' };

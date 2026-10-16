@@ -37,7 +37,7 @@ export default function BusinessSection() {
       <div className="mx-auto w-full max-w-(--width-app-canvas) px-5 pt-16 md:px-8 md:pt-20 canvas:px-0 lg:pt-28">
         <div className="mb-10 flex items-end justify-between lg:mb-12">
           <div>
-            <p className="text-small text-primary mb-4 lg:mb-8 font-bold tracking-widest">
+            <p className="text-small text-primary mb-4 lg:mb-8 font-bold">
               BUSINESS
             </p>
             <h2 className="text-h3 mb-5 lg:text-[3rem] lg:leading-14">

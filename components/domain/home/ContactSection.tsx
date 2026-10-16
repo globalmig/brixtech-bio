@@ -16,7 +16,7 @@ export default function ContactSection() {
 
       <div className="relative mx-auto flex w-full max-w-(--width-app-canvas) flex-col items-start justify-between gap-10 px-5 py-20 text-white sm:flex-row sm:items-center md:px-8 md:py-28 canvas:px-0 lg:py-32">
         <div>
-          <p className="text-small mb-4 font-bold tracking-widest lg:mb-8">
+          <p className="text-small mb-4 font-bold lg:mb-8">
             CONTACT
           </p>
           <h2 className="text-h3 mb-5 font-semibold lg:text-[3rem] lg:leading-14">
@@ -28,7 +28,7 @@ export default function ContactSection() {
         </div>
 
         <Link
-          href="/contact"
+          href="/news/inquiry"
           aria-label="문의페이지로 이동"
           className="relative flex shrink-0 items-center"
         >

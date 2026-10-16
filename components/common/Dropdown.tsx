@@ -26,7 +26,7 @@ function DropdownTrigger({
     <SelectPrimitive.Trigger
       data-slot="dropdown-trigger"
       className={cn(
-        'group/dropdown flex h-12 w-50 items-center justify-between gap-2 rounded-md border border-border-default bg-bg-default px-4 py-3 [color:var(--color-text-default)] outline-none select-none focus-visible:border-gray-600 focus-visible:ring-2 focus-visible:ring-primary/50 data-placeholder:text-text-info data-popup-open:rounded-b-none data-popup-open:border-b-0 disabled:cursor-not-allowed disabled:bg-gray-200',
+        'group/dropdown flex h-12 w-50 items-center justify-between gap-2 rounded-md border border-border-default bg-bg-default px-4 py-3 [color:var(--color-text-default)] outline-none select-none focus-visible:border-gray-600 focus-visible:ring-2 focus-visible:ring-primary/50 data-placeholder:text-text-info disabled:cursor-not-allowed disabled:bg-gray-200',
         className
       )}
       {...props}
@@ -49,7 +49,7 @@ function DropdownContent({
   className,
   children,
   side = 'bottom',
-  sideOffset = 0,
+  sideOffset = 8,
   align = 'start',
   alignOffset = 0,
   ...props
@@ -71,7 +71,7 @@ function DropdownContent({
         <SelectPrimitive.Popup
           data-slot="dropdown-content"
           className={cn(
-            'w-(--anchor-width) min-w-40.5 origin-(--transform-origin) overflow-hidden rounded-b-md border border-t-0 border-border-default bg-bg-default p-2 [color:var(--color-text-sub)] data-[side=bottom]:slide-in-from-top-1 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95',
+            'w-(--anchor-width) min-w-40.5 origin-(--transform-origin) overflow-hidden rounded-md border border-border-default bg-bg-default p-2 [color:var(--color-text-sub)] data-[side=bottom]:slide-in-from-top-1 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95',
             className
           )}
           {...props}
@@ -94,7 +94,7 @@ function DropdownItem({
     <SelectPrimitive.Item
       data-slot="dropdown-item"
       className={cn(
-        'flex w-full cursor-pointer items-center rounded-md px-3 py-2 outline-none select-none focus:bg-gray-100 focus:text-primary data-selected:bg-gray-100 data-selected:text-primary data-disabled:pointer-events-none data-disabled:text-text-disabled',
+        'flex w-full cursor-pointer items-center rounded-md px-3 py-2 outline-none select-none data-selected:font-bold data-disabled:pointer-events-none data-disabled:text-text-disabled',
         className
       )}
       {...props}

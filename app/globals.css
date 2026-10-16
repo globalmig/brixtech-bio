@@ -34,7 +34,6 @@
   /* Layout */
   --width-app-canvas: 1400px;
   --min-width-app-canvas: var(--width-app-canvas);
-  /* width-app-canvas와 같은 값: 뷰포트가 이 값 미만이면 좌우 padding 유지, 이상이면 0 (mx-auto로 중앙 정렬되므로) */
   --breakpoint-canvas: 1400px;
 
   /* Font Family */
@@ -42,14 +41,6 @@
     var(--font-noto-sans-kr), 'Pretendard', -apple-system, BlinkMacSystemFont,
     'Malgun Gothic', sans-serif;
 
-  /*
-   * Typography — 실제 시맨틱 태그 기준 스케일입니다.
-   * 마크업에서는 태그와 1:1로 대응하는 클래스를 그대로 씁니다.
-   * 예: <h4 className="text-h4">, <p className="text-body">
-   * 공통 컴포넌트(components/common)는 이 클래스를 직접 쓰지 않습니다 —
-   * 크기는 프로젝트마다 바뀌므로, 사용하는 쪽 마크업에서 지정합니다.
-   * 새 프로젝트를 시작할 때는 아래 rem/line-height 값만 교체하면 됩니다.
-   */
   --text-h1: 2.5rem;
   --text-h1--line-height: 3rem;
   --text-h1--font-weight: 700;
@@ -175,4 +166,48 @@ body {
 
 .animate-badge-spin {
   animation: badge-spin 20s linear infinite;
+}
+
+/* 브랜드 쇼케이스 자동 슬라이드 */
+@keyframes fade-left {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fade-right {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-left {
+  animation: fade-left 1.6s ease-out both;
+}
+
+.animate-fade-right {
+  animation: fade-right 1.6s ease-out both;
+}
+
+.animate-fade-in {
+  animation: fade-in 1.6s ease-out both;
 }
