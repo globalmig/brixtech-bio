@@ -8,7 +8,7 @@ import { DESIGN_REVIEW_ITEM, NAV_ITEMS } from '@/constants/nav';
 
 export default function Header() {
   const pathname = usePathname();
-  const isHome = pathname === '/' || '/design';
+  const isHome = pathname === '/' || pathname === '/design';
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDesktopNavOpen, setIsDesktopNavOpen] = useState(false);
   const [hoveredNavItem, setHoveredNavItem] = useState<string | null>(null);
