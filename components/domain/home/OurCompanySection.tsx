@@ -33,13 +33,13 @@ export default function OurCompanySection() {
                 </p>
               </article>
             ))}
-          </div>
+          </div> 
         </div>
 
         <div className="relative aspect-4/3 w-full lg:w-150 overflow-hidden">
           <video
-            src="/images/배양관_전경.mp4"
-            poster="/images/배양관_전경_poster.jpg"
+            src="/images/미세조류 영상.mp4"
+            poster="/images/미세조류 영상_poster.jpg"
             autoPlay
             loop
             muted

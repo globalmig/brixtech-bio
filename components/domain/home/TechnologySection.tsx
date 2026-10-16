@@ -55,18 +55,7 @@ export default function TechnologySection() {
               바이오 시장을 선도합니다.
             </p>
 
-            <div className="relative aspect-3/4 w-full max-w-100 overflow-hidden">
-              <video
-                src="/images/미세조류 영상.mp4"
-                poster="/images/미세조류_영상_poster.jpg"
-                autoPlay
-                loop
-                muted
-                playsInline
-                preload="auto"
-                className="h-full w-full object-cover"
-              />
-            </div>
+            
           </div>
 
           <div ref={stepsRef} className="border-t border-black lg:w-200">
