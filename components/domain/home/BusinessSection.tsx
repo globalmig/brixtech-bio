@@ -1,133 +1,76 @@
-'use client';
-
 import Image from 'next/image';
-import { useEffect, useRef, useState } from 'react';
-import Slider from 'react-slick';
+import Link from 'next/link';
 
 import { BUSINESS_CATEGORIES } from '@/constants/home';
 
-function getSlidesToShow(width: number) {
-  if (width < 480) return 1;
-  if (width < 768) return 2;
-  if (width < 1024) return 3;
-  if (width < 1280) return 4;
-  return 3;
-}
-
 export default function BusinessSection() {
-  const sliderRef = useRef<Slider>(null);
-  const [slidesToShow, setSlidesToShow] = useState(5);
-  const [isCenterMode, setIsCenterMode] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const updateSlidesToShow = () => {
-      const width = window.innerWidth;
-      setSlidesToShow(getSlidesToShow(width));
-      setIsCenterMode(width >= 1280);
-      setIsMobile(width < 1024);
-    };
-    updateSlidesToShow();
-    window.addEventListener('resize', updateSlidesToShow);
-    return () => window.removeEventListener('resize', updateSlidesToShow);
-  }, []);
-
   return (
-    <section className="bg-primary-5 pb-10">
-      <div className="mx-auto w-full max-w-(--width-app-canvas) px-5 pt-16 md:px-8 md:pt-20 canvas:px-0 lg:pt-28">
-        <div className="mb-10 flex items-end justify-between lg:mb-12">
-          <div>
-            <p className="text-small text-primary mb-4 lg:mb-8 font-bold">
-              BUSINESS
-            </p>
-            <h2 className="text-h3 mb-5 lg:text-[3rem] lg:leading-14">
-             하나로 이어지는 <br className='lg:hidden'/>바이오 비즈니스
-            </h2>
-            <p className="text-[1rem] lg:text-[1.5rem] leading-6 lg:leading-8 text-primary-4">
-              5가지 핵심 사업 영역의 유기적인 시너지를 통해 <br className='hidden lg:block'/>지속가능한 미래 바이오 시장을 선도합니다.
-            </p>
-          </div>
-        </div>
+    <section className="w-full py-15 lg:py-30">
+      <div className="mx-auto w-full max-w-(--width-app-canvas) px-[4%] md:px-8 canvas:px-0">
+        <p className="text-small text-black mb-4 flex items-center gap-3 font-bold lg:mb-8">
+          BUSINESS
+        </p>
+        <h2 className="text-h4 text-black mb-5 lg:text-h2">
+          하나로 이어지는 <br/>바이오 비즈니스
+        </h2>
+        <p className="text-body text-gray-750">
+          5가지 핵심 사업 영역의 유기적인 시너지를 통해<br/>
+          지속가능한 미래 바이오 시장을 선도합니다.
+        </p>
       </div>
 
-      <div className="mx-auto w-full max-w-[2340px] px-5 pb-16 md:px-8 md:pb-20 lg:px-0 lg:pb-28">
-        <div className="relative">
-          <Slider
-          className="business-slider"
-            ref={sliderRef}
-            dots={true}
-            arrows={false}
-            infinite
-            speed={500}
-            slidesToShow={slidesToShow}
-            slidesToScroll={1}
-            centerMode={isCenterMode}
-            centerPadding={isCenterMode ? '12%' : '0px'}
-            autoplay={isMobile}
-            autoplaySpeed={3000}
-            pauseOnHover
+      <div className="mt-16 grid grid-cols-1 gap-5 lg:gap-2 px-[4%] lg:px-6 sm:grid-cols-2 lg:mt-20 lg:grid-cols-3 xl:grid-cols-5">
+        {BUSINESS_CATEGORIES.map((category) => (
+          <Link
+            key={category.title}
+            href={category.href}
+            className="group bg-bg-default relative block aspect-square overflow-hidden sm:aspect-3/4"
           >
-            {BUSINESS_CATEGORIES.map((category) => (
-              <div key={category.title} className="group px-2">
-                <div className="border-gray-300 bg-bg-default overflow-hidden rounded-2xl border">
-                  <div className="relative aspect-5/4 w-full overflow-hidden">
-                    <Image
-                      src={category.image}
-                      alt={category.title}
-                      fill
-                      sizes="(min-width: 1280px) 20vw, (min-width: 1024px) 25vw, (min-width: 768px) 33vw, (min-width: 480px) 50vw, 100vw"
-                      className="object-cover transition-transform duration-300 group-hover:scale-110"
-                    />
-                  </div>
-                  <div className="flex items-start justify-between gap-3 p-5">
-                    <div>
-                      <span className="text-h6 block lg:text-h4">
-                        {category.title}
-                      </span>
-                      <p className="text-small lg:text-h5 font-normal text-text-info mt-1 line-clamp-2 min-h-15 lg:h-20 lg:mt-4">
-                        {category.description}
-                      </p>
-                    </div>
-                    <svg
-                      width="16"
-                      height="16"
-                      viewBox="0 0 16 16"
-                      fill="none"
-                      className="mt-1 shrink-0 transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1"
-                    >
-                      <path
-                        d="M3 13L13 3M13 3H5M13 3V11"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </Slider>
+            <Image
+              src={category.image}
+              alt={category.title}
+              fill
+              sizes="(min-width: 1280px) 20vw, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+              className="object-cover transition-transform duration-500 group-hover:scale-105"
+            />
 
-          <div className="hidden absolute inset-x-0 top-[36%] mx-auto lg:flex -translate-y-1/2 items-center justify-between w-[75%]">
-            <button
-              type="button"
-              aria-label="이전 카테고리"
-              onClick={() => sliderRef.current?.slickPrev()}
-              className="relative size-12 -translate-x-1/2 cursor-pointer sm:size-16"
-            >
-              <Image src="/icons/business-prev.svg" alt="이전 카테고리" fill />
-            </button>
-            <button
-              type="button"
-              aria-label="다음 카테고리"
-              onClick={() => sliderRef.current?.slickNext()}
-              className="relative size-12 translate-x-1/2 cursor-pointer sm:size-16"
-            >
-              <Image src="/icons/business-next.svg" alt="다음 카테고리" fill />
-            </button>
-          </div>
-        </div>
+            <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/0 to-black/0 transition-opacity duration-300 group-hover:opacity-0" />
+            <span className="text-h4 absolute inset-x-0 bottom-0 p-5 font-semibold tracking-wide text-white uppercase transition-opacity duration-300 group-hover:opacity-0 lg:p-6">
+              {category.label}
+            </span>
+
+            <div className="bg-primary-2 absolute inset-0 flex flex-col justify-end overflow-hidden p-6 text-white opacity-0 transition-all duration-500 ease-out transform-[translateY(100%)] group-hover:opacity-100 group-hover:transform-[translateY(0)] lg:p-8">
+              <div>
+                <p className="mb-3 text-base text-white">{category.title}</p>
+                <p className="text-h4 font-semibold tracking-wide uppercase">
+                  {category.label}
+                </p>
+                <p className="mt-4 text-small lg:text-base text-white">
+                  {category.description}
+                </p>
+              </div>
+
+              <span className="text-small text-base mt-[clamp(1.5rem,4vw,9.375rem)] flex items-center gap-3">
+                VIEW MORE
+                <svg
+                  width="40"
+                  height="10"
+                  viewBox="0 0 40 10"
+                  fill="none"
+                  className="shrink-0 transition-transform duration-300 group-hover:translate-x-1"
+                >
+                  <path
+                    d="M0 5H38M38 5L32 1M38 5L32 9"
+                    stroke="currentColor"
+                    strokeWidth="1.2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </span>
+            </div>
+          </Link>
+        ))}
       </div>
     </section>
   );

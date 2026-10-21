@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { useMemo, useState } from 'react';
 
 import {
@@ -12,13 +13,9 @@ import {
 } from '@/components/common/Dropdown';
 import { Input } from '@/components/common/Input';
 import Pagination from '@/components/common/Pagination';
+import type { NewsItem } from '@/constants/news';
 
-export interface NewsItem {
-  id: number;
-  title: string;
-  content?: string;
-  date: string;
-}
+export type { NewsItem };
 
 type NewsFilterField = 'title' | 'content';
 
@@ -63,13 +60,13 @@ export default function NewsList({ items, itemsPerPage = 10 }: NewsListProps) {
 
   return (
     <div>
-      <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-end">
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-center">
         <Dropdown
           value={filterField}
           onValueChange={(value) => setFilterField(value as NewsFilterField)}
         >
-          <DropdownTrigger className="h-11 w-full sm:w-32">
-            <DropdownValue>{filterLabel}</DropdownValue>
+          <DropdownTrigger className="h-auto w-full rounded-[10px] border-gray-350 p-5 sm:w-32 lg:w-62.5">
+            <DropdownValue className="text-gray-750">{filterLabel}</DropdownValue>
           </DropdownTrigger>
           <DropdownContent>
             {FILTER_OPTIONS.map((option) => (
@@ -80,7 +77,7 @@ export default function NewsList({ items, itemsPerPage = 10 }: NewsListProps) {
           </DropdownContent>
         </Dropdown>
 
-        <div className="w-full sm:w-80">
+        <div className="w-full sm:w-80 lg:w-150">
           <Input
             value={keyword}
             onChange={(event) => setKeyword(event.target.value)}
@@ -91,6 +88,7 @@ export default function NewsList({ items, itemsPerPage = 10 }: NewsListProps) {
               }
             }}
             placeholder="검색어를 입력하세요."
+            className="h-auto rounded-[10px] border-gray-350 py-5 pl-5 pr-11 placeholder:text-gray-750"
             icon={
               <button
                 type="button"
@@ -105,8 +103,8 @@ export default function NewsList({ items, itemsPerPage = 10 }: NewsListProps) {
         </div>
       </div>
 
-      <div className="border-text-default mt-6 border-t-2">
-        <div className="text-text-default grid grid-cols-[3.5rem_1fr_6rem] items-center border-b border-gray-300 py-4 text-center text-[0.95rem] font-semibold sm:grid-cols-[5rem_1fr_9rem]">
+      <div className="border-text-default mt-20 border-t-2">
+        <div className="text-text-default text-[1.2rem] grid grid-cols-[3.5rem_1fr_6rem] items-center border-b border-gray-300 py-8 text-center font-semibold sm:grid-cols-[5rem_1fr_9rem]">
           <span>No</span>
           <span>제목</span>
           <span>날짜</span>
@@ -116,27 +114,30 @@ export default function NewsList({ items, itemsPerPage = 10 }: NewsListProps) {
           <p className="text-text-sub py-16 text-center text-[0.95rem]">등록된 소식이 없습니다.</p>
         ) : (
           pagedItems.map((item, index) => (
-            <div
+            <Link
               key={item.id}
-              className="grid grid-cols-[3.5rem_1fr_6rem] items-center border-b border-gray-200 py-5 text-[0.9rem] sm:grid-cols-[5rem_1fr_9rem]"
+              href={`/news/${item.id}`}
+              className="grid grid-cols-[3.5rem_1fr_6rem] items-center border-b border-gray-200 py-7.5 text-base transition-colors hover:bg-gray-50 sm:grid-cols-[5rem_1fr_9rem]"
             >
               <span className="text-primary text-center font-medium">
                 {filteredItems.length - ((currentPage - 1) * itemsPerPage + index)}
               </span>
-              <span className="text-text-default truncate px-2">{item.title}</span>
+              <span className="text-text-default text-[1.2rem] truncate px-2">{item.title}</span>
               <span className="text-text-info text-center">{item.date}</span>
-            </div>
+            </Link>
           ))
         )}
       </div>
 
       {filteredItems.length > itemsPerPage ? (
-        <Pagination
-          key={`${filterField}-${searchTerm}`}
-          totalCount={filteredItems.length}
-          itemsPerPage={itemsPerPage}
-          onPageChange={setPage}
-        />
+        <div className="mt-25 [&>div]:mt-0!">
+          <Pagination
+            key={`${filterField}-${searchTerm}`}
+            totalCount={filteredItems.length}
+            itemsPerPage={itemsPerPage}
+            onPageChange={setPage}
+          />
+        </div>
       ) : null}
     </div>
   );

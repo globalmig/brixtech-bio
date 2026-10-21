@@ -3,26 +3,16 @@ import Link from 'next/link';
 
 export default function ContactSection() {
   return (
-    <section className="relative overflow-hidden">
-      <Image
-        src="/images/home-contact-banner.png"
-        alt="문의하기 배너"
-        fill
-        sizes="100vw"
-        className="object-cover"
-        aria-hidden
-      />
-      <div className="bg-primary-2/80 absolute inset-0" />
-
-      <div className="relative mx-auto flex w-full max-w-(--width-app-canvas) flex-col items-start justify-between gap-10 px-5 py-20 text-white sm:flex-row sm:items-center md:px-8 md:py-28 canvas:px-0 lg:py-32">
+    <section className="relative overflow-hidden bg-primary-2">
+      <div className="relative mx-auto flex w-full max-w-(--width-app-canvas) flex-col items-start justify-between gap-10 px-[4%] py-20 text-white sm:flex-row sm:items-center md:px-8 md:py-28 canvas:px-0 lg:py-32">
         <div>
-          <p className="text-small mb-4 font-bold lg:mb-8">
+          <p className="text-small mb-6 font-bold lg:mb-10">
             CONTACT
           </p>
-          <h2 className="text-h3 mb-5 font-semibold lg:text-[3rem] lg:leading-14">
+          <h2 className="text-h4 mb-5 lg:text-h2">
             미세조류 바이오 기술 및 <br/>사업 협력에 대해 문의주세요.
           </h2>
-          <p className="text-[1rem] text-white/80 mb-10 lg:text-[1.5rem]">
+          <p className="text-[1rem] text-white/80 mb-10">
             브릭스텍바이오가 함께하겠습니다.
           </p>
         </div>

@@ -1,6 +1,7 @@
 interface RoadmapItem {
-  period: string;
-  description: string;
+  year: string;
+  yearLabel: string;
+  description: string[];
 }
 
 interface RoadmapGridProps {
@@ -9,16 +10,24 @@ interface RoadmapGridProps {
 
 export default function RoadmapGrid({ items }: RoadmapGridProps) {
   return (
-    <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap">
+    <div className="border-divider-strong border-t">
       {items.map((item) => (
         <div
-          key={item.period}
-          className="border-gray-300 bg-gray-50 rounded-2xl border p-5 sm:min-w-56 sm:flex-1"
+          key={item.year}
+          className="border-divider-default flex flex-col gap-3 border-b py-8 sm:flex-row sm:items-start sm:justify-between sm:gap-10 lg:py-10"
         >
-          <p className="text-small text-primary mb-2 font-bold tracking-wide">
-            {item.period}
-          </p>
-          <p className="text-text-sub text-[0.9rem] leading-6">{item.description}</p>
+          <div className="shrink-0">
+            <p className="text-h5 lg:text-h4 text-black font-bold">{item.year}</p>
+            <p className="text-small text-gray-750 mt-1">{item.yearLabel}</p>
+          </div>
+
+          <div>
+            {item.description.map((line) => (
+              <p key={line} className="text-text-sub text-[0.95rem] leading-7 lg:text-body">
+                {line}
+              </p>
+            ))}
+          </div>
         </div>
       ))}
     </div>

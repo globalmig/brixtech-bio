@@ -1,0 +1,7 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+<ellipse cx="24" cy="29" rx="8.4" ry="7.2" stroke="white" stroke-width="1.8"/>
+<ellipse cx="13.2" cy="19.4" rx="3.6" ry="4.4" transform="rotate(-18 13.2 19.4)" stroke="white" stroke-width="1.8"/>
+<ellipse cx="34.8" cy="19.4" rx="3.6" ry="4.4" transform="rotate(18 34.8 19.4)" stroke="white" stroke-width="1.8"/>
+<ellipse cx="18.5" cy="11.5" rx="3" ry="3.6" transform="rotate(-10 18.5 11.5)" stroke="white" stroke-width="1.8" opacity="0.75"/>
+<ellipse cx="29.5" cy="11.5" rx="3" ry="3.6" transform="rotate(10 29.5 11.5)" stroke="white" stroke-width="1.8" opacity="0.75"/>
+</svg>

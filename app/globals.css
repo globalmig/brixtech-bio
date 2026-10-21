@@ -18,10 +18,12 @@
   --color-gray-100: #f5f5f5;
   --color-gray-200: #efefef;
   --color-gray-300: #e2e2e2;
+  --color-gray-350: #dddddd;
   --color-gray-400: #bfbfbf;
   --color-gray-500: #a0a0a0;
   --color-gray-600: #777777;
   --color-gray-700: #636363;
+  --color-gray-750: #555555;
   --color-gray-800: #444444;
   --color-gray-900: #232527;
 
@@ -211,4 +213,32 @@ body {
 
 .animate-fade-in {
   animation: fade-in 1.6s ease-out both;
+}
+
+/* 경쟁력 섹션 원형 궤도 애니메이션 */
+@keyframes orbit-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes orbit-counter-rotate {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+.animate-orbit {
+  animation: orbit-rotate 28s linear infinite;
+}
+
+.animate-orbit-reverse {
+  animation: orbit-counter-rotate 28s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-orbit,
+  .animate-orbit-reverse {
+    animation: none;
+  }
 }

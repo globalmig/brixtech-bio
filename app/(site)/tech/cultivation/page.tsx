@@ -15,10 +15,9 @@ export default function TechCultivationPage() {
       <PageIntro
         eyebrow="TECH"
         title="배양 기술"
-        lead="특허 기반 밀폐형 배양으로 저비용과 고순도를 동시에 달성합니다."
       />
 
-      <div className="mx-auto w-full max-w-(--width-app-canvas) px-5 md:px-8 canvas:px-0">
+      <div className="mx-auto w-full max-w-360 px-[3%] py-15 canvas:px-0 canvas:py-30">
         <PageSection title="배양 방식 비교">
           <CompareTable
             headers={['', '설비비', '오염 리스크', '품질 안정성']}

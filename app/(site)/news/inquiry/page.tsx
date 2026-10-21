@@ -13,9 +13,9 @@ export const metadata: Metadata = {
 };
 
 const fieldClassName =
-  'rounded-[10px] border border-transparent bg-gray-50 placeholder:text-[#555] focus-visible:border-primary';
+  'h-auto rounded-[10px] border border-transparent bg-gray-50 p-5 text-base placeholder:text-gray-750 focus-visible:border-primary';
 
-const labelClassName = 'text-text-default font-semibold';
+const labelClassName = 'text-text-default text-2xl font-semibold';
 
 function RequiredMark() {
   return <span className="text-primary">*</span>;
@@ -27,12 +27,11 @@ export default function NewsInquiryPage() {
       <PageIntro
         eyebrow="NEWS"
         title="사업 제휴 및 제품 문의"
-        lead="유통·OEM·투자 제휴와 제품 관련 문의를 남겨주세요."
       />
 
-      <section className="mx-auto w-full max-w-(--width-app-canvas) px-[3%] py-20 lg:py-30 md:px-8 canvas:px-0">
+      <section className="mx-auto w-full max-w-360 px-[3%] py-15 canvas:px-0 canvas:py-30">
        
-          <form className="mx-auto flex w-full max-w-240 flex-col gap-8">
+          <form className="mx-auto flex w-full max-w-240 flex-col gap-10">
             <div className="flex flex-col gap-2">
               <label htmlFor="company" className={labelClassName}>
                 회사명 <RequiredMark />
@@ -123,7 +122,7 @@ export default function NewsInquiryPage() {
                 id="attachment"
                 name="attachment"
                 type="file"
-                className="text-text-sub w-full rounded-[10px] bg-gray-50 px-3 py-2.5 text-[0.95rem] file:mr-4 file:cursor-pointer file:rounded-lg file:border file:border-border-default file:bg-white file:px-4 file:py-1.5 file:text-[0.9rem] file:font-medium file:text-text-default"
+                className="text-text-sub w-full rounded-[10px] bg-gray-50 p-5 text-base file:mr-4 file:cursor-pointer file:rounded-lg file:border file:border-border-default file:bg-white file:px-4 file:py-1.5 file:text-base file:font-medium file:text-text-default"
               />
             </div>
 
@@ -131,7 +130,7 @@ export default function NewsInquiryPage() {
               <label htmlFor="privacy-agree" className={labelClassName}>
                 개인정보 수집 및 이용 동의 <RequiredMark />
               </label>
-              <div className="text-text-sub rounded-[10px] bg-gray-50 px-5 py-4 text-[0.9rem] leading-6">
+              <div className="text-text-sub rounded-[10px] bg-gray-50 px-5 py-4 text-base leading-6">
                 <p>[개인정보 수집 및 이용 동의]</p>
                 <p className="mt-3">
                   브릭스텍바이오는 홈페이지 문의 접수 및 처리를 위하여 다음과 같이 개인정보를 수집 및
@@ -159,7 +158,7 @@ export default function NewsInquiryPage() {
               />
             </div>
 
-            <Button type="submit" size="medium" className="self-end rounded-full">
+            <Button type="submit" size="medium" className="self-end rounded-full px-7.5">
               문의하기
             </Button>
           </form>

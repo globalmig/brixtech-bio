@@ -4,6 +4,7 @@ import ContactSection from '@/components/domain/home/ContactSection';
 import HeroSection from '@/components/domain/home/HeroSection';
 import NewsSection from '@/components/domain/home/NewsSection';
 import OurCompanySection from '@/components/domain/home/OurCompanySection';
+import ProductSection from '@/components/domain/home/ProductSection';
 import TechnologySection from '@/components/domain/home/TechnologySection';
 
 export default function HomePage() {
@@ -11,6 +12,7 @@ export default function HomePage() {
     <>
       <HeroSection />
       <OurCompanySection />
+      <ProductSection />
       <TechnologySection />
       <BusinessSection />
       <BrandSection />

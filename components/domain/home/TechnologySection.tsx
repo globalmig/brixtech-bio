@@ -40,7 +40,7 @@ export default function TechnologySection() {
   }, [visible]);
 
   return (
-    <section>
+    <section className="bg-[#F6F9EF]">
       <div className="mx-auto w-full max-w-(--width-app-canvas) px-[4%] py-15 md:px-8 canvas:px-0 lg:py-30">
         <div className="flex flex-col gap-12 lg:flex-row lg:gap-20">
           <div className="lg:flex-1">
@@ -50,12 +50,10 @@ export default function TechnologySection() {
             <h2 className="text-h4 text-black mb-5 whitespace-pre-line lg:text-h2">
               {'스피루리나 배양 기술을\n사업의 출발점으로'}
             </h2>
-            <p className="text-[1rem] leading-6 text-black/50 mb-10 lg:mb-25">
+            <p className="text-body text-black/50 mb-10 lg:mb-25">
               5가지 핵심 사업 영역의 유기적인 시너지를 통해<br /> 지속가능한 미래
               바이오 시장을 선도합니다.
             </p>
-
-            
           </div>
 
           <div ref={stepsRef} className="border-t border-black lg:w-200">
@@ -66,7 +64,7 @@ export default function TechnologySection() {
               >
                 <span
                   aria-hidden
-                  className={`pointer-events-none absolute left-0 top-1/3 -z-10 -translate-y-1/2 text-[3.5rem] leading-none font-bold text-black italic select-none transition-all duration-1000 ease-out ${visible && activeIndex === index ? 'opacity-15' : 'opacity-0'}`}
+                  className={`pointer-events-none absolute left-0 top-1/3 -z-10 -translate-y-1/2 text-[3.5rem] leading-none font-bold text-primary-2 italic select-none transition-all duration-1000 ease-out ${visible && activeIndex === index ? 'opacity-15' : 'opacity-0'}`}
                 >
                   {String(index + 1).padStart(2, '0')}
                 </span>

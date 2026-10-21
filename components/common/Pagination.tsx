@@ -63,7 +63,7 @@ export default function Pagination({
           className={`w-10 h-10 flex items-center justify-center rounded-lg text-base font-medium transition-colors cursor-pointer ${
             currentPage === page
               ? "bg-primary-2 text-white"
-              : "bg-gray-100 text-[#555] hover:bg-surface"
+              : "bg-gray-100 text-gray-750 hover:bg-surface"
           }`}
         >
           {page}

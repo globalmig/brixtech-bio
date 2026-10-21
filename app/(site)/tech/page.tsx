@@ -389,10 +389,9 @@ export default function TechPage() {
       <PageIntro
         eyebrow="TECH"
         title="스피루리나 소개"
-        lead="UN이 인정한 슈퍼푸드, 70여 년간 연구되어 온 안전한 영양원입니다."
       />
 
-      <div className="mx-auto w-full max-w-(--width-app-canvas) px-5 md:px-8 canvas:px-0">
+      <div className="mx-auto w-full max-w-360 px-[3%] py-15 canvas:px-0 canvas:py-30">
         <PageSection title="스피루리나란?">
           <p className="text-text-sub text-[0.95rem] leading-6">
             지구상에서 가장 오래된 생명체 중 하나로, 65% 이상의 풍부한 식물성 단백질과 필수 5대

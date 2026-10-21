@@ -33,8 +33,16 @@ export default function BusinessCosmeticsPage() {
       <PageSection title="출시 계획">
         <RoadmapGrid
           items={[
-            { period: '2~3년차', description: '고기능성 화장품 및 바디케어 라인 출시' },
-            { period: '4~5년차', description: '미세조류 유래 천연 화장품 원료 자체 개발' },
+            {
+              year: '2027',
+              yearLabel: '2 ~ 3년차',
+              description: ['고기능성 화장품 및 바디케어 라인 출시'],
+            },
+            {
+              year: '2029',
+              yearLabel: '4 ~ 5년차',
+              description: ['미세조류 유래 천연 화장품 원료 자체 개발'],
+            },
           ]}
         />
       </PageSection>
