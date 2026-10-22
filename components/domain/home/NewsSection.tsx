@@ -1,39 +1,56 @@
-import { Button } from '@/components/common/Button';
-import { NEWS_LIST } from '@/constants/home';
 import Link from 'next/link';
+
+import { NEWS_LIST } from '@/constants/home';
 
 export default function NewsSection() {
   return (
-    <section className="mx-auto w-full max-w-(--width-app-canvas) px-5 py-16 md:px-8 md:py-20 canvas:px-0 lg:py-28">
-      <div className="grid gap-16 lg:grid-cols-2">
-        <div>
-          <p className="text-small text-primary mb-4 font-bold lg:mb-8">
-            NEWS
-          </p>
-          <h2 className="text-h3 mb-10 lg:mb-20 whitespace-pre-line lg:text-[3rem] lg:leading-14">
-            {'브릭스텍바이오의\n새로운 소식을 전합니다.'}
-          </h2>
-          <Button
-            size={{ base: 'small', md: 'medium', lg: 'large' }}
-          >소식 더보기</Button>
-        </div>
+    <section className="mx-auto w-full max-w-(--width-app-canvas) px-[4%] py-15 md:px-8 canvas:px-0 lg:py-30">
+      <p className="text-small text-black mb-4 font-bold lg:mb-8">
+        NEWS
+      </p>
+      <h2 className="text-h4 text-black mb-10 whitespace-pre-line lg:mb-20 lg:text-h2">
+        {'브릭스텍바이오의\n새로운 소식을 전합니다.'}
+      </h2>
 
-        <ul className="border-primary-2 border-t-2">
-          {NEWS_LIST.map((news, index) => (
-            <li key={index}>
-              <Link
-                href="#"
-                className="border-gray-300 flex items-center justify-between border-b py-3.75 lg:py-7"
-              >
-                <span className="text-h6 lg:text-h5 line-clamp-1">{news.title}</span>
-                <span className="text-xs lg:text-small text-text-info shrink-0 pl-4">
-                  {news.date}
-                </span>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <Link
+        href="/news"
+        className="group inline-flex items-center gap-3"
+      >
+        <span className="text-small text-black font-bold">VIEW ALL</span>
+        <svg
+          width="40"
+          height="10"
+          viewBox="0 0 40 10"
+          fill="none"
+          className="shrink-0 transition-transform duration-300 group-hover:translate-x-1"
+        >
+          <path
+            d="M0 5H38M38 5L32 1M38 5L32 9"
+            stroke="currentColor"
+            strokeWidth="1.2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </Link>
+
+      <ul className="border-t-black mt-10 border-t-2 lg:mt-14">
+        {NEWS_LIST.map((news, index) => (
+          <li key={index}>
+            <Link
+              href="#"
+              className="border-divider-default flex items-center justify-between border-b py-5 lg:py-10"
+            >
+              <span className="text-h6 text-black line-clamp-1 lg:text-h5">
+                {news.title}
+              </span>
+              <span className="text-xs text-gray-750 shrink-0 pl-6 lg:text-small">
+                {news.date}
+              </span>
+            </Link>
+          </li>
+        ))}
+      </ul>
     </section>
   );
 }

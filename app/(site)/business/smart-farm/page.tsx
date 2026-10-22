@@ -56,10 +56,15 @@ export default function BusinessSmartFarmPage() {
         <RoadmapGrid
           items={[
             {
-              period: '2~3년차',
-              description: '도시 스마트팜 테스트베드 구축과 딸기·토마토 직거래 매장 시범 운영',
+              year: '2027',
+              yearLabel: '2 ~ 3년차',
+              description: ['도시 스마트팜 테스트베드 구축과 딸기·토마토 직거래 매장 시범 운영'],
             },
-            { period: '4~5년차', description: '바이오스티뮬런트 농법 기반 스마트팜 확장' },
+            {
+              year: '2029',
+              yearLabel: '4 ~ 5년차',
+              description: ['바이오스티뮬런트 농법 기반 스마트팜 확장'],
+            },
           ]}
         />
       </PageSection>

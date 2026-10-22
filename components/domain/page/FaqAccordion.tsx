@@ -4,7 +4,6 @@ import { Accordion } from '@base-ui/react/accordion';
 import { useMemo, useState } from 'react';
 
 import Pagination from '@/components/common/Pagination';
-import { cn } from '@/lib/utils';
 
 export interface FaqItem {
   id: number;
@@ -30,7 +29,7 @@ const ALL_CATEGORY = 'all';
 export default function FaqAccordion({
   items,
   categories,
-  itemsPerPage = 8,
+  itemsPerPage = 5,
 }: FaqAccordionProps) {
   const [activeCategory, setActiveCategory] = useState<string>(ALL_CATEGORY);
   const [page, setPage] = useState(1);
@@ -57,26 +56,31 @@ export default function FaqAccordion({
 
   return (
     <div>
-      <div className="mb-6 flex flex-wrap gap-2">
-        {[{ value: ALL_CATEGORY, label: '전체' }, ...categories].map((category) => (
-          <button
-            key={category.value}
-            type="button"
-            onClick={() => handleCategoryChange(category.value)}
-            className={cn(
-              'text-small cursor-pointer rounded-full border px-4 py-1.5 font-medium transition-colors',
-              activeCategory === category.value
-                ? 'border-primary bg-primary text-white'
-                : 'border-gray-300 text-text-sub hover:border-primary hover:text-primary'
-            )}
-          >
-            {category.label}
-          </button>
+      <ul className="text-small lg:text-[1rem] mb-6 flex flex-wrap items-center gap-x-2">
+        {[{ value: ALL_CATEGORY, label: 'ALL' }, ...categories].map((category, index) => (
+          <li key={category.value} className="flex items-center gap-x-2">
+            {index > 0 ? (
+              <span className="text-text-info" aria-hidden>
+                |
+              </span>
+            ) : null}
+            <button
+              type="button"
+              onClick={() => handleCategoryChange(category.value)}
+              className={
+                activeCategory === category.value
+                  ? 'text-text-default cursor-pointer font-bold'
+                  : 'text-text-info hover:text-text-default cursor-pointer'
+              }
+            >
+              {category.label}
+            </button>
+          </li>
         ))}
-      </div>
+      </ul>
 
       {pagedItems.length === 0 ? (
-        <p className="text-text-sub py-10 text-center text-[0.95rem]">
+        <p className="text-text-sub py-10 text-center text-[1rem]">
           해당 분류에 등록된 질문이 아직 없습니다.
         </p>
       ) : (
@@ -85,7 +89,7 @@ export default function FaqAccordion({
             <Accordion.Item key={item.id} value={item.id}>
               <Accordion.Header>
                 <Accordion.Trigger className="group flex w-full cursor-pointer items-center justify-between gap-4 py-3.75 text-left lg:py-7">
-                  <span className="text-text-default text-[0.95rem] font-semibold">
+                  <span className="text-text-default lg:text-[1.2rem] font-semibold">
                     <span className="text-text-disabled mr-1.5 font-normal">Q.</span>
                     {item.q}
                   </span>
@@ -95,7 +99,7 @@ export default function FaqAccordion({
                 </Accordion.Trigger>
               </Accordion.Header>
               <Accordion.Panel className="h-(--accordion-panel-height) overflow-hidden transition-[height] duration-200 ease-out data-ending-style:h-0 data-starting-style:h-0">
-                <p className="text-text-sub pb-3.75 text-[0.9rem] leading-6 lg:pb-7">
+                <p className="text-text-sub pb-3.75 text-[1rem] leading-6 lg:pb-7">
                   <span className="text-text-disabled mr-1.5 font-normal">A.</span>
                   {item.a}
                 </p>

@@ -44,7 +44,7 @@ function DialogOverlay({
   return (
     <DialogPrimitive.Backdrop
       data-slot="dialog-overlay"
-      className={cn('fixed inset-0 z-50 bg-gray-900/40', className)}
+      className={cn('fixed inset-0 z-50 bg-black/30 backdrop-blur-sm', className)}
       {...props}
     />
   );

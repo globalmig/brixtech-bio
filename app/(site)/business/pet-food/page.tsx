@@ -17,10 +17,7 @@ export default function BusinessPetFoodPage() {
       title="반려동물 푸드"
       lead="기능성 미세조류 원료로 만드는 즉석 수제 펫푸드, 도그원샷을 만나보세요."
     >
-      <PageSection>
-        <h2 className="text-h5 lg:text-h4 text-primary-2 mb-5 font-bold">
-          도그원샷
-        </h2>
+      <PageSection title="도그원샷">
         <p className="text-text-sub text-[0.95rem] leading-6">
           반려동물의 피부와 피모 건강을 위한 수제 펫푸드가 곧 출시됩니다. 자세한 제품 정보는
           출시와 함께 공개됩니다.

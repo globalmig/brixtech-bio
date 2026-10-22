@@ -19,8 +19,13 @@ export default function BusinessPageTemplate({
 }: BusinessPageTemplateProps) {
   return (
     <>
-      <PageIntro eyebrow="BUSINESS" title={title} lead={lead} />
-      <div className="mx-auto w-full max-w-(--width-app-canvas) px-5 md:px-8 canvas:px-0">
+      <PageIntro eyebrow="BUSINESS" title={title}/>
+      <div className="mx-auto w-full max-w-360 px-[3%] py-15 canvas:px-0 canvas:py-30">
+        <div className="border-gray-300 border-b pb-10 lg:pb-12">
+          <p className="text-small text-black mb-4 font-bold lg:mb-8">BUSINESS</p>
+          <h2 className="text-h4 lg:text-h2 text-black mb-5">{title}</h2>
+          <p className="text-body text-gray-750">{lead}</p>
+        </div>
         {children}
       </div>
     </>
