@@ -21,7 +21,7 @@ export default function HeroBanner({ eyebrow, title, description, imageAlt }: He
           {title}
         </h2>
         {description ? (
-          <p className="text-body mx-auto max-w-xl whitespace-pre-line text-white/85">
+          <p className="text-body mx-auto whitespace-pre-line text-white/85">
             {description}
           </p>
         ) : null}

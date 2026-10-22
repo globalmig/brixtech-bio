@@ -13,7 +13,7 @@ export default function NewsSection() {
       </h2>
 
       <Link
-        href="#"
+        href="/news"
         className="group inline-flex items-center gap-3"
       >
         <span className="text-small text-black font-bold">VIEW ALL</span>
@@ -34,7 +34,7 @@ export default function NewsSection() {
         </svg>
       </Link>
 
-      <ul className="border-divider-strong mt-10 border-t lg:mt-14">
+      <ul className="border-t-black mt-10 border-t-2 lg:mt-14">
         {NEWS_LIST.map((news, index) => (
           <li key={index}>
             <Link

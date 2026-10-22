@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import { notFound } from 'next/navigation';
 
 import CheckList from '@/components/domain/page/CheckList';
@@ -42,7 +43,13 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
         <section className="py-10 lg:py-12">
           <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:gap-18.75">
             <div className="border-gray-300 relative aspect-square w-full overflow-hidden border lg:w-164.25 lg:shrink-0">
-              <div className="absolute inset-[12%] rounded-full bg-gray-200" />
+              <Image
+                src={product.image}
+                alt={product.name}
+                fill
+                sizes="(min-width: 1024px) 657px, 100vw"
+                className="object-contain"
+              />
             </div>
 
             <div className="lg:flex-1">

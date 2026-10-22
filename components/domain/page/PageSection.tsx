@@ -1,18 +1,29 @@
+import { cn } from '@/lib/utils';
+
 interface PageSectionProps {
   eyebrow?: string;
   title?: string;
   description?: string;
+  className?: string;
   children: React.ReactNode;
 }
 
-export default function PageSection({ eyebrow, title, description, children }: PageSectionProps) {
+export default function PageSection({
+  eyebrow,
+  title,
+  description,
+  className,
+  children,
+}: PageSectionProps) {
   return (
-    <section className="border-gray-300 border-t py-10 first:border-t-0 lg:py-12">
+    <section
+      className={cn('border-gray-300 py-10 lg:py-12', className)}
+    >
       {eyebrow ? (
-        <p className="text-small text-black mb-4 font-bold lg:mb-8">{eyebrow}</p>
+        <p className="text-small text-black mb-5 font-bold">{eyebrow}</p>
       ) : null}
       {title ? (
-        <h2 className={`text-h4 lg:text-h2 text-black ${description ? 'mb-5' : 'mb-8 lg:mb-10'}`}>
+        <h2 className={"text-h4 lg:text-h2 text-black mb-5"}>
           {title}
         </h2>
       ) : null}

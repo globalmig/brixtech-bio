@@ -1,10 +1,12 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 
 import BulletList from '@/components/domain/page/BulletList';
 import FaqAccordion, { type FaqItem } from '@/components/domain/page/FaqAccordion';
-import InfoTable from '@/components/domain/page/InfoTable';
+import MediaTextRow from '@/components/domain/page/MediaTextRow';
 import PageIntro from '@/components/domain/page/PageIntro';
-import PageSection from '@/components/domain/page/PageSection';
+import RoadmapGrid from '@/components/domain/page/RoadmapGrid';
+import HeroBanner from '@/components/domain/page/HeroBanner';
 
 export const metadata: Metadata = {
   title: '스피루리나 소개 | BRIXTECHBIO',
@@ -383,6 +385,97 @@ const FAQ_ITEMS: FaqItem[] = [
   },
 ];
 
+const ACTIVE_INGREDIENTS = [
+  {
+    title: '피코시아닌',
+    label: '항산화 · 면역',
+    description:
+      '스피루리나에만 들어있는 청색 색소 단백질로, 피부 위에 미세한 수분막을 형성해 강력한 항산화 효능으로 노화를 방지합니다. 환경적 스트레스로 인한 자극을 막아주고 피부 면역 시스템 향상에 도움을 주며, 부작용 없이 민감한 피부에도 자극적이지 않습니다. 또한 세포분열에 필요한 단백질을 공급하고 임파구(림프구) 생성을 촉진해 면역 세포 활성화에도 관여합니다.',
+  },
+  {
+    title: '베타카로틴',
+    label: '보습 · 세포 강화',
+    description:
+      '식품의약품안전처가 인정한 건강기능성 원료로, 항산화 작용과 세포 강화·면역력 증강에 효과적입니다. 소량으로도 충분한 보습력을 발휘하며 끈적임 없이 쾌적한 사용감을 줍니다. 유해산소를 제거하는 산화방지제 역할을 해 자외선으로 인한 손상을 방지하고, 피부 면역력 관리와 유지에도 도움을 줍니다.',
+  },
+  {
+    title: '클로로필',
+    label: '노폐물 제거 · 세포 재생',
+    description:
+      '활성산소를 제거하는 녹색 광합성 항산화 물질로, 피부에 축적된 중금속·노폐물과 피지를 제거하고 항염 작용으로 염증 생성을 억제합니다. 적혈구 생성을 도와 세포 재생을 촉진하며, 혈액 정화와 산소 운반 능력 향상에도 기여합니다.',
+  },
+];
+
+// 좌/우 각 3개 원을 잇는 반원 형태의 곡선 + 맨 위 두 원(지방류·일반성분)을 잇는 곡선.
+// 중간 노드 위치는 각 곡선의 t=0.5 지점과 정확히 일치시켜 선이 원 중심을 그대로 통과하도록
+// 계산했습니다. 좌표는 다이어그램 컨테이너(3:2 비율)와 동일한 비율의 viewBox(0 0 100 66.667)
+// 기준이라, 곡선이 타원형으로 눌리지 않고 실제 화면 비율 그대로 그려집니다.
+const NUTRITION_ARCS = {
+  left: 'M 14 48 Q 16 25.3 34 8',
+  right: 'M 86 48 Q 84 25.3 66 8',
+  top: 'M 34 8 Q 50 2 66 8',
+};
+
+// 5대 영양소 = 진한 배경(강조) · 아미노산 = 5대 영양소와 동일(유지)
+// 비타민류 · 미네랄류 = 5대 영양소보다 한 단계 은은한 배경(불투명 — 선이 비쳐 보이지 않도록)
+// 지방류 · 일반성분 = 흰색 배경
+const NUTRITION_STYLE = {
+  strong: 'bg-primary-4 text-white',
+  soft: 'bg-[#dde3da] text-primary-2 border border-primary-4/30',
+  plain: 'bg-white text-primary-2 border border-primary-4/40',
+} as const;
+
+const NUTRITION_FACTS = [
+  {
+    count: '5대',
+    label: '영양소',
+    detail: '단백질 · 탄수화물 · 지방 · 비타민 · 미네랄',
+    position: { x: 14, y: 72 },
+    style: 'strong' as const,
+    caption: 'below' as const,
+  },
+  {
+    count: '12종',
+    label: '비타민류',
+    detail: '비타민 A·B1·B2·B3·B6·C·E·K, 판토텐산·엽산·콜린·카로틴',
+    position: { x: 20, y: 40 },
+    style: 'soft' as const,
+    caption: 'outer-left' as const,
+  },
+  {
+    count: '7종',
+    label: '지방류',
+    detail: '미리스틴산·팔미틴산·스테아린산·팔미톨레산·올레산·리놀렌산·감마리놀렌산',
+    position: { x: 34, y: 12 },
+    style: 'plain' as const,
+    caption: 'outer-left' as const,
+  },
+  {
+    count: '18종',
+    label: '아미노산',
+    detail: '필수아미노산 9종 포함',
+    position: { x: 86, y: 72 },
+    style: 'strong' as const,
+    caption: 'below' as const,
+  },
+  {
+    count: '10종',
+    label: '미네랄류',
+    detail: '칼슘·철·마그네슘·인·칼륨·나트륨·아연·구리·망간·셀레늄',
+    position: { x: 80, y: 40 },
+    style: 'soft' as const,
+    caption: 'outer-right' as const,
+  },
+  {
+    count: '5종',
+    label: '일반성분',
+    detail: '단백질 · 지방(지질) · 회분 · 탄수화물 · 식이섬유',
+    position: { x: 66, y: 12 },
+    style: 'plain' as const,
+    caption: 'outer-right' as const,
+  },
+];
+
 export default function TechPage() {
   return (
     <>
@@ -391,58 +484,201 @@ export default function TechPage() {
         title="스피루리나 소개"
       />
 
-      <div className="mx-auto w-full max-w-360 px-[3%] py-15 canvas:px-0 canvas:py-30">
-        <PageSection title="스피루리나란?">
-          <p className="text-text-sub text-[0.95rem] leading-6">
-            지구상에서 가장 오래된 생명체 중 하나로, 65% 이상의 풍부한 식물성 단백질과 필수 5대
-            영양소를 포함한 700여 종의 영양소를 함유하고 있습니다. 청록색 다세포 조류로 맨눈으로는
-            보이지 않으며, 알칼리성 염호에서 자생합니다. 1927년 독일 과학자에 의해 처음
-            명명되었습니다.
-          </p>
-          {/* docs/gitignore/사진자료/미세조류.JPG */}
-          <p className="text-text-info mt-3 text-[0.85rem] italic">
-            시각자료 : 미세조류 클로즈업 사진. &quot;영상/영상2~4.JPG&quot;는 코리아스피루리나
-            유튜브 캡처본으로 영상자료용이므로, 이 섹션에는 정지 이미지가 아니라 해당 영상을
-            임베드하거나 재생 썸네일로 연결
-          </p>
-        </PageSection>
+      <HeroBanner
+              eyebrow="SPIRULINA"
+              title={'스피루리나란?'}
+              description="지구상에서 가장 오래된 생명체 중 하나로, 65% 이상의 풍부한 식물성 단백질과 필수 5대
+              영양소를 포함한 700여 종의 영양소를 함유하고 있습니다. 청록색 다세포 조류로 맨눈으로는
+              보이지 않으며, 알칼리성 염호에서 자생합니다. 1927년 독일 과학자에 의해 처음
+              명명되었습니다."
+              imageAlt="스피루리나 이미지"
+            />
 
-        <PageSection title="3대 핵심 활성성분">
-          <BulletList
-            items={[
-              '피코시아닌 — 항산화 작용과 피부 면역력 향상에 도움을 줍니다.',
-              '베타카로틴 — 수분 보습과 세포 강화에 도움을 줍니다.',
-              '클로로필 — 노폐물 배출과 세포 재생에 도움을 줍니다.',
-            ]}
-          />
-        </PageSection>
+        <section className="mx-auto w-full max-w-360 px-[3%] py-15 canvas:px-0 lg:pt-30">
+           <p className="text-small mb-4 font-bold">
+              ACTIVE INGREDIENT
+            </p>
+            <h2 className="text-h4 mb-5 lg:text-h2">
+              3대 핵심 활성 성분
+            </h2>
+            <p className="text-body mb-10 lg:mb-25 text-gray-750">
+              스피루리나를 특별하게 만드는 3가지 핵심 활성
+              성분이 항산화와 보습, 세포 재생에 이르는 피부 건강을 다각도로 책임집니다.
+            </p>
+          <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-3 lg:gap-x-15 lg:gap-y-0">
+            {ACTIVE_INGREDIENTS.map((ingredient) => (
+              <article key={ingredient.title}>
+                <p className="text-h5 lg:text-h4 text-black mb-2 font-bold">{ingredient.title}</p>
+                <p className="text-base font-semibold text-text-sub mb-6">{ingredient.label}</p>
+                <div className="mb-6 border-t border-gray-300 lg:mb-8" />
+                <p className="text-body text-text-sub leading-6">{ingredient.description}</p>
+              </article>
+            ))}
+          </div>
+        </section>
 
-        <PageSection title="영양 성분">
-          <p className="text-text-sub text-[0.95rem] leading-6">
-            18종 아미노산(필수아미노산 9종 포함), 12종 비타민류, 10종 미네랄류, 7종 지방류 등 약
-            50여 가지의 영양소를 함유하고 있습니다.
+        <section className="mx-auto w-full max-w-360 px-[3%] py-15 canvas:px-0 lg:py-30">
+          <p className="text-small mb-4 font-bold">NUTRITION</p>
+          <h2 className="text-h4 mb-5 lg:text-h2">영양 성분</h2>
+          <p className="text-body mb-10 lg:mb-16 text-gray-750">
+            단백질과 필수아미노산, 비타민, 미네랄, 지방산까지.<br/> 스피루리나 한 스푼에 담긴 50여
+            종의 영양소를 6가지 카테고리로 체계화하여,<br/> 고순도 원료가 지닌 영양학적 가치를
+            과학적 데이터로 증명합니다.
           </p>
-          <p className="text-text-sub mt-3 text-[0.95rem] leading-6">
-            우유 대비 칼슘 500% 이상, 시금치 대비 철분 5000% 이상, 당근 대비 베타카로틴 1000%
-            이상, 두부 대비 단백질 37.5% 이상의 영양 밀도를 가지고 있습니다.
+
+          <div className="relative mx-auto hidden aspect-3/2 w-full max-w-340 lg:block">
+            <svg
+              viewBox="0 0 100 66.667"
+              preserveAspectRatio="none"
+              className="absolute inset-0 h-full w-full"
+              aria-hidden="true"
+            >
+              <path
+                d={NUTRITION_ARCS.left}
+                fill="none"
+                stroke="var(--color-primary-4)"
+                strokeWidth="0.35"
+                strokeOpacity="0.6"
+                vectorEffect="non-scaling-stroke"
+              />
+              <path
+                d={NUTRITION_ARCS.right}
+                fill="none"
+                stroke="var(--color-primary-4)"
+                strokeWidth="0.35"
+                strokeOpacity="0.6"
+                vectorEffect="non-scaling-stroke"
+              />
+              <path
+                d={NUTRITION_ARCS.top}
+                fill="none"
+                stroke="var(--color-primary-4)"
+                strokeWidth="0.35"
+                strokeOpacity="0.6"
+                vectorEffect="non-scaling-stroke"
+              />
+            </svg>
+
+            <div className="absolute top-1/2 left-1/2 aspect-square w-[30%] -translate-x-1/2 -translate-y-1/2">
+              <Image
+                src="/images/tech/영양성분.png"
+                alt="스피루리나 영양 성분 제품 이미지"
+                fill
+                sizes="340px"
+                className="object-contain"
+              />
+            </div>
+
+            {NUTRITION_FACTS.map((fact) => (
+              <div
+                key={fact.label}
+                className="absolute -translate-x-1/2 -translate-y-1/2"
+                style={{ top: `${fact.position.y}%`, left: `${fact.position.x}%` }}
+              >
+                <div
+                  className={`relative z-10 flex size-40 shrink-0 flex-col items-center justify-center rounded-full text-center shadow-sm ${NUTRITION_STYLE[fact.style]}`}
+                >
+                  <span className="text-[1.3rem] leading-tight font-bold">{fact.count}</span>
+                  <span className="text-[0.95rem] leading-tight font-semibold">{fact.label}</span>
+                </div>
+
+                {fact.caption === 'below' ? (
+                  <div className="absolute top-full left-1/2 mt-3 w-44 -translate-x-1/2 text-center">
+                    <p className="text-text-sub text-[0.85rem] leading-6">{fact.detail}</p>
+                  </div>
+                ) : fact.caption === 'outer-left' ? (
+                  <div className="absolute top-1/2 right-full mr-3 w-36 -translate-y-1/2 text-right">
+                    <p className="text-text-sub text-[0.85rem] leading-6">{fact.detail}</p>
+                  </div>
+                ) : (
+                  <div className="absolute top-1/2 left-full ml-3 w-36 -translate-y-1/2 text-left">
+                    <p className="text-text-sub text-[0.85rem] leading-6">{fact.detail}</p>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+
+          {/* 모바일/태블릿: 이미지 + 그리드 */}
+          <div className="lg:hidden">
+            <div className="relative mx-auto mb-10 aspect-square w-full max-w-64">
+              <Image
+                src="/images/tech/영양성분.png"
+                alt="스피루리나 영양 성분 제품 이미지"
+                fill
+                sizes="256px"
+                className="object-contain"
+              />
+            </div>
+            <div className="grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-3">
+              {NUTRITION_FACTS.map((fact) => (
+                <div key={fact.label} className="flex flex-col items-center gap-2 text-center">
+                  <span
+                    className={`flex size-24 flex-col items-center justify-center rounded-full text-center shadow-sm ${NUTRITION_STYLE[fact.style]}`}
+                  >
+                    <span className="text-base leading-tight font-bold">{fact.count}</span>
+                    <span className="text-small leading-tight font-semibold">{fact.label}</span>
+                  </span>
+                  <span className="text-text-sub text-[0.78rem] leading-5">{fact.detail}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <div className="bg-[#F6F9EF]">
+          <section className="mx-auto w-full max-w-360 px-[3%] py-15 canvas:px-0 canvas:py-30">
+            <div className="flex flex-col gap-10 lg:flex-row lg:justify-between lg:gap-16">
+              <div className="lg:w-[42%] lg:shrink-0">
+                <p className="text-small text-black mb-4 font-bold lg:mb-8">RECOGNITION</p>
+                <h2 className="text-h4 lg:text-h2 text-black mb-5">국제 공인 연혁</h2>
+                <p className="text-body mb-10 max-w-2xl text-gray-750 lg:mb-16">
+                  스피루리나는 한 기업의 주장이 아니라, UN·FAO·미국 FDA·WHO 등 국제기구가 지난
+                  수십 년에 걸쳐 안전성과 영양 가치를 공식적으로 인정해온 식품입니다. 1974년,
+                  미래 식량으로 지목된 이후 반복적으로 이어진 국제적 공인의 흐름을 통해,
+                  스피루리나가 왜 신뢰할 수 있는 원료인지를 보여드립니다.
+                </p>
+              </div>
+
+              <div className="lg:w-[50%]">
+                <RoadmapGrid
+                  items={[
+                    {
+                      year: '1974',
+                      description: [
+                        'UN, 인류에게 가장 이상적인 음식',
+                        'FAO, 미래 최고의 음식',
+                      ],
+                    },
+                    {
+                      year: '1981',
+                      description: [
+                        '미국 FDA, 부작용 없는 건강하고 안전한 제품 인증',
+                      ],
+                    },
+                    {
+                      year: '1992',
+                      description: [
+                        'WHO, 21세기의 건강한 제품',
+                      ],
+                    },
+                  ]}
+                />
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <section className="mx-auto w-full max-w-360 px-[3%] py-15 canvas:px-0 canvas:py-30">
+           <p className="text-small mb-4 font-bold">
+              FAQ
+            </p>
+          <h2 className="text-h4 lg:text-h2 text-black mb-5">스피루리나가 더 궁금하신가요?</h2>
+          <p className="text-text-sub text-[0.95rem] leading-6 mb-12 lg:mb-20">
+            섭취 방법부터 활용 분야까지, 건강기능식품·화장품·반려동물 푸드·스마트팜 분야별 궁금증을 모았습니다.
           </p>
-        </PageSection>
-
-        <PageSection title="국제 공인 연혁">
-          <InfoTable
-            rows={[
-              { label: '1974', value: 'UN, "인류에게 가장 이상적인 음식"' },
-              { label: '1974', value: 'FAO, "미래 최고의 음식"' },
-              { label: '1981', value: '미국 FDA, "부작용 없는 건강하고 안전한 제품" 인증' },
-              { label: '1992', value: 'WHO, "21세기의 건강한 제품"' },
-            ]}
-          />
-        </PageSection>
-
-        <PageSection title="자주 묻는 질문">
-          <FaqAccordion items={FAQ_ITEMS} categories={FAQ_CATEGORIES} />
-        </PageSection>
-      </div>
+          <FaqAccordion items={FAQ_ITEMS} categories={FAQ_CATEGORIES} itemsPerPage={5} />
+        </section>
     </>
   );
 }

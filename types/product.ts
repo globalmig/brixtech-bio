@@ -19,6 +19,7 @@ export interface BrandProduct {
   slug: string;
   name: string;
   description: string;
+  image: string;
   specs: BrandProductSpec[];
   features: string[];
   ingredients: string;

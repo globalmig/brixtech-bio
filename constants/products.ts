@@ -9,6 +9,7 @@ export const PRODUCTS: BrandProduct[] = [
     slug: 'dog-oneshot',
     name: '도그원샷',
     description: '반려동물의 피부와 피모 건강을 위한 수제 펫푸드입니다.',
+    image: '/images/brand/spione-dogoneshot.png',
     specs: [
       { label: '중량', value: '4kg' },
       { label: '급여 대상 (연령)', value: '12개월 이상', accent: true },
@@ -53,7 +54,7 @@ function toProductItem(brand: Brand, product: BrandProduct): ProductItem {
   return {
     id: product.id,
     status: 'active',
-    image: '#',
+    image: product.image,
     brand: brand.name.toUpperCase(),
     name: product.name,
     href: `/brand/${brand.slug}/${product.slug}`,

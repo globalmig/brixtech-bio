@@ -10,6 +10,7 @@ export const BRANDS: Brand[] = [
     logo: '/images/brand/spione-logo-black.png',
     logoWhite: '/images/brand/spione-logo-white.png',
     bgImage: '/images/brand/spione-bg.png',
+    bannerImage: '/images/brand/spione-brand-banner.png',
     tagline: '반려동물의 건강을 위한 프리미엄 기능성 펫푸드',
     cardDescription: '반려동물의 건강을 위한\n프리미엄 기능성 펫푸드',
     comingSoonCount: 2,

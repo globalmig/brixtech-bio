@@ -14,6 +14,8 @@ export interface Brand {
   logoWhite: string;
   /** 브랜드 소개 쇼케이스 카드 배경 이미지 */
   bgImage: string;
+  /** 브랜드 상세 히어로 배경 배너 이미지 */
+  bannerImage: string;
   /** 브랜드 상세 히어로에 한 줄로 표시되는 태그라인 */
   tagline: string;
   /** 브랜드 소개 쇼케이스 카드에 표시되는 태그라인(줄바꿈 포함 가능) */

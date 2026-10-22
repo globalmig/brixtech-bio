@@ -7,6 +7,14 @@ import { BUSINESS_CATEGORIES } from '@/constants/home';
 
 const AUTOPLAY_INTERVAL = 3000;
 
+const BACKGROUND_IMAGES = [
+  '/images/about/about-health.png',
+  '/images/about/about-cosmetics.png',
+  '/images/about/about-pet-food.png',
+  '/images/about/about-air.png',
+  '/images/about/about-smart-farm.png',
+];
+
 export default function BusinessCoreValues() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
@@ -23,7 +31,7 @@ export default function BusinessCoreValues() {
 
   return (
     <div
-      className="relative w-full overflow-hidden bg-primary-2 sm:h-115 lg:h-160"
+      className="relative w-full overflow-hidden bg-primary-2 sm:h-115 lg:h-185"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
@@ -31,7 +39,7 @@ export default function BusinessCoreValues() {
         {BUSINESS_CATEGORIES.map((category, index) => (
           <Image
             key={category.title}
-            src={category.image}
+            src={BACKGROUND_IMAGES[index] ?? category.image}
             alt={category.title}
             fill
             sizes="100vw"

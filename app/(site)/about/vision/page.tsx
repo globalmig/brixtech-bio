@@ -1,7 +1,5 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
-
-import ContactSection from '@/components/domain/home/ContactSection';
 import HeroBanner from '@/components/domain/page/HeroBanner';
 import PageIntro from '@/components/domain/page/PageIntro';
 import RoadmapGrid from '@/components/domain/page/RoadmapGrid';
@@ -180,7 +178,7 @@ export default function AboutVisionPage() {
           <div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:gap-16">
             <div className="lg:w-[42%] lg:shrink-0">
               <p className="text-small text-black mb-4 font-bold lg:mb-8">VISION</p>
-              <h2 className="text-h4 lg:text-h2 text-black mb-8 lg:mb-16">왜 미세조류인가요?</h2>
+              <h2 className="text-h4 lg:text-h2 text-black mb-5">왜 미세조류인가요?</h2>
               <p className="text-[1rem] leading-7 text-gray-750">
                 미세조류는 빠르게 성장하고 적은 자원으로도 높은 생산성을 내며, 단백질·비타민·항산화물질
                 등 다양한 고부가 성분을 함유하고 있습니다. 식량작물과 경작지를 두고 경쟁하지 않으면서도
@@ -189,7 +187,7 @@ export default function AboutVisionPage() {
               </p>
             </div>
 
-            <div className="relative aspect-4/5 w-full overflow-hidden bg-gray-100 lg:flex-1">
+            <div className="relative aspect-4/3 w-full overflow-hidden bg-gray-100 lg:flex-1">
               <Image
                 src="/#"
                 alt="미세조류 클로즈업 이미지"
@@ -200,25 +198,25 @@ export default function AboutVisionPage() {
             </div>
           </div>
 
-          <div className="mt-10 grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:mt-16 lg:grid-cols-5 lg:gap-x-8 lg:gap-y-0">
+          <div className="mt-10 grid grid-cols gap-x-6 gap-y-10 sm:grid-cols-3 lg:my-30 lg:grid-cols-5 lg:gap-x-8 lg:gap-y-0">
             {WHY_MICROALGAE_FEATURES.map((feature) => (
-              <div key={feature.title}>
-                <p className="text-h5 lg:text-h4 text-black mb-3 font-bold lg:mb-4">
+              <article key={feature.title}>
+                <p className="text-h5 lg:text-h4 text-black mb-2 font-bold">
                   {feature.title}
                 </p>
-                <p className="text-body text-text-sub mb-6 lg:mb-8">{feature.label}</p>
+                <p className="text-base font-semibold text-text-sub mb-6">{feature.label}</p>
                 <div className="mb-6 border-t border-gray-300 lg:mb-8" />
                 <p className="text-body text-text-sub leading-6">{feature.description}</p>
-              </div>
+              </article>
             ))}
           </div>
         </section>
 
-        <section className="py-10 lg:py-12">
-          <div className="flex flex-col gap-10 lg:flex-row-reverse lg:items-start lg:gap-16">
-            <div className="lg:w-[42%] lg:shrink-0">
+        <section className="py-10 lg:pb-10">
+          <div className="flex flex-col gap-10 lg:flex-row-reverse lg:justify-between lg:gap-16">
+            <div className="lg:w-[50%] lg:shrink-0">
               <p className="text-small text-black mb-4 font-bold lg:mb-8">VISION</p>
-              <h2 className="text-h4 lg:text-h2 text-black mb-8">국제기구가 주목하는 원료</h2>
+              <h2 className="text-h4 lg:text-h2 text-black mb-5">국제기구가 주목하는 원료</h2>
               <p className="text-[1rem] leading-7 text-gray-750">
                 WHO(2019)는 'Alternative food and feed products'에서 영양이 풍부한 식품 자원으로
                 소개했으며, 미국 FDA(2012)는 GRAS 등재 심사에서 특정 용도의 사용에 이의 없음(no
@@ -228,7 +226,7 @@ export default function AboutVisionPage() {
               </p>
             </div>
 
-            <div className="relative aspect-4/5 w-full overflow-hidden bg-gray-100 lg:flex-1">
+            <div className="relative aspect-4/3 w-full overflow-hidden bg-gray-100 lg:w-150">
               <Image
                 src="/#"
                 alt="국제기구 인증 및 원료 표준화 이미지"
@@ -241,10 +239,10 @@ export default function AboutVisionPage() {
         </section>
       </div>
 
-      <section className="py-15 canvas:py-30">
+      <section className="py-15 canvas:py-10">
         <div className="mx-auto w-full max-w-360 px-[3%] canvas:px-0">
-          <p className="text-small text-black mb-4 font-bold lg:mb-8">TECH</p>
-          <h2 className="text-h4 lg:text-h2 text-black mb-5">원료 표준화 &amp; 사업화 단계</h2>
+          <p className="text-small text-black mb-4 font-bold lg:mb-8">TECHNOLOGY</p>
+          <h2 className="text-h4 lg:text-h2 text-black mb-5">미세조류가 가치가 되는 순간</h2>
           <p className="text-body mb-10 max-w-2xl text-gray-750 lg:mb-16">
             분말·추출물·배양액 등 고기능 원료로 표준화하며, 건강기능식품·화장품·펫푸드·바이오스티뮬런트로
             제품화됩니다. 완제품뿐 아니라 바이오·화장품·식품 분야의 외부 파트너에게 미세조류 소재를
@@ -252,36 +250,37 @@ export default function AboutVisionPage() {
           </p>
         </div>
 
-        <div className="bg-gray-50">
-          <div className="mx-auto grid w-full max-w-360 grid-cols-2 px-[3%] sm:grid-cols-3 lg:grid-cols-5 lg:divide-x lg:divide-gray-300 canvas:px-0">
+        <div className="bg-[#F6F9EF]">
+          <div className="grid w-full grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 lg:divide-x lg:divide-gray-300">
             {PROCESS_PHASES.map((phase) => (
               <div
                 key={phase.title}
                 className="flex flex-col items-center gap-3 px-4 py-10 text-center lg:px-6"
               >
-                <span className="bg-white text-primary ring-primary/10 shadow-primary/15 flex size-14 items-center justify-center rounded-full shadow-lg ring-1 lg:size-16">
+                <span className="bg-[#E9EFDA] text-primary-2 flex size-14 items-center justify-center rounded-full lg:size-16">
                   <phase.Icon className="size-6 lg:size-7" />
                 </span>
-                <p className="text-h6 text-text-default font-bold">{phase.title}</p>
-                <p className="text-text-sub text-[0.85rem] leading-5">{phase.description}</p>
+                <p className="text-h5 lg:text-h4 text-text-default font-bold">{phase.title}</p>
+                <p className="text-text-sub text-[1rem] leading-6">{phase.description}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <div className="mx-auto w-full max-w-360 px-[3%] py-15 canvas:px-0 canvas:py-30">
+      <div className="mx-auto w-full max-w-360 px-[3%] py-15 canvas:px-0 canvas:py-20 lg:pb-30">
         <section className="py-10 lg:py-12">
-          <div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:gap-16">
+          <div className="flex flex-col gap-10 lg:flex-row lg:justify-between lg:gap-16">
             <div className="lg:w-[42%] lg:shrink-0">
               <p className="text-small text-black mb-4 font-bold lg:mb-8">ROADMAP</p>
-              <h2 className="text-h4 lg:text-h2 text-black mb-8 lg:mb-16">사업 로드맵</h2>
+              <h2 className="text-h4 lg:text-h2 text-black mb-5">사업 로드맵</h2>
               <p className="text-body mb-10 max-w-2xl text-gray-750 lg:mb-16">
-                Contents
+                2026년 대량생산 체계 구축을 시작으로, <br/> 2029년까지 화장품·펫푸드·스마트팜 전 영역의
+                기술을 단계적으로 고도화합니다.
               </p>
             </div>
 
-            <div className="lg:flex-1">
+            <div className="lg:w-[50%]">
               <RoadmapGrid
                 items={[
                   {

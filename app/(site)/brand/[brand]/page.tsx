@@ -34,20 +34,29 @@ export default async function BrandDetailPage({ params }: BrandDetailPageProps) 
     <>
       <PageIntro eyebrow="브랜드 소개" title={brand.name} />
 
-      <div className="bg-gray-200 flex flex-col items-center justify-center px-5 py-20 text-center lg:py-32">
-        <p className="text-small text-text-sub mb-4 font-bold tracking-[0.2em] uppercase lg:mb-6">
+      <div className="relative flex flex-col items-center justify-center px-5 py-20 text-center lg:py-32">
+        <Image
+          src={brand.bannerImage}
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover"
+          aria-hidden
+        />
+        <div className="absolute inset-0 bg-black/25" aria-hidden />
+        <p className="text-small relative mb-4 font-bold tracking-[0.2em] text-white uppercase lg:mb-6">
           {brand.category}
         </p>
         <div className="relative h-14 w-52 lg:h-20 lg:w-76">
           <Image
-            src={brand.logo}
+            src={brand.logoWhite}
             alt={brand.name}
             fill
             sizes="300px"
             className="object-contain"
           />
         </div>
-        <p className="text-text-sub mt-6 text-body lg:mt-8">{brand.tagline}</p>
+        <p className="relative mt-6 text-body text-white lg:mt-8">{brand.tagline}</p>
       </div>
 
       <section className="py-15 canvas:py-30">
