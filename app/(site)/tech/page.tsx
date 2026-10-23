@@ -492,6 +492,7 @@ export default function TechPage() {
               보이지 않으며, 알칼리성 염호에서 자생합니다. 1927년 독일 과학자에 의해 처음
               명명되었습니다."
               imageAlt="스피루리나 이미지"
+              imageSrc='/images/tech/tech-spirulina-banner2.png'
             />
 
         <section className="mx-auto w-full max-w-360 px-[3%] py-15 canvas:px-0 lg:pt-30">

@@ -3,8 +3,8 @@ import Link from 'next/link';
 
 export default function ContactSection() {
   return (
-    <section className="relative overflow-hidden bg-primary-2">
-      <div className="relative mx-auto flex w-full max-w-(--width-app-canvas) flex-col items-start justify-between gap-10 px-[4%] py-20 text-white sm:flex-row sm:items-center md:px-8 md:py-28 canvas:px-0 lg:py-32">
+    <section className="relative overflow-hidden bg-[#F6F9EF]">
+      <div className="relative mx-auto flex w-full max-w-(--width-app-canvas) flex-col items-start justify-between gap-10 px-[4%] py-20 text-black sm:flex-row sm:items-center md:px-8 md:py-28 canvas:px-0 lg:py-32">
         <div>
           <p className="text-small mb-6 font-bold lg:mb-10">
             CONTACT
@@ -12,7 +12,7 @@ export default function ContactSection() {
           <h2 className="text-h4 mb-5 lg:text-h2">
             미세조류 바이오 기술 및 <br/>사업 협력에 대해 문의주세요.
           </h2>
-          <p className="text-[1rem] text-white/80 mb-10">
+          <p className="text-[1rem] text-black/50 mb-10">
             브릭스텍바이오가 함께하겠습니다.
           </p>
         </div>
@@ -27,13 +27,13 @@ export default function ContactSection() {
             alt="문의페이지로 이동"
             width={480}
             height={144}
-            className="h-8 w-auto sm:h-10 lg:h-15"
+            className="h-8 w-auto brightness-0 sm:h-10 lg:h-15"
             aria-hidden
           />
 
           <span
             aria-hidden
-            className="border border-white absolute top-1/2 right-0 size-28 -translate-y-1/2 translate-x-1/2 rounded-full p-3 sm:size-30  lg:size-35"
+            className="border border-black absolute top-1/2 right-0 size-28 -translate-y-1/2 translate-x-1/2 rounded-full p-3 sm:size-30  lg:size-35"
           >
             <svg viewBox="0 0 100 100" className="animate-badge-spin size-full">
               <path
@@ -41,7 +41,7 @@ export default function ContactSection() {
                 d="M 2,50 a 48,48 0 1,0 96,0 a 48,48 0 1,0 -96,0"
                 fill="none"
               />
-              <text fontSize="11" fill="white" letterSpacing="1" textLength="302" lengthAdjust="spacing">
+              <text fontSize="11" fill="black" letterSpacing="1" textLength="302" lengthAdjust="spacing">
                 <textPath href="#contact-badge-path" startOffset="0">
                   BRIXTECH BIO • BRIXTECH BIO •
                 </textPath>

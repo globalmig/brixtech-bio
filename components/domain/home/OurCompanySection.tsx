@@ -1,4 +1,17 @@
+'use client';
+
+import Image from 'next/image';
+import { useEffect, useRef } from 'react';
+
 export default function OurCompanySection() {
+  const spirulinaVideoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (spirulinaVideoRef.current) {
+      spirulinaVideoRef.current.playbackRate = 0.5;
+    }
+  }, []);
+
   return (
     <section className="relative w-full py-15 lg:py-30">
       <div className="mx-auto w-full max-w-(--width-app-canvas) px-[4%] md:px-8 canvas:px-0">
@@ -17,7 +30,13 @@ export default function OurCompanySection() {
       <div className="mt-20 w-full lg:mt-40">
         <div className="hidden items-stretch gap-8 lg:flex">
           <div className="flex-[1.7] shrink-0">
-            <div className="h-full w-full bg-gray-200" />
+            <Image
+              src="/images/home-innovation.png"
+              alt="BIO INNOVATION"
+              width={800}
+              height={1000}
+              className="h-full w-full object-cover"
+            />
           </div>
 
           <div className="flex min-w-0 flex-3 flex-col">
@@ -42,7 +61,15 @@ export default function OurCompanySection() {
                 </p>
               </div>
 
-              <div className="aspect-4/5 w-[45%] shrink-0 bg-gray-200" />
+              <video
+                ref={spirulinaVideoRef}
+                src="/videos/스피루리나.mp4"
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="aspect-4/5 w-[45%] shrink-0 object-cover"
+              />
             </div>
           </div>
         </div>

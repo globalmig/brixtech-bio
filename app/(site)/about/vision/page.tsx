@@ -171,6 +171,7 @@ export default function AboutVisionPage() {
         title={'스피루리나 배양 기술을\n사업의 출발점으로'}
         description="5가지 핵심 사업 영역의 유기적인 시너지를 통해 지속가능한 미래 바이오 시장을 선도합니다."
         imageAlt="미세조류 연구 및 배양 현장 이미지"
+        imageSrc='/images/about/about-vision-banner.png'
       />
 
       <div className="mx-auto w-full max-w-360 px-[3%] py-15 canvas:px-0 canvas:py-30">
@@ -189,8 +190,8 @@ export default function AboutVisionPage() {
 
             <div className="relative aspect-4/3 w-full overflow-hidden bg-gray-100 lg:flex-1">
               <Image
-                src="/#"
-                alt="미세조류 클로즈업 이미지"
+                src="/images/about/vision2.png"
+                alt="미세조류"
                 fill
                 sizes="(min-width: 1024px) 55vw, 100vw"
                 className="object-cover"
@@ -228,8 +229,8 @@ export default function AboutVisionPage() {
 
             <div className="relative aspect-4/3 w-full overflow-hidden bg-gray-100 lg:w-150">
               <Image
-                src="/#"
-                alt="국제기구 인증 및 원료 표준화 이미지"
+                src="/images/about/vision1.png"
+                alt="국제기구 인증 및 원료 표준화"
                 fill
                 sizes="(min-width: 1024px) 55vw, 100vw"
                 className="object-cover"

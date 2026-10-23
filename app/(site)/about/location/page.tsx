@@ -40,7 +40,7 @@ function BusIcon() {
 }
 
 const DIRECTIONS = [
-  { Icon: SubwayIcon, color: '#D4003B', text: '신사역 4번 출구에서 도보 약 3~5분' },
+  { Icon: SubwayIcon, color: '#D4003B', text: '신사역 5번 출구에서 도보 약 3분' },
   {
     Icon: BusIcon,
     color: '#0068B7',

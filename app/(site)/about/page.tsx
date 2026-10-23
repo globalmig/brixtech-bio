@@ -206,6 +206,7 @@ export default function AboutPage() {
         title={'미세조류에서 시작해\n지속가능한 바이오 산업을 만들어갑니다.'}
         description="브릭스텍바이오는 미세조류 기반 기능성 원료와 친환경 바이오 응용 제품을 개발합니다."
         imageAlt="배양 현장 또는 미세조류 클로즈업 사진"
+        imageSrc='/images/about/about-banner.png'
       />
 
       <div className="mx-auto w-full max-w-360 px-[3%] py-15 canvas:px-0 canvas:py-30 lg:pb-10">
@@ -239,8 +240,8 @@ export default function AboutPage() {
 
           <div className="relative aspect-[745.06/880.43] w-full lg:w-150 overflow-hidden bg-gray-100">
             <Image
-              src="/#"
-              alt="브릭스텍바이오 연구·배양 시설 전경 이미지"
+              src="/images/about/company.png"
+              alt="브릭스텍바이오 인사말"
               fill
               sizes="(min-width: 1024px) 55vw, 100vw"
               className="object-cover"
@@ -252,7 +253,7 @@ export default function AboutPage() {
       <div className="mx-auto w-full max-w-360 px-[3%] py-15 canvas:px-0 canvas:py-30 lg:pb-10">
         <section className="py-10 lg:py-12">
           <div className="flex flex-col gap-10 lg:flex-row-reverse lg:justify-between lg:gap-16">
-            <div className="lg:w-[50%] lg:shrink-0">
+            <div className="lg:w-[45%] lg:shrink-0">
               <p className="text-small text-black mb-4 font-bold lg:mb-8">FACILITY</p>
               <h2 className="text-h4 lg:text-h2 text-black mb-8">
                 미세조류가 자라나는
@@ -266,10 +267,10 @@ export default function AboutPage() {
               </p>
             </div>
 
-            <div className="relative aspect-4/5 w-full overflow-hidden bg-gray-100 lg:w-150">
+            <div className="relative aspect-6/4 w-full overflow-hidden bg-gray-100 lg:w-200">
               <video
-                src="/#"
-                controls
+                src="/videos/배양관_전경.mp4"
+                autoPlay
                 muted
                 loop
                 playsInline
