@@ -109,14 +109,12 @@ export default function FaqAccordion({
         </Accordion.Root>
       )}
 
-      {filteredItems.length > itemsPerPage ? (
         <Pagination
           key={activeCategory}
           totalCount={filteredItems.length}
           itemsPerPage={itemsPerPage}
           onPageChange={setPage}
         />
-      ) : null}
     </div>
   );
 }

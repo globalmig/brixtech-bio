@@ -21,7 +21,7 @@
 
 | prop        | type                                        | default     | 설명                 |
 | ----------- | ------------------------------------------- | ----------- | -------------------- |
-| `variant`   | `'primary' \| 'secondary' \| 'outline'`     | `'primary'` |                      |
+| `variant`   | `'primary' \| 'secondary' \| 'outline' \| 'danger'` | `'primary'` | `danger`는 삭제 등 파괴적 액션용 |
 | `size`      | `'giant' \| 'large' \| 'medium' \| 'small'` \| `{ base?, sm?, md?, lg?: ButtonSize }` | `'large'`   | breakpoint별 객체로 반응형 크기 지정 가능 |
 | `leftIcon`  | `ReactNode`                                 | —           | 왼쪽 아이콘 슬롯     |
 | `rightIcon` | `ReactNode`                                 | —           | 오른쪽 아이콘 슬롯   |
@@ -543,5 +543,35 @@ const totalPages = 5;
 ```
 
 이전/다음 버튼은 각각 `page`가 1 이하, `totalPages` 이상일 때 자동으로 비활성화됩니다.
+
+---
+
+## PrevNextNav
+
+상세 페이지 하단의 이전 글/다음 글 네비게이션입니다. 뉴스·영상 등 상세 콘텐츠 종류와 상관없이 호출하는 쪽에서 href·제목만 넘겨주면 됩니다.
+
+### Props
+
+| prop        | type     | default | 설명                               |
+| ----------- | -------- | ------- | ---------------------------------- |
+| `prevHref`  | `string` | —       | 없으면 "이전 글이 없습니다." 표시 |
+| `prevTitle` | `string` | —       |                                    |
+| `nextHref`  | `string` | —       | 없으면 "다음 글이 없습니다." 표시 |
+| `nextTitle` | `string` | —       |                                    |
+| `className` | `string` | —       | 추가 클래스(마진 등)               |
+
+### 사용 예
+
+```tsx
+import { PrevNextNav } from '@/components/common/PrevNextNav';
+
+<PrevNextNav
+  className="mt-10 lg:mt-15"
+  prevHref={prevItem ? `/news/${prevItem.id}` : undefined}
+  prevTitle={prevItem?.title}
+  nextHref={nextItem ? `/news/${nextItem.id}` : undefined}
+  nextTitle={nextItem?.title}
+/>;
+```
 
 ---

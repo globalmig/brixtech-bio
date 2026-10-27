@@ -10,7 +10,7 @@ interface ProductCardProps {
 export default function ProductCard({ product }: ProductCardProps) {
   const content = (
     <>
-      <div className="relative mb-auto aspect-square w-full overflow-hidden bg-gray-200">
+      <div className="relative mb-auto aspect-square w-full overflow-hidden">
         {product.image && product.image !== '#' && (
           <Image
             src={product.image}
@@ -23,7 +23,7 @@ export default function ProductCard({ product }: ProductCardProps) {
       </div>
 
       <div>
-        <p className="text-h6 lg:text-h5 font-bold">{product.brand}</p>
+        <p className="text-h6 lg:text-h5 font-bold lg:mt-4">{product.brand}</p>
         <p className="text-small lg:text-[1rem] text-text-info mt-1">
           {product.name}
         </p>
@@ -33,11 +33,11 @@ export default function ProductCard({ product }: ProductCardProps) {
 
   if (product.href) {
     return (
-      <Link href={product.href} className="flex h-full flex-col p-8 lg:p-10">
+      <Link href={product.href} className="flex h-full flex-col p-5 lg:p-8">
         {content}
       </Link>
     );
   }
 
-  return <div className="flex h-full flex-col p-8 lg:p-10">{content}</div>;
+  return <div className="flex h-full flex-col p-5 lg:p-8">{content}</div>;
 }

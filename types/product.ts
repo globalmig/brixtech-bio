@@ -25,6 +25,8 @@ export interface BrandProduct {
   ingredients: string;
   /** 한 행에 좌/우로 나란히 표시할 성분 2개씩 묶어서 전달합니다. 홀수개면 마지막 행의 두 번째 칸은 null. */
   nutrients: [BrandProductNutrient, BrandProductNutrient | null][];
+  /** false면 실제 사이트에서 숨겨집니다(관리자 화면에서는 계속 보이고 편집 가능). */
+  isActive: boolean;
 }
 
 export type ProductStatus = 'active' | 'coming-soon';

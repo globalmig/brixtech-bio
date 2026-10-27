@@ -27,7 +27,7 @@ export default function BrandGallery({ brands, categories }: BrandGalleryProps) 
   return (
     <>
       <div className="px-[4%] lg:px-6">
-        <ul className="text-small lg:text-[1rem] flex flex-wrap items-center gap-x-2">
+        <ul className="text-small lg:text-[1rem] flex flex-wrap justify-end items-center gap-x-2">
           {[ALL_CATEGORY, ...categories].map((category, index) => (
             <li key={category} className="flex items-center gap-x-2">
               {index > 0 ? (

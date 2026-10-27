@@ -26,7 +26,7 @@ function DropdownTrigger({
     <SelectPrimitive.Trigger
       data-slot="dropdown-trigger"
       className={cn(
-        'group/dropdown flex h-12 w-50 items-center justify-between gap-2 rounded-md border border-border-default bg-bg-default px-4 py-3 [color:var(--color-text-default)] outline-none select-none focus-visible:border-gray-600 focus-visible:ring-2 focus-visible:ring-primary/50 data-placeholder:text-text-info disabled:cursor-not-allowed disabled:bg-gray-200',
+        'group/dropdown flex h-12 w-50 cursor-pointer items-center justify-between gap-2 rounded-md border border-border-default bg-bg-default px-4 py-3 [color:var(--color-text-default)] outline-none select-none focus-visible:border-gray-600 focus-visible:ring-2 focus-visible:ring-primary/50 data-placeholder:text-text-info disabled:cursor-not-allowed disabled:bg-gray-200',
         className
       )}
       {...props}

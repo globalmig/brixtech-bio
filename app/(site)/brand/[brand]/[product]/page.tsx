@@ -6,30 +6,30 @@ import CheckList from '@/components/domain/page/CheckList';
 import InfoTable from '@/components/domain/page/InfoTable';
 import PageIntro from '@/components/domain/page/PageIntro';
 import NutrientTable from '@/components/domain/product/NutrientTable';
-import { BRANDS } from '@/constants/brands';
-import { getBrandProduct, PRODUCTS } from '@/constants/products';
+import { getAllProductsWithBrand, getBrandProduct } from '@/lib/products';
 
 interface ProductDetailPageProps {
   params: Promise<{ brand: string; product: string }>;
 }
 
-export function generateStaticParams() {
-  return PRODUCTS.map((product) => {
-    const brand = BRANDS.find((item) => item.id === product.brandId);
-    return { brand: brand?.slug ?? '', product: product.slug };
-  });
+export async function generateStaticParams() {
+  const items = await getAllProductsWithBrand();
+  return items.map(({ brand, product }) => ({
+    brand: brand.slug,
+    product: product.slug,
+  }));
 }
 
 export async function generateMetadata({ params }: ProductDetailPageProps): Promise<Metadata> {
   const { brand: brandSlug, product: productSlug } = await params;
-  const found = getBrandProduct(brandSlug, productSlug);
+  const found = await getBrandProduct(brandSlug, productSlug);
 
   return { title: found ? `${found.product.name} | BRIXTECHBIO` : 'BRIXTECHBIO' };
 }
 
 export default async function ProductDetailPage({ params }: ProductDetailPageProps) {
   const { brand: brandSlug, product: productSlug } = await params;
-  const found = getBrandProduct(brandSlug, productSlug);
+  const found = await getBrandProduct(brandSlug, productSlug);
 
   if (!found) notFound();
 

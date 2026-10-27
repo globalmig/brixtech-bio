@@ -16,6 +16,7 @@ export const NAV_ITEMS: NavItem[] = [
     href: '/about',
     children: [
       { label: '기업소개', href: '/about' },
+      { label: '홍보 영상', href: '/about/video' },
       { label: '비전', href: '/about/vision' },
       { label: '오시는길', href: '/about/location' },
     ],

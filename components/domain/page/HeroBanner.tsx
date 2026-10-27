@@ -11,7 +11,9 @@ interface HeroBannerProps {
 export default function HeroBanner({ eyebrow, title, description, imageAlt, imageSrc }: HeroBannerProps) {
   return (
     <div className="relative flex h-96 w-full items-center justify-center overflow-hidden bg-gray-200 text-center lg:h-130">
-      <Image src={imageSrc} alt={imageAlt} fill sizes="100vw" className="object-cover" />
+      {imageSrc ? (
+        <Image src={imageSrc} alt={imageAlt} fill sizes="100vw" className="object-cover" />
+      ) : null}
       <div className="absolute inset-0 bg-black/35" aria-hidden />
 
       <div className="relative z-10 px-5">

@@ -43,7 +43,6 @@ function FileUpload({
   const [isDragging, setIsDragging] = useState(false);
 
   const handleDragOver = (event: DragEvent<HTMLLabelElement>) => {
-    // preventDefault를 해야 브라우저가 drop을 허용한다.
     event.preventDefault();
     if (!disabled) {
       setIsDragging(true);
@@ -66,7 +65,6 @@ function FileUpload({
       return;
     }
 
-    // 드롭한 파일을 input에 넣고 change를 발생시켜, 클릭 선택과 같은 onChange 흐름을 탄다.
     const transfer = new DataTransfer();
     (multiple ? dropped : dropped.slice(0, 1)).forEach((file) =>
       transfer.items.add(file)

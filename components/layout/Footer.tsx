@@ -52,12 +52,28 @@ export default function Footer() {
             평일 09:00~18:00 / 주말 및 공휴일 휴무
           </li>
           <li className="text-small text-white/40">
-            주소: 000시 00구 00로 00길 00
+            주소: 서울시 강남대로 101안길 13, B1~4F
           </li>
         </ul>
-        <p className="text-small mt-4 text-white/40">
-          Copyright BRIXTECHBIO 2026. All rights reserved.
-        </p>
+
+        <div className="mt-6 flex flex-col gap-4 border-t border-white/15 pt-6 md:flex-row md:items-center md:justify-between">
+          <ul className="flex flex-wrap gap-x-4 gap-y-2">
+            <li>
+              <Link href="/privacy" className="text-small text-white/70 hover:text-white">
+                개인정보처리방침
+              </Link>
+            </li>
+            <li>
+              <Link href="/terms" className="text-small text-white/70 hover:text-white">
+                서비스 이용약관
+              </Link>
+            </li>
+          </ul>
+
+          <p className="text-small text-white/40">
+            Copyright BRIXTECHBIO 2026. All rights reserved.
+          </p>
+        </div>
       </div>
       <Dialog open={isComingSoonOpen} onOpenChange={setIsComingSoonOpen}>
         <DialogContent className="w-80">

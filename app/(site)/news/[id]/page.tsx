@@ -3,7 +3,8 @@ import { notFound } from 'next/navigation';
 
 import NewsDetail from '@/components/domain/news/NewsDetail';
 import PageIntro from '@/components/domain/page/PageIntro';
-import { NEWS_ITEMS } from '@/constants/news';
+import { getNewsList } from '@/lib/news';
+import { toNewsItem } from '@/types/news';
 
 interface NewsDetailPageProps {
   params: Promise<{ id: string }>;
@@ -11,7 +12,8 @@ interface NewsDetailPageProps {
 
 export async function generateMetadata({ params }: NewsDetailPageProps): Promise<Metadata> {
   const { id } = await params;
-  const item = NEWS_ITEMS.find((news) => news.id === Number(id));
+  const newsList = await getNewsList();
+  const item = newsList.find((news) => news.id === id);
 
   return {
     title: item ? `${item.title} | BRIXTECHBIO` : '기업 소식 | BRIXTECHBIO',
@@ -20,15 +22,16 @@ export async function generateMetadata({ params }: NewsDetailPageProps): Promise
 
 export default async function NewsDetailPage({ params }: NewsDetailPageProps) {
   const { id } = await params;
-  const index = NEWS_ITEMS.findIndex((news) => news.id === Number(id));
+  const newsList = await getNewsList();
+  const index = newsList.findIndex((news) => news.id === id);
 
   if (index === -1) {
     notFound();
   }
 
-  const item = NEWS_ITEMS[index];
-  const prevItem = NEWS_ITEMS[index + 1];
-  const nextItem = NEWS_ITEMS[index - 1];
+  const item = toNewsItem(newsList[index]);
+  const prevItem = newsList[index + 1] && toNewsItem(newsList[index + 1]);
+  const nextItem = newsList[index - 1] && toNewsItem(newsList[index - 1]);
 
   return (
     <>

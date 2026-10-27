@@ -1,14 +1,16 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
-import Slider from 'react-slick';
 
 import { HERO_SLIDES } from '@/constants/home';
 
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+
+const Slider = dynamic(() => import('react-slick'), { ssr: false });
 
 function ArrowRightIcon({ className = 'text-text-default' }: { className?: string }) {
   return (

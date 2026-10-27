@@ -1,9 +1,6 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
-
-import BulletList from '@/components/domain/page/BulletList';
 import FaqAccordion, { type FaqItem } from '@/components/domain/page/FaqAccordion';
-import MediaTextRow from '@/components/domain/page/MediaTextRow';
 import PageIntro from '@/components/domain/page/PageIntro';
 import RoadmapGrid from '@/components/domain/page/RoadmapGrid';
 import HeroBanner from '@/components/domain/page/HeroBanner';
@@ -406,23 +403,16 @@ const ACTIVE_INGREDIENTS = [
   },
 ];
 
-// 좌/우 각 3개 원을 잇는 반원 형태의 곡선 + 맨 위 두 원(지방류·일반성분)을 잇는 곡선.
-// 중간 노드 위치는 각 곡선의 t=0.5 지점과 정확히 일치시켜 선이 원 중심을 그대로 통과하도록
-// 계산했습니다. 좌표는 다이어그램 컨테이너(3:2 비율)와 동일한 비율의 viewBox(0 0 100 66.667)
-// 기준이라, 곡선이 타원형으로 눌리지 않고 실제 화면 비율 그대로 그려집니다.
 const NUTRITION_ARCS = {
   left: 'M 14 48 Q 16 25.3 34 8',
   right: 'M 86 48 Q 84 25.3 66 8',
   top: 'M 34 8 Q 50 2 66 8',
 };
 
-// 5대 영양소 = 진한 배경(강조) · 아미노산 = 5대 영양소와 동일(유지)
-// 비타민류 · 미네랄류 = 5대 영양소보다 한 단계 은은한 배경(불투명 — 선이 비쳐 보이지 않도록)
-// 지방류 · 일반성분 = 흰색 배경
 const NUTRITION_STYLE = {
-  strong: 'bg-primary-4 text-white',
-  soft: 'bg-[#dde3da] text-primary-2 border border-primary-4/30',
-  plain: 'bg-white text-primary-2 border border-primary-4/40',
+  strong: 'bg-primary-2 text-white',
+  soft: 'bg-[#E6F4D8] text-primary-2 border border-primary-4/20',
+  plain: 'bg-[#F3FDE9] text-primary-2 border border-primary-4/20',
 } as const;
 
 const NUTRITION_FACTS = [

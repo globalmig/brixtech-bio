@@ -3,15 +3,50 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import type { MouseEvent } from 'react';
-import { useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 
 import { Button } from '@/components/common/Button';
 import { Dialog, DialogContent, DialogFooter, DialogHeader } from '@/components/common/Dialog';
-import { NAV_ITEMS } from '@/constants/nav';
+import { NAV_ITEMS, type NavItem } from '@/constants/nav';
 
 export default function Header() {
   const pathname = usePathname();
   const isHome = pathname === '/';
+  const [businessOrder, setBusinessOrder] = useState<{ slug: string; label: string }[] | null>(
+    null
+  );
+
+  useEffect(() => {
+    // Header는 레이아웃에 고정돼 있어 페이지 이동만으로는 다시 마운트되지 않습니다.
+    // 관리자에서 순서/숨김을 바꾼 뒤 링크로 이동했을 때도 최신 상태가 보이도록
+    // pathname이 바뀔 때마다(=페이지를 이동할 때마다) 다시 불러옵니다.
+    let isMounted = true;
+    fetch('/api/business/order', { cache: 'no-store' })
+      .then((response) => (response.ok ? response.json() : null))
+      .then((data: { categories?: { slug: string; label: string }[] } | null) => {
+        if (isMounted && data?.categories) setBusinessOrder(data.categories);
+      })
+      .catch(() => {});
+    return () => {
+      isMounted = false;
+    };
+  }, [pathname]);
+
+  // 관리자에서 드래그로 바꾼 카테고리 순서를 BUSINESS 하위 메뉴에 반영합니다.
+  // 순서를 아직 못 불러왔으면 constants/nav.ts에 적힌 기본 순서를 그대로 보여줍니다.
+  const navItems: NavItem[] = businessOrder
+    ? NAV_ITEMS.map((item) =>
+        item.label === 'BUSINESS'
+          ? {
+              ...item,
+              children: businessOrder.map((category) => ({
+                label: category.label,
+                href: `/business/${category.slug}`,
+              })),
+            }
+          : item
+      )
+    : NAV_ITEMS;
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDesktopNavOpen, setIsDesktopNavOpen] = useState(false);
   const [hoveredNavItem, setHoveredNavItem] = useState<string | null>(null);
@@ -25,12 +60,6 @@ export default function Header() {
   const logoRef = useRef<HTMLAnchorElement>(null);
   const navRef = useRef<HTMLElement>(null);
   const navItemRefs = useRef<(HTMLAnchorElement | null)[]>([]);
-
-  // 데스크톱 서브메뉴 상/하위 카테고리 "세트" 정렬 계산용.
-  // nav는 hover 시 gap-x-17 -> gap-x-24로 CSS transition과 함께 넓어지는데,
-  // 애니메이션 도중 getBoundingClientRect로 위치를 측정하면 중간값(stale)을 읽게 되어
-  // 서브메뉴가 상위 카테고리와 어긋난다. 그래서 위치는 애니메이션에 의존하지 않고
-  // (gap에 영향받지 않는) 아이템 폭 + 목표 gap 값으로 직접 계산한다.
   const NAV_GAP_REM = { closed: 17 * 0.25, open: 24 * 0.25 } as const;
   const ROOT_FONT_SIZE_PX = 16;
   const gapPx = (isDesktopNavOpen ? NAV_GAP_REM.open : NAV_GAP_REM.closed) * ROOT_FONT_SIZE_PX;
@@ -102,7 +131,7 @@ export default function Header() {
           }`}
           onMouseEnter={() => setIsDesktopNavOpen(true)}
         >
-          {NAV_ITEMS.map((item, index) =>
+          {navItems.map((item, index) =>
             item.external ? (
               <Link
                 key={item.href}
@@ -160,7 +189,7 @@ export default function Header() {
                 gridTemplateColumns: columnWidths.map((width) => `${width}px`).join(' '),
               }}
             >
-              {NAV_ITEMS.map((item) => (
+              {navItems.map((item) => (
                 <ul
                   key={item.href}
                   className="flex flex-col items-center gap-5"
@@ -189,7 +218,7 @@ export default function Header() {
       ) : null}
 
       <div
-        className={`bg-primary-3 fixed inset-0 z-30 flex h-full w-full flex-col px-5 py-6 transition-transform duration-300 ease-in-out lg:hidden ${
+        className={`bg-primary-3 text-white fixed inset-0 z-30 flex h-full w-full flex-col px-5 py-6 transition-transform duration-300 ease-in-out lg:hidden ${
           isMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
         aria-hidden={!isMenuOpen}
@@ -214,7 +243,7 @@ export default function Header() {
         </div>
 
         <nav className="mt-10 flex flex-col gap-1 overflow-y-auto">
-          {NAV_ITEMS.map((item) =>
+          {navItems.map((item) =>
             item.external ? (
               <Link
                 key={item.href}

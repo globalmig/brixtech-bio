@@ -130,11 +130,3 @@ export const BRAND_SHOWCASE_PRODUCT = [
   description: '반려동물의 건강을 위한\n프리미엄 기능성 펫푸드',
 },
 ];
-
-export const NEWS_LIST = [
-  { title: '기업 소식의 제목입니다.', date: '2026.00.00' },
-  { title: '기업 소식의 제목입니다.', date: '2026.00.00' },
-  { title: '기업 소식의 제목입니다.', date: '2026.00.00' },
-  { title: '기업 소식의 제목입니다.', date: '2026.00.00' },
-  { title: '기업 소식의 제목입니다.', date: '2026.00.00' },
-];

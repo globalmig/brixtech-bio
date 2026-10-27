@@ -48,7 +48,7 @@ export default function TechnologySection() {
               TECHNOLOGY
             </p>
             <h2 className="text-h4 text-black mb-5 whitespace-pre-line lg:text-h2">
-              {'스피루리나 배양 기술을\n사업의 출발점으로'}
+              {'마이크로 알지 배양 기술을\n사업의 출발점으로'}
             </h2>
             <p className="text-body text-black/50 mb-10 lg:mb-25">
               5가지 핵심 사업 영역의 유기적인 시너지를 통해<br /> 지속가능한 미래

@@ -1,8 +1,12 @@
 import Link from 'next/link';
 
-import { NEWS_LIST } from '@/constants/home';
+import { getNewsList } from '@/lib/news';
+import { toNewsItem } from '@/types/news';
 
-export default function NewsSection() {
+export default async function NewsSection() {
+  const newsList = await getNewsList();
+  const recentNews = newsList.slice(0, 5).map(toNewsItem);
+
   return (
     <section className="mx-auto w-full max-w-(--width-app-canvas) px-[4%] py-15 md:px-8 canvas:px-0 lg:py-30">
       <p className="text-small text-black mb-4 font-bold lg:mb-8">
@@ -35,10 +39,10 @@ export default function NewsSection() {
       </Link>
 
       <ul className="border-t-black mt-10 border-t-2 lg:mt-14">
-        {NEWS_LIST.map((news, index) => (
-          <li key={index}>
+        {recentNews.map((news) => (
+          <li key={news.id}>
             <Link
-              href="#"
+              href={`/news/${news.id}`}
               className="border-divider-default flex items-center justify-between border-b py-5 lg:py-10"
             >
               <span className="text-h6 text-black line-clamp-1 lg:text-h5">

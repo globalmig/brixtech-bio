@@ -1,10 +1,10 @@
 import Link from 'next/link';
 
 import ProductGridItem from '@/components/domain/product/ProductGridItem';
-import { getFeaturedProducts } from '@/constants/products';
+import { getFeaturedProducts } from '@/lib/products';
 
-export default function ProductSection() {
-  const products = getFeaturedProducts();
+export default async function ProductSection() {
+  const products = await getFeaturedProducts();
 
   return (
     <section className='mb-20 lg:mb-40'>

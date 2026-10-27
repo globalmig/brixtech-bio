@@ -214,3 +214,48 @@ body {
 .animate-fade-in {
   animation: fade-in 1.6s ease-out both;
 }
+
+/* BUSINESS 블록 배경색이 primary-2(진한 그린)일 때, 하위에서 쓰이는 어두운 텍스트/보더
+   유틸리티 클래스를 자동으로 밝은 색으로 바꿔줍니다. (BusinessSectionRenderer의 on-dark 클래스) */
+.on-dark {
+  color: #ffffff;
+}
+
+.on-dark :where(
+  .text-black,
+  .text-text-default,
+  .text-text-sub,
+  .text-gray-900,
+  .text-gray-800,
+  .text-gray-750,
+  .text-gray-700
+) {
+  color: #ffffff;
+}
+
+.on-dark :where(.text-text-info, .text-gray-600, .text-gray-500) {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.on-dark :where(
+  .border-gray-300,
+  .border-gray-350,
+  .border-gray-400,
+  .border-divider-default,
+  .border-t-black,
+  .border-t-primary-2,
+  .border-b-gray-300
+) {
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.on-dark .divide-gray-300 > :not([hidden]) ~ :not([hidden]) {
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* 관리자 화면: 제목(h1~h6)·label·text-small로 명시한 요소를 제외한 모든 텍스트는
+   항상 1rem으로 고정합니다. 공개 페이지의 반응형 텍스트 유틸(text-h*, 브레이크포인트별
+   크기 등)이 관리자 화면에 새어 들어오는 것을 막기 위한 규칙입니다. */
+.admin-shell *:not(h1, h2, h3, h4, h5, h6, label, [class*='text-small']) {
+  font-size: 1rem;
+}

@@ -1,35 +1,58 @@
-import ReviewDisclaimer from '@/components/domain/business/ReviewDisclaimer';
+import Image from 'next/image';
+import type { CustomerReviewsDisplay } from '@/types/business';
 
 interface Review {
   quote: string;
   context?: string;
+  image?: string;
 }
 
 interface CustomerReviewsProps {
   reviews?: Review[];
+  display?: CustomerReviewsDisplay;
 }
 
-/**
- * Business 하위 페이지(건강기능식품/화장품 등)가 공유하는 고객 후기 섹션입니다.
- * reviews를 비워두면 고지 문구만 노출되며, 원문 후기를 확보하는 대로 데이터만 채워 넣으면 됩니다.
- */
-export default function CustomerReviews({ reviews = [] }: CustomerReviewsProps) {
+export default function CustomerReviews({
+  reviews = [],
+  display = 'text',
+}: CustomerReviewsProps) {
   return (
     <>
-      <ReviewDisclaimer />
-      {reviews.length > 0 ? (
-        <div className="flex flex-col gap-4">
+      {display === 'gallery' ? (
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
           {reviews.map((review, index) => (
-            <div key={index} className="border-gray-300 rounded-xl border p-4">
-              <p className="text-text-sub text-[0.9rem] leading-6">&quot;{review.quote}&quot;</p>
+            <div key={index} className="flex flex-col gap-3">
+              <div className="relative aspect-square w-full overflow-hidden rounded-xl bg-gray-100">
+                {review.image ? (
+                  <Image
+                    src={review.image}
+                    alt=""
+                    fill
+                    sizes="(min-width: 1024px) 260px, 50vw"
+                    className="object-cover"
+                  />
+                ) : null}
+              </div>
+              <p className="text-text-sub line-clamp-4">
+                &quot;{review.quote}&quot;
+              </p>
               {review.context ? (
-                <p className="text-text-info mt-2 text-[0.8rem]">{review.context}</p>
+                <p className="text-text-info">{review.context}</p>
               ) : null}
             </div>
           ))}
         </div>
       ) : (
-        <p className="text-text-info text-[0.85rem]">후기 원문은 확보되는 대로 추가될 예정입니다.</p>
+        <div className="flex flex-col gap-4">
+          {reviews.map((review, index) => (
+            <div key={index} className="border-gray-300 rounded-xl border p-4">
+              <p className="text-text-sub">&quot;{review.quote}&quot;</p>
+              {review.context ? (
+                <p className="text-text-info mt-2">{review.context}</p>
+              ) : null}
+            </div>
+          ))}
+        </div>
       )}
     </>
   );

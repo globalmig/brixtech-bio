@@ -8,6 +8,8 @@ export const metadata: Metadata = {
   title: '비전 | BRIXTECHBIO',
 };
 
+/*
+TODO : 사용 안하게 되는 것 확정 시, 삭제
 function FlaskIcon({ className }: { className?: string }) {
   return (
     <svg
@@ -104,32 +106,38 @@ function PlatformIcon({ className }: { className?: string }) {
     </svg>
   );
 }
+*/
 
 const PROCESS_PHASES = [
   {
     title: '배양',
+    label: 'CULTIVATION',
     description: '자체 배양 시스템으로 고순도 미세조류를 대량 배양합니다.',
-    Icon: FlaskIcon,
+    // Icon: FlaskIcon,
   },
   {
     title: '원료화',
+    label: 'PROCESSING',
     description: '분말·추출물·배양액 등 고기능 원료로 표준화합니다.',
-    Icon: ConversionIcon,
+    // Icon: ConversionIcon,
   },
   {
     title: '제품화',
+    label: 'PRODUCTION',
     description: '건강기능식품·화장품·펫푸드·공기정화기·스마트팜 등 다양한 제품을 개발합니다.',
-    Icon: PackageIcon,
+    // Icon: PackageIcon,
   },
   {
     title: '유통',
+    label: 'DISTRIBUTION',
     description: '자체몰·유통사·해외 파트너를 통해 안정적으로 공급합니다.',
-    Icon: TruckIcon,
+    // Icon: TruckIcon,
   },
   {
     title: '플랫폼화',
+    label: 'PLATFORM',
     description: '하나의 브랜드로 연결합니다.',
-    Icon: PlatformIcon,
+    // Icon: PlatformIcon,
   },
 ];
 
@@ -240,8 +248,8 @@ export default function AboutVisionPage() {
         </section>
       </div>
 
-      <section className="py-15 canvas:py-10">
-        <div className="mx-auto w-full max-w-360 px-[3%] canvas:px-0">
+      <section className="px-[3%] py-15 canvas:px-0 canvas:py-30 bg-[#F6F9EF]">
+        <div className="mx-auto w-full max-w-360">
           <p className="text-small text-black mb-4 font-bold lg:mb-8">TECHNOLOGY</p>
           <h2 className="text-h4 lg:text-h2 text-black mb-5">미세조류가 가치가 되는 순간</h2>
           <p className="text-body mb-10 max-w-2xl text-gray-750 lg:mb-16">
@@ -251,7 +259,7 @@ export default function AboutVisionPage() {
           </p>
         </div>
 
-        <div className="bg-[#F6F9EF]">
+        {/* <div className="bg-[#F6F9EF]">
           <div className="grid w-full grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 lg:divide-x lg:divide-gray-300">
             {PROCESS_PHASES.map((phase) => (
               <div
@@ -264,6 +272,19 @@ export default function AboutVisionPage() {
                 <p className="text-h5 lg:text-h4 text-text-default font-bold">{phase.title}</p>
                 <p className="text-text-sub text-[1rem] leading-6">{phase.description}</p>
               </div>
+            ))}
+          </div>
+        </div> */}
+
+        <div className="mx-auto w-full max-w-360 px-[3%] canvas:px-0">
+          <div className="grid grid-cols gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-5 lg:gap-x-8 lg:gap-y-0">
+            {PROCESS_PHASES.map((phase) => (
+              <article key={phase.title}>
+                <p className="text-h5 lg:text-h4 text-black mb-2 font-bold">{phase.title}</p>
+                <p className="text-base font-semibold text-text-sub mb-6">{phase.label}</p>
+                <div className="mb-6 border-t border-gray-300 lg:mb-8" />
+                <p className="text-body text-text-sub leading-6">{phase.description}</p>
+              </article>
             ))}
           </div>
         </div>

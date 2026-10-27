@@ -28,35 +28,46 @@ export default function OurCompanySection() {
       </div>
 
       <div className="mt-20 w-full lg:mt-40">
-        <div className="hidden items-stretch gap-8 lg:flex">
-          <div className="flex-[1.7] shrink-0">
+        <div className="flex flex-col gap-10 lg:flex-row lg:items-stretch lg:gap-8">
+          <div className="px-[4%] md:px-8 lg:hidden">
+            <h3 className="text-h4 text-black mb-2">BIO INNOVATION</h3>
+            <p className="text-small text-gray-750">
+              미세조류의 특성과 활용 가능성을 바탕으로 건강과 환경을 아우르는 다양한 바이오 응용 분야를 탐색합니다.
+            </p>
+          </div>
+
+          <div className="shrink-0 lg:flex-[1.7]">
             <Image
               src="/images/home-innovation.png"
               alt="BIO INNOVATION"
               width={800}
               height={1000}
-              className="h-full w-full object-cover"
+              className="aspect-3/4 w-full object-cover lg:aspect-auto lg:h-full"
             />
           </div>
 
-          <div className="flex min-w-0 flex-3 flex-col">
-            <div>
+          <div className="flex min-w-0 flex-col gap-10 lg:flex-3 lg:gap-0">
+            <div className="hidden px-[4%] md:px-8 lg:block lg:px-0">
               <h3 className="text-h4 text-black mb-2 lg:mb-4">
                 BIO INNOVATION
               </h3>
               <p className="text-small text-gray-750 lg:text-base">
-                미세조류의 특성과 활용 가능성을 바탕으로 건강과 환경을 <br />아우르는 다양한 바이오 응용 분야를 탐색합니다.
+                미세조류의 특성과 활용 가능성을 바탕으로 건강과 환경을{' '}
+                <br className="hidden lg:inline" />
+                아우르는 다양한 바이오 응용 분야를 탐색합니다.
               </p>
             </div>
 
-            <div className="mt-32 flex items-end gap-8">
-              <div className="min-w-0 flex-1 text-right">
+            <div className="flex flex-col gap-4 lg:mt-32 lg:flex-row lg:items-end lg:gap-8">
+              <div className="min-w-0 px-[4%] md:px-8 lg:flex-1 lg:px-0 lg:text-right">
                 <h3 className="text-h4 text-black mb-2 lg:mb-4">
                   SPIRULINA
                 </h3>
                 <p className="text-small text-gray-750 lg:text-base">
-                  스피루리나의 생육 환경을 체계적으로 관리하고<br />
-                  안정적인 배양 기술을 바탕으로지<br />
+                  스피루리나의 생육 환경을 체계적으로 관리하고
+                  <br className="hidden lg:inline" />
+                  안정적인 배양 기술을 바탕으로지
+                  <br className="hidden lg:inline" />
                   속적인 원료 생산 기반을 마련합니다.
                 </p>
               </div>
@@ -68,28 +79,10 @@ export default function OurCompanySection() {
                 loop
                 muted
                 playsInline
-                className="aspect-4/5 w-[45%] shrink-0 object-cover"
+                className="aspect-4/5 w-full shrink-0 object-cover lg:w-[45%]"
               />
             </div>
           </div>
-        </div>
-
-        <div className="flex flex-col gap-4 lg:hidden">
-          <div className="px-[4%] md:px-8">
-            <h3 className="text-h4 text-black mb-2">BIO INNOVATION</h3>
-            <p className="text-small text-gray-750">
-              미세조류의 특성과 활용 가능성을 바탕으로 건강과 환경을 아우르는 다양한 바이오 응용 분야를 탐색합니다.
-            </p>
-          </div>
-          <div className="aspect-3/4 w-full bg-gray-200" />
-
-          <div className="mt-10 px-[4%] md:px-8">
-            <h3 className="text-h4 text-black mb-2">SPIRULINA</h3>
-            <p className="text-small text-gray-750">
-              스피루리나의 생육 환경을 체계적으로 관리하고 안정적인 배양 기술을 바탕으로지속적인 원료 생산 기반을 마련합니다.
-            </p>
-          </div>
-          <div className="aspect-4/5 w-full bg-gray-200" />
         </div>
       </div>
     </section>

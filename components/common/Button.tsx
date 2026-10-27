@@ -7,7 +7,7 @@ import type { ReactNode } from 'react';
 import { cn } from '@/lib/utils';
 
 const buttonVariants = cva(
-  'inline-flex cursor-pointer lg:text-[1.2rem] items-center justify-center whitespace-nowrap transition-colors outline-none select-none focus-visible:ring-2 focus-visible:ring-primary disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_img]:pointer-events-none [&_img]:shrink-0',
+  'inline-flex cursor-pointer lg:text-[1rem] items-center justify-center whitespace-nowrap transition-colors outline-none select-none focus-visible:ring-2 focus-visible:ring-primary disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_img]:pointer-events-none [&_img]:shrink-0',
   {
     variants: {
       variant: {
@@ -17,6 +17,8 @@ const buttonVariants = cva(
           'bg-white [color:var(--color-primary)] border border-primary disabled:bg-gray-100 disabled:[color:var(--color-gray-500)] disabled:border-gray-300',
         outline:
           'bg-white [color:var(--color-gray-900)] border border-gray-400 hover:border-gray-600 active:bg-gray-300 active:border-gray-600 disabled:bg-gray-200 disabled:[color:var(--color-gray-500)] disabled:border-gray-300',
+        danger:
+          'bg-white [color:var(--color-system-alert)] border border-system-alert hover:bg-system-alert/10 active:bg-system-alert/20 disabled:bg-gray-100 disabled:[color:var(--color-gray-500)] disabled:border-gray-300',
         blur: 'border-1 border-white bg-white/30 text-white backdrop-blur-xs'
       },
       size: {

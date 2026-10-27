@@ -4,31 +4,32 @@ import { notFound } from 'next/navigation';
 
 import PageIntro from '@/components/domain/page/PageIntro';
 import ProductGridItem from '@/components/domain/product/ProductGridItem';
-import { BRANDS, getBrand } from '@/constants/brands';
-import { getBrandLineup } from '@/constants/products';
+import { getBrand, getBrands } from '@/lib/brands';
+import { getBrandLineup } from '@/lib/products';
 
 interface BrandDetailPageProps {
   params: Promise<{ brand: string }>;
 }
 
-export function generateStaticParams() {
-  return BRANDS.map((brand) => ({ brand: brand.slug }));
+export async function generateStaticParams() {
+  const brands = await getBrands();
+  return brands.map((brand) => ({ brand: brand.slug }));
 }
 
 export async function generateMetadata({ params }: BrandDetailPageProps): Promise<Metadata> {
   const { brand: slug } = await params;
-  const brand = getBrand(slug);
+  const brand = await getBrand(slug);
 
   return { title: brand ? `${brand.name} | BRIXTECHBIO` : 'BRIXTECHBIO' };
 }
 
 export default async function BrandDetailPage({ params }: BrandDetailPageProps) {
   const { brand: slug } = await params;
-  const brand = getBrand(slug);
+  const brand = await getBrand(slug);
 
   if (!brand) notFound();
 
-  const lineup = getBrandLineup(brand);
+  const lineup = await getBrandLineup(brand);
 
   return (
     <>

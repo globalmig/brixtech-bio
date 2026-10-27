@@ -2,13 +2,19 @@ import type { Metadata } from 'next';
 
 import BrandGallery from '@/components/domain/brand/BrandGallery';
 import PageIntro from '@/components/domain/page/PageIntro';
-import { BRAND_BUSINESS_CATEGORIES, BRANDS } from '@/constants/brands';
+import { getBrands } from '@/lib/brands';
+import { getOrderedBusinessCategories } from '@/lib/business';
 
 export const metadata: Metadata = {
   title: '브랜드 소개 | BRIXTECHBIO',
 };
 
-export default function BrandPage() {
+export default async function BrandPage() {
+  const [brands, categories] = await Promise.all([
+    getBrands(),
+    getOrderedBusinessCategories(),
+  ]);
+
   return (
     <>
       <PageIntro eyebrow="BRAND" title="브랜드 소개" />
@@ -24,7 +30,10 @@ export default function BrandPage() {
           </p>
         </div>
 
-        <BrandGallery brands={BRANDS} categories={BRAND_BUSINESS_CATEGORIES} />
+        <BrandGallery
+          brands={brands}
+          categories={categories.map((item) => item.label)}
+        />
       </section>
     </>
   );

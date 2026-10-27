@@ -4,6 +4,7 @@ import PageIntro from '@/components/domain/page/PageIntro';
 
 interface BusinessPageTemplateProps {
   title: string;
+  titleEn?: string | null;
   lead: string;
   children: ReactNode;
 }
@@ -14,20 +15,23 @@ interface BusinessPageTemplateProps {
  */
 export default function BusinessPageTemplate({
   title,
+  titleEn,
   lead,
   children,
 }: BusinessPageTemplateProps) {
   return (
     <>
       <PageIntro eyebrow="BUSINESS" title={title}/>
-      <div className="mx-auto w-full max-w-360 px-[3%] py-15 canvas:px-0 canvas:py-30">
-        <div className="border-gray-300 border-b pb-10 lg:pb-12">
-          <p className="text-small text-black mb-4 font-bold lg:mb-8">BUSINESS</p>
+      <section className="pt-15 canvas:pt-30">
+        <div className="mx-auto w-full max-w-360 px-[3%] pb-10 canvas:px-0 lg:pb-12">
+          <p className="text-small text-black mb-4 font-bold lg:mb-8">
+            {titleEn || 'BUSINESS'}
+          </p>
           <h2 className="text-h4 lg:text-h2 text-black mb-5">{title}</h2>
           <p className="text-body text-gray-750">{lead}</p>
         </div>
-        {children}
-      </div>
+      </section>
+      {children}
     </>
   );
 }

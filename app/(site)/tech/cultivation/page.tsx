@@ -70,14 +70,10 @@ export default function TechCultivationPage() {
           ]}
         />
         <p className="text-text-sub mt-4 text-[0.95rem] leading-6">
-          전 세계 스피루리나의 83% 이상이 개방형 방식으로 생산되지만, 브릭스텍바이오는
+          전 세계 마이크로 알지의 83% 이상이 개방형 방식으로 생산되지만, 브릭스텍바이오는
           고순도·고부가가치 원료 생산을 위해 밀폐형 방식을 채택했습니다. 외부 오염원으로부터
           안전하게 차단된 무균 공정으로 고효율 생산성을 유지하고, 타물질 혼입 없이 안정적인
           품질의 원료를 생산·관리합니다.
-        </p>
-        {/* docs/gitignore/사진자료/자체 제작 밀폐형 배양 장치.JPG */}
-        <p className="text-text-info mt-3 text-[0.85rem] italic">
-          시각자료 : 자체 제작 밀폐형 배양 장치 실물 사진을 비교표와 함께 배치
         </p>
       </section>
 
@@ -85,7 +81,7 @@ export default function TechCultivationPage() {
         <h2 className="text-h4 lg:text-h2 text-black mb-5">독자 배양 기술</h2>
         <BulletList
           items={[
-            '밀폐형 배양으로 외부 오염을 최소화해 고순도 스피루리나를 배양합니다.',
+            '밀폐형 배양으로 외부 오염을 최소화해 고순도 마이크로 알지를 배양합니다.',
             '장치 구조를 단순화·소형화해 초기 설비 구축비용을 대폭 절감했습니다.',
             '온도·광·순환·가스를 효율적으로 제어해 운영비를 절감했습니다.',
           ]}
@@ -101,12 +97,6 @@ export default function TechCultivationPage() {
           성장 속도가 고르지 않다는 한계가 있었습니다. 브릭스텍바이오는 배양공정을
           단순화·소형화한 모델로 이러한 문제를 해결해, 농업·축산업·수산업 등 1차 산업에도
           적용 가능한 저가형 대량배양·장기보관 설비로 생산비용을 대폭 절감했습니다.
-        </p>
-        {/* docs/gitignore/사진자료/배양관 탱크 제어 장치를 연결한 설비 전경.JPG,
-            보급형 미세조류 생산설비1~8.JPG 중 선택 */}
-        <p className="text-text-info mt-3 text-[0.85rem] italic">
-          시각자료 : 배양관 탱크·제어 장치 설비 전경 사진, 기존 설비 대비 소형화된 신규
-          설비 비교 사진
         </p>
       </section>
 
@@ -128,16 +118,12 @@ export default function TechCultivationPage() {
         <h2 className="text-h4 lg:text-h2 text-black mb-5">생산 체계</h2>
         <BulletList
           items={[
-            '종균 배양 (완료) — 스피루리나 종균 확보, 초기 배양 및 증식',
-            '대량배양 (진행 중) — 고순도 스피루리나 대량배양, 1일 생산출하량 자동 체크',
+            '종균 배양 (완료) — 마이크로 알지 종균 확보, 초기 배양 및 증식',
+            '대량배양 (진행 중) — 고순도 마이크로 알지 대량배양, 1일 생산출하량 자동 체크',
             '수확·농축·건조 (진행 중) — 연속수확시스템, 농축 및 후처리 공정',
             '원료화 (준비 중) — 건강기능식품·화장품·펫푸드·비료 맞춤 원료로 이어집니다',
           ]}
         />
-        {/* docs/gitignore/사진자료/배양약 제조 및 냉각 탱크.JPG(배양·냉각), 저장탱크.JPG(저장) */}
-        <p className="text-text-info mt-3 text-[0.85rem] italic">
-          시각자료 : 배양·냉각, 저장 단계별 현장 사진
-        </p>
       </section>
 
       <section className="mx-auto w-full max-w-360 px-[3%] py-10 canvas:px-0 lg:py-12">
@@ -159,10 +145,6 @@ export default function TechCultivationPage() {
             </article>
           ))}
         </div>
-        {/* docs/gitignore/사진자료/조명을 배치한 수직 배양관.JPG */}
-        <p className="text-text-info mt-6 text-[0.85rem] italic">
-          시각자료 : 조명을 배치한 수직 배양관 사진으로 차세대 고밀도 배양 이미지를 보여줌
-        </p>
       </section>
     </>
   );

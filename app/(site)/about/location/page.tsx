@@ -103,12 +103,13 @@ export default function AboutLocationPage() {
                 <p className="text-[1rem] text-gray-750">02-6242-6584</p>
               </div>
 
-              <div className="flex flex-col gap-4 sm:flex-row sm:gap-6">
+              {/* TODO: 이메일은 생성 후에 표시 */}
+              {/* <div className="flex flex-col gap-4 sm:flex-row sm:gap-6">
                 <p className="text-[1rem] text-primary-2 shrink-0 font-bold sm:w-28">
                   E-mail
                 </p>
                 <p className="text-[1rem] text-gray-750">이메일 안내는 준비 중입니다.</p>
-              </div>
+              </div> */}
             </div>
           </div>
         </PageSection>
