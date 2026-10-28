@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
-import { AdminButton as Button } from '@/components/domain/admin/AdminButton';
-import AdminNewsList from '@/components/domain/admin/AdminNewsList';
+import { AdminButton as Button } from '@/components/domain/admin/shared/AdminButton';
+import AdminNewsList from '@/components/domain/admin/news/AdminNewsList';
 import { getNewsList } from '@/lib/news';
 
 export default async function AdminNewsListPage() {

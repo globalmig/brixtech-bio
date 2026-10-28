@@ -2,8 +2,8 @@ import Link from 'next/link';
 
 import { getBrands } from '@/lib/brands';
 
-import { AdminButton as Button } from '@/components/domain/admin/AdminButton';
-import AdminBrandList from '@/components/domain/admin/AdminBrandList';
+import { AdminButton as Button } from '@/components/domain/admin/shared/AdminButton';
+import AdminBrandList from '@/components/domain/admin/brands/AdminBrandList';
 
 export default async function AdminBrandsListPage() {
   const brands = await getBrands();

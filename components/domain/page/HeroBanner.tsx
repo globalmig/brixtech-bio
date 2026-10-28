@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import type { ReactNode } from 'react';
 
 interface HeroBannerProps {
   eyebrow: string;
@@ -6,17 +6,32 @@ interface HeroBannerProps {
   description?: string;
   imageAlt: string;
   imageSrc: string;
+  overlay?: boolean;
+  children?: ReactNode;
 }
 
-export default function HeroBanner({ eyebrow, title, description, imageAlt, imageSrc }: HeroBannerProps) {
+export default function HeroBanner({
+  eyebrow,
+  title,
+  description,
+  imageAlt,
+  imageSrc,
+  overlay = true,
+  children,
+}: HeroBannerProps) {
   return (
-    <div className="relative flex h-96 w-full items-center justify-center overflow-hidden bg-gray-200 text-center lg:h-130">
+    <div className="relative flex min-h-96 w-full flex-col items-center justify-center overflow-hidden bg-gray-200 py-16 text-center lg:min-h-130 lg:py-24">
       {imageSrc ? (
-        <Image src={imageSrc} alt={imageAlt} fill sizes="100vw" className="object-cover" />
+        <div
+          role="img"
+          aria-label={imageAlt}
+          className="absolute inset-0 bg-cover bg-center bg-scroll lg:bg-fixed"
+          style={{ backgroundImage: `url(${imageSrc})` }}
+        />
       ) : null}
-      <div className="absolute inset-0 bg-black/35" aria-hidden />
+      {overlay ? <div className="absolute inset-0 bg-black/35" aria-hidden /> : null}
 
-      <div className="relative z-10 px-5">
+      <div className="relative z-10 w-full px-5">
         <p className="text-small mb-4 font-bold text-white uppercase">
           {eyebrow}
         </p>
@@ -27,6 +42,9 @@ export default function HeroBanner({ eyebrow, title, description, imageAlt, imag
           <p className="text-body mx-auto max-w-180 text-white">
             {description}
           </p>
+        ) : null}
+        {children ? (
+          <div className="mx-auto mt-12 w-full max-w-360 text-left lg:mt-16">{children}</div>
         ) : null}
       </div>
     </div>

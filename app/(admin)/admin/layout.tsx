@@ -2,8 +2,8 @@ import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import type { ReactNode } from 'react';
 
-import AdminNav from '@/components/domain/admin/AdminNav';
-import LogoutButton from '@/components/domain/admin/LogoutButton';
+import AdminNav from '@/components/domain/admin/shared/AdminNav';
+import LogoutButton from '@/components/domain/admin/shared/LogoutButton';
 import { getCurrentUser } from '@/lib/supabase/auth';
 
 export default async function AdminLayout({

@@ -12,8 +12,8 @@ import { cn } from '@/lib/utils';
 import type { Brand } from '@/types/brand';
 import type { BrandProduct } from '@/types/product';
 
-import ConfirmDeleteButton from '@/components/domain/admin/ConfirmDeleteButton';
-import StatusDropdown from '@/components/domain/admin/StatusDropdown';
+import ConfirmDeleteButton from '@/components/domain/admin/shared/ConfirmDeleteButton';
+import StatusDropdown from '@/components/domain/admin/shared/StatusDropdown';
 
 const ITEMS_PER_PAGE = 10;
 const ROW_GRID = 'grid-cols-[3.5rem_1fr_8rem_9rem_6rem_6rem] gap-4';

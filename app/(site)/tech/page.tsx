@@ -412,7 +412,7 @@ const NUTRITION_ARCS = {
 const NUTRITION_STYLE = {
   strong: 'bg-primary-2 text-white',
   soft: 'bg-[#E6F4D8] text-primary-2 border border-primary-4/20',
-  plain: 'bg-[#F3FDE9] text-primary-2 border border-primary-4/20',
+  plain: 'bg-[#f0f7ea] text-primary-2 border border-primary-4/20',
 } as const;
 
 const NUTRITION_FACTS = [
@@ -574,16 +574,16 @@ export default function TechPage() {
                 </div>
 
                 {fact.caption === 'below' ? (
-                  <div className="absolute top-full left-1/2 mt-3 w-44 -translate-x-1/2 text-center">
-                    <p className="text-text-sub text-[0.85rem] leading-6">{fact.detail}</p>
+                  <div className="absolute top-full left-1/2 mt-3 w-45 -translate-x-1/2 text-center">
+                    <p className="text-text-sub text-[1rem] leading-6">{fact.detail}</p>
                   </div>
                 ) : fact.caption === 'outer-left' ? (
-                  <div className="absolute top-1/2 right-full mr-3 w-36 -translate-y-1/2 text-right">
-                    <p className="text-text-sub text-[0.85rem] leading-6">{fact.detail}</p>
+                  <div className="absolute top-1/2 right-full mr-3 w-45 -translate-y-1/2 text-right">
+                    <p className="text-text-sub text-[1rem] leading-6">{fact.detail}</p>
                   </div>
                 ) : (
-                  <div className="absolute top-1/2 left-full ml-3 w-36 -translate-y-1/2 text-left">
-                    <p className="text-text-sub text-[0.85rem] leading-6">{fact.detail}</p>
+                  <div className="absolute top-1/2 left-full ml-3 w-48 -translate-y-1/2 text-left">
+                    <p className="text-text-sub text-[1rem] leading-6">{fact.detail}</p>
                   </div>
                 )}
               </div>

@@ -17,7 +17,7 @@ import Pagination from '@/components/common/Pagination';
 import { usePagination } from '@/hooks/usePagination';
 import { VIDEO_CATEGORIES, getVideoCategoryLabel, type Video } from '@/types/video';
 
-import ConfirmDeleteButton from '@/components/domain/admin/ConfirmDeleteButton';
+import ConfirmDeleteButton from '@/components/domain/admin/shared/ConfirmDeleteButton';
 
 const ITEMS_PER_PAGE = 12;
 

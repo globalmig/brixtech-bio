@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 
-import ProductForm from '@/components/domain/admin/ProductForm';
+import ProductForm from '@/components/domain/admin/brands/ProductForm';
 import { getBrandById } from '@/lib/brands';
 
 interface NewProductPageProps {

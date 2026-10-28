@@ -10,7 +10,7 @@ import Pagination from '@/components/common/Pagination';
 import { usePagination } from '@/hooks/usePagination';
 import type { News } from '@/types/news';
 
-import ConfirmDeleteButton from '@/components/domain/admin/ConfirmDeleteButton';
+import ConfirmDeleteButton from '@/components/domain/admin/shared/ConfirmDeleteButton';
 
 const ITEMS_PER_PAGE = 10;
 

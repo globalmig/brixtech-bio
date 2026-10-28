@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form';
 import { Input } from '@/components/common/Input';
 import { loginFormSchema, type LoginFormValues } from '@/lib/admin/schemas/login';
 
-import { AdminButton as Button } from '@/components/domain/admin/AdminButton';
+import { AdminButton as Button } from '@/components/domain/admin/shared/AdminButton';
 
 export default function AdminLoginPage() {
   const router = useRouter();

@@ -1,4 +1,4 @@
-import BrandForm from '@/components/domain/admin/BrandForm';
+import BrandForm from '@/components/domain/admin/brands/BrandForm';
 import { getBusinessCategoryOptions } from '@/lib/business';
 
 export default async function NewBrandPage() {

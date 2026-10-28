@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
-import VideoForm from '@/components/domain/admin/VideoForm';
+import VideoForm from '@/components/domain/admin/videos/VideoForm';
 import { getVideoById } from '@/lib/videos';
 
 interface EditVideoPageProps {

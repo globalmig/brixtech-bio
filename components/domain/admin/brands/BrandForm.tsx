@@ -10,9 +10,9 @@ import { Textarea } from '@/components/common/Textarea';
 import { brandFormSchema, type BrandFormValues } from '@/lib/admin/schemas/brand';
 import type { Brand } from '@/types/brand';
 
-import { AdminButton as Button } from '@/components/domain/admin/AdminButton';
-import AdminMessageDialog from '@/components/domain/admin/AdminMessageDialog';
-import ImageUploadField from '@/components/domain/admin/ImageUploadField';
+import { AdminButton as Button } from '@/components/domain/admin/shared/AdminButton';
+import AdminMessageDialog from '@/components/domain/admin/shared/AdminMessageDialog';
+import ImageUploadField from '@/components/domain/admin/shared/ImageUploadField';
 
 interface BrandFormProps {
   initialBrand?: Brand;

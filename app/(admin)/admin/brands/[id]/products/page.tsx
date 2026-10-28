@@ -4,8 +4,8 @@ import { notFound } from 'next/navigation';
 import { getBrandById } from '@/lib/brands';
 import { getProductsByBrand } from '@/lib/products';
 
-import { AdminButton as Button } from '@/components/domain/admin/AdminButton';
-import AdminProductList from '@/components/domain/admin/AdminProductList';
+import { AdminButton as Button } from '@/components/domain/admin/shared/AdminButton';
+import AdminProductList from '@/components/domain/admin/brands/AdminProductList';
 
 interface BrandProductsPageProps {
   params: Promise<{ id: string }>;

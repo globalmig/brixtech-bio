@@ -42,7 +42,7 @@ export default function HeroSection() {
         infinite
         autoplay
         autoplaySpeed={5000}
-        speed={800}
+        speed={1000}
         pauseOnHover={false}
         afterChange={setActiveIndex}
       >

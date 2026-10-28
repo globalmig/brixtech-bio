@@ -24,73 +24,41 @@ import { Input } from '@/components/common/Input';
 import Pagination from '@/components/common/Pagination';
 import { usePagination } from '@/hooks/usePagination';
 import { cn } from '@/lib/utils';
-import type { BrandProduct } from '@/types/product';
+import type { Brand } from '@/types/brand';
 
-import ConfirmDeleteButton from '@/components/domain/admin/ConfirmDeleteButton';
-import { GripIcon } from '@/components/domain/admin/icons';
-import StatusDropdown from '@/components/domain/admin/StatusDropdown';
+import ConfirmDeleteButton from '@/components/domain/admin/shared/ConfirmDeleteButton';
+import { GripIcon } from '@/components/domain/admin/shared/icons';
 
 const ITEMS_PER_PAGE = 10;
-const ROW_GRID = 'grid-cols-[1.5rem_3.5rem_1fr_9rem_7rem_7rem] gap-4';
+const ROW_GRID = 'grid-cols-[1.5rem_9rem_1fr_13rem] gap-4';
 
-interface AdminProductListProps {
-  brandId: string;
-  brandSlug: string;
-  products: BrandProduct[];
+interface AdminBrandListProps {
+  brands: Brand[];
 }
 
-async function deleteProduct(id: string, brandId: string) {
-  const response = await fetch(
-    `/api/admin/products/${id}?brandId=${encodeURIComponent(brandId)}`,
-    { method: 'DELETE' }
-  );
+async function deleteBrand(id: string) {
+  const response = await fetch(`/api/admin/brands/${id}`, { method: 'DELETE' });
   if (!response.ok) {
     const data = await response.json().catch(() => ({}));
     throw new Error(data.error ?? '삭제에 실패했습니다.');
   }
 }
 
-async function reorderProducts(brandId: string, orderedIds: string[]) {
-  await fetch('/api/admin/products/reorder', {
+async function reorderBrands(orderedIds: string[]) {
+  await fetch('/api/admin/brands/reorder', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ brandId, orderedIds }),
+    body: JSON.stringify({ orderedIds }),
   });
 }
 
-async function setProductActive(
-  id: string,
-  brandId: string,
-  isActive: boolean
-) {
-  const response = await fetch(`/api/admin/products/${id}/active`, {
-    method: 'PATCH',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ brandId, isActive }),
-  });
-  if (!response.ok) {
-    const data = await response.json().catch(() => ({}));
-    throw new Error(data.error ?? '변경에 실패했습니다.');
-  }
-}
-
-interface ProductRowProps {
-  brandId: string;
-  brandSlug: string;
-  product: BrandProduct;
+interface BrandRowProps {
+  brand: Brand;
   draggable: boolean;
   onDelete: () => Promise<void>;
-  onSetActive: (isActive: boolean) => Promise<void>;
 }
 
-function ProductRow({
-  brandId,
-  brandSlug,
-  product,
-  draggable,
-  onDelete,
-  onSetActive,
-}: ProductRowProps) {
+function BrandRow({ brand, draggable, onDelete }: BrandRowProps) {
   const {
     attributes,
     listeners,
@@ -98,7 +66,7 @@ function ProductRow({
     transform,
     transition,
     isDragging,
-  } = useSortable({ id: product.id, disabled: !draggable });
+  } = useSortable({ id: brand.id, disabled: !draggable });
 
   return (
     <div
@@ -125,48 +93,35 @@ function ProductRow({
       )}
 
       <Link
-        href={`/admin/products/${product.id}`}
-        className="relative size-12 shrink-0 overflow-hidden rounded-lg border border-gray-350 bg-gray-50"
+        href={`/admin/brands/${brand.id}/products`}
+        className="group flex items-center gap-3 overflow-hidden"
       >
-        {product.image ? (
-          <Image
-            src={product.image}
-            alt=""
-            fill
-            sizes="48px"
-            className="object-cover"
-          />
-        ) : null}
+        <span className="relative size-12 shrink-0 overflow-hidden rounded-lg border border-gray-350 bg-gray-50">
+          {brand.logo ? (
+            <Image
+              src={brand.logo}
+              alt=""
+              fill
+              sizes="48px"
+              className="object-contain"
+            />
+          ) : null}
+        </span>
+        <span className="truncate group-hover:text-primary-2 group-hover:underline">
+          {brand.name}
+        </span>
       </Link>
-      <Link
-        href={`/admin/products/${product.id}`}
-        className="truncate hover:text-primary-2 hover:underline"
-      >
-        {product.name}
-      </Link>
-      <a
-        href={`/brand/${brandSlug}/${product.slug}`}
-        target="_blank"
-        rel="noreferrer"
-        className="truncate text-text-info hover:text-primary-2 hover:underline"
-      >
-        {product.slug}
-      </a>
-      <StatusDropdown
-        isActive={product.isActive}
-        onChange={onSetActive}
-        className="w-full"
-      />
+      <span className="text-text-info truncate">{brand.businessCategory}</span>
       <div className="flex items-center justify-end gap-4">
         <Link
-          href={`/admin/brands/${brandId}/products/${product.id}/edit`}
+          href={`/admin/brands/${brand.id}/edit`}
           className="font-semibold text-primary-2 hover:underline"
         >
-          수정
+          브랜드 정보 수정
         </Link>
         <ConfirmDeleteButton
           onConfirm={onDelete}
-          confirmMessage={`"${product.name}" 제품을 삭제하시겠습니까? 삭제 시 되돌릴 수 없습니다.`}
+          confirmMessage={`"${brand.name}" 브랜드를 삭제하시겠습니까? 삭제 시 소속된 제품도 모두 함께 삭제되며 되돌릴 수 없습니다.`}
           className="cursor-pointer text-text-info hover:text-system-alert hover:underline"
         >
           삭제
@@ -176,19 +131,15 @@ function ProductRow({
   );
 }
 
-export default function AdminProductList({
-  brandId,
-  brandSlug,
-  products,
-}: AdminProductListProps) {
+export default function AdminBrandList({ brands }: AdminBrandListProps) {
   const router = useRouter();
-  const [items, setItems] = useState(products);
-  const [prevProducts, setPrevProducts] = useState(products);
+  const [items, setItems] = useState(brands);
+  const [prevBrands, setPrevBrands] = useState(brands);
   const [keyword, setKeyword] = useState('');
 
-  if (products !== prevProducts) {
-    setPrevProducts(products);
-    setItems(products);
+  if (brands !== prevBrands) {
+    setPrevBrands(brands);
+    setItems(brands);
   }
 
   const isFiltering = keyword.trim() !== '';
@@ -196,8 +147,10 @@ export default function AdminProductList({
   const filteredItems = useMemo(() => {
     const term = keyword.trim().toLowerCase();
     if (!term) return items;
-    return items.filter((product) =>
-      product.name.toLowerCase().includes(term)
+    return items.filter(
+      (brand) =>
+        brand.name.toLowerCase().includes(term) ||
+        brand.businessCategory.toLowerCase().includes(term)
     );
   }, [items, keyword]);
 
@@ -212,12 +165,8 @@ export default function AdminProductList({
     const { active, over } = event;
     if (!over || active.id === over.id) return;
 
-    const oldIndex = currentItems.findIndex(
-      (product) => product.id === active.id
-    );
-    const newIndex = currentItems.findIndex(
-      (product) => product.id === over.id
-    );
+    const oldIndex = currentItems.findIndex((brand) => brand.id === active.id);
+    const newIndex = currentItems.findIndex((brand) => brand.id === over.id);
     if (oldIndex === -1 || newIndex === -1) return;
 
     const reorderedPage = arrayMove(currentItems, oldIndex, newIndex);
@@ -226,17 +175,14 @@ export default function AdminProductList({
     nextItems.splice(pageOffset, reorderedPage.length, ...reorderedPage);
 
     setItems(nextItems);
-    void reorderProducts(
-      brandId,
-      nextItems.map((product) => product.id)
-    );
+    void reorderBrands(nextItems.map((brand) => brand.id));
   };
 
   return (
     <>
       <div className="overflow-hidden rounded-xl border border-gray-350 bg-white">
         <div className="flex items-center justify-between border-b border-gray-350 px-5 py-4">
-          <h2 className="font-semibold">제품 목록</h2>
+          <h2 className="font-semibold">브랜드 목록</h2>
           <span className="text-small text-text-info rounded-full bg-gray-100 px-3 py-1">
             Total: {totalCount}
           </span>
@@ -247,7 +193,7 @@ export default function AdminProductList({
             <Input
               value={keyword}
               onChange={(event) => setKeyword(event.target.value)}
-              placeholder="제품명으로 검색"
+              placeholder="브랜드명 또는 사업 카테고리로 검색"
               size="small"
               icon={
                 <Image
@@ -275,16 +221,16 @@ export default function AdminProductList({
           )}
         >
           <span />
-          <span />
-          <span>제품명</span>
-          <span>슬러그</span>
-          <span>활성화</span>
+          <span>브랜드명</span>
+          <span>Business</span>
           <span className="text-right">관리</span>
         </div>
 
         {currentItems.length === 0 ? (
           <p className="text-text-info py-10 text-center">
-            {isFiltering ? '검색 결과가 없습니다.' : '등록된 제품이 없습니다.'}
+            {isFiltering
+              ? '검색 결과가 없습니다.'
+              : '등록된 브랜드가 없습니다.'}
           </p>
         ) : (
           <DndContext
@@ -293,22 +239,16 @@ export default function AdminProductList({
             onDragEnd={handleDragEnd}
           >
             <SortableContext
-              items={currentItems.map((product) => product.id)}
+              items={currentItems.map((brand) => brand.id)}
               strategy={verticalListSortingStrategy}
             >
-              {currentItems.map((product) => (
-                <ProductRow
-                  key={product.id}
-                  brandId={brandId}
-                  brandSlug={brandSlug}
-                  product={product}
+              {currentItems.map((brand) => (
+                <BrandRow
+                  key={brand.id}
+                  brand={brand}
                   draggable={!isFiltering}
                   onDelete={async () => {
-                    await deleteProduct(product.id, brandId);
-                    router.refresh();
-                  }}
-                  onSetActive={async (isActive) => {
-                    await setProductActive(product.id, brandId, isActive);
+                    await deleteBrand(brand.id);
                     router.refresh();
                   }}
                 />
@@ -317,6 +257,7 @@ export default function AdminProductList({
           </DndContext>
         )}
       </div>
+
       <div className="px-5 py-4">
         <Pagination
           key={filteredItems.length}
@@ -326,6 +267,7 @@ export default function AdminProductList({
           onPageChange={onPageChange}
         />
       </div>
+
     </>
   );
 }

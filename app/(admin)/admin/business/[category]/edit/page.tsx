@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
-import BusinessPageForm from '@/components/domain/admin/BusinessPageForm';
+import BusinessPageForm from '@/components/domain/admin/business/BusinessPageForm';
 import { getBusinessPage } from '@/lib/business';
 
 interface EditBusinessPageProps {

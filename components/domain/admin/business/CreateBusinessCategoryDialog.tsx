@@ -12,7 +12,7 @@ import {
   DialogHeader,
 } from '@/components/common/Dialog';
 
-import { AdminButton as Button } from '@/components/domain/admin/AdminButton';
+import { AdminButton as Button } from '@/components/domain/admin/shared/AdminButton';
 
 interface CreateBusinessCategoryDialogProps {
   open: boolean;

@@ -13,9 +13,9 @@ import {
 } from '@/lib/admin/schemas/product';
 import type { BrandProduct } from '@/types/product';
 
-import { AdminButton as Button } from '@/components/domain/admin/AdminButton';
-import AdminMessageDialog from '@/components/domain/admin/AdminMessageDialog';
-import ImageUploadField from '@/components/domain/admin/ImageUploadField';
+import { AdminButton as Button } from '@/components/domain/admin/shared/AdminButton';
+import AdminMessageDialog from '@/components/domain/admin/shared/AdminMessageDialog';
+import ImageUploadField from '@/components/domain/admin/shared/ImageUploadField';
 
 interface ProductFormProps {
   initialProduct?: BrandProduct;

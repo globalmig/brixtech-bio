@@ -1,6 +1,6 @@
 import { getAllBusinessPages } from '@/lib/business';
 
-import AdminBusinessList from '@/components/domain/admin/AdminBusinessList';
+import AdminBusinessList from '@/components/domain/admin/business/AdminBusinessList';
 
 export default async function AdminBusinessListPage() {
   const pages = await getAllBusinessPages();

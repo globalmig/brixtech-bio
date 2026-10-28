@@ -14,9 +14,9 @@ import {
 } from '@/lib/admin/schemas/video';
 import { VIDEO_CATEGORIES, type Video } from '@/types/video';
 
-import { AdminButton as Button } from '@/components/domain/admin/AdminButton';
-import AdminMessageDialog from '@/components/domain/admin/AdminMessageDialog';
-import VideoUploadField from '@/components/domain/admin/VideoUploadField';
+import { AdminButton as Button } from '@/components/domain/admin/shared/AdminButton';
+import AdminMessageDialog from '@/components/domain/admin/shared/AdminMessageDialog';
+import VideoUploadField from '@/components/domain/admin/shared/VideoUploadField';
 
 interface VideoFormProps {
   initialVideo?: Video;

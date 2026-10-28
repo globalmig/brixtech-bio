@@ -1,6 +1,6 @@
 import { getAllProductsForAdmin } from '@/lib/products';
 
-import AdminAllProductsList from '@/components/domain/admin/AdminAllProductsList';
+import AdminAllProductsList from '@/components/domain/admin/products/AdminAllProductsList';
 
 export default async function AdminProductsListPage() {
   const items = await getAllProductsForAdmin();

@@ -8,9 +8,9 @@ import type { Brand } from '@/types/brand';
 import type { BrandProduct } from '@/types/product';
 
 import { buttonVariants } from '@/components/common/Button';
-import { AdminButton as Button } from '@/components/domain/admin/AdminButton';
-import ConfirmDeleteButton from '@/components/domain/admin/ConfirmDeleteButton';
-import StatusDropdown from '@/components/domain/admin/StatusDropdown';
+import { AdminButton as Button } from '@/components/domain/admin/shared/AdminButton';
+import ConfirmDeleteButton from '@/components/domain/admin/shared/ConfirmDeleteButton';
+import StatusDropdown from '@/components/domain/admin/shared/StatusDropdown';
 
 interface AdminProductDetailProps {
   brand: Brand;

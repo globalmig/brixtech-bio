@@ -1,4 +1,4 @@
-import VideoForm from '@/components/domain/admin/VideoForm';
+import VideoForm from '@/components/domain/admin/videos/VideoForm';
 
 export default function NewVideoPage() {
   return (

@@ -1,4 +1,4 @@
-import NewsForm from '@/components/domain/admin/NewsForm';
+import NewsForm from '@/components/domain/admin/news/NewsForm';
 
 export default function NewNewsPage() {
   return (

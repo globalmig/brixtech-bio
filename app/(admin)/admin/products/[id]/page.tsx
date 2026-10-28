@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import { getBrandById } from '@/lib/brands';
 import { getProductById } from '@/lib/products';
 
-import AdminProductDetail from '@/components/domain/admin/AdminProductDetail';
+import AdminProductDetail from '@/components/domain/admin/products/AdminProductDetail';
 
 interface ProductDetailPageProps {
   params: Promise<{ id: string }>;

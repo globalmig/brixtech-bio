@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 
-import BrandForm from '@/components/domain/admin/BrandForm';
+import BrandForm from '@/components/domain/admin/brands/BrandForm';
 import { getBrandById } from '@/lib/brands';
 import { getBusinessCategoryOptions } from '@/lib/business';
 

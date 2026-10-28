@@ -33,12 +33,12 @@ import type {
 } from '@/types/business';
 import { BUSINESS_SECTION_BACKGROUNDS } from '@/types/business';
 
-import { AdminButton as Button } from '@/components/domain/admin/AdminButton';
-import AdminMessageDialog from '@/components/domain/admin/AdminMessageDialog';
-import ConfirmDeleteButton from '@/components/domain/admin/ConfirmDeleteButton';
-import { EyeIcon, EyeOffIcon, GripIcon, TrashIcon } from '@/components/domain/admin/icons';
-import ImageUploadField from '@/components/domain/admin/ImageUploadField';
-import StatusDropdown from '@/components/domain/admin/StatusDropdown';
+import { AdminButton as Button } from '@/components/domain/admin/shared/AdminButton';
+import AdminMessageDialog from '@/components/domain/admin/shared/AdminMessageDialog';
+import ConfirmDeleteButton from '@/components/domain/admin/shared/ConfirmDeleteButton';
+import { EyeIcon, EyeOffIcon, GripIcon, TrashIcon } from '@/components/domain/admin/shared/icons';
+import ImageUploadField from '@/components/domain/admin/shared/ImageUploadField';
+import StatusDropdown from '@/components/domain/admin/shared/StatusDropdown';
 import BusinessSectionRenderer from '@/components/domain/business/BusinessSectionRenderer';
 
 type SectionType =

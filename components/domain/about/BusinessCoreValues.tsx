@@ -8,11 +8,26 @@ import { BUSINESS_CATEGORIES } from '@/constants/home';
 const AUTOPLAY_INTERVAL = 3000;
 
 const BACKGROUND_IMAGES = [
-  '/images/about/about-health.png',
-  '/images/about/about-cosmetics.png',
-  '/images/about/about-pet-food.png',
-  '/images/about/about-air.png',
-  '/images/about/about-smart-farm.png',
+  {
+    desktop: '/images/about/about-health.png',
+    mobile: '/images/about/about-health-mo.png',
+  },
+  {
+    desktop: '/images/about/about-cosmetics.png',
+    mobile: '/images/about/about-cosmetics-mo.png',
+  },
+  {
+    desktop: '/images/about/about-pet-food.png',
+    mobile: '/images/about/about-pet-food-mo.png',
+  },
+  {
+    desktop: '/images/about/about-air.png',
+    mobile: '/images/about/about-air-mo.png',
+  },
+  {
+    desktop: '/images/about/about-smart-farm.png',
+    mobile: '/images/about/about-smart-farm-mo.png',
+  },
 ];
 
 export default function BusinessCoreValues() {
@@ -36,18 +51,34 @@ export default function BusinessCoreValues() {
       onMouseLeave={() => setIsPaused(false)}
     >
       <div className="absolute inset-0" aria-hidden>
-        {BUSINESS_CATEGORIES.map((category, index) => (
-          <Image
-            key={category.title}
-            src={BACKGROUND_IMAGES[index] ?? category.image}
-            alt={category.title}
-            fill
-            sizes="100vw"
-            priority={index === 0}
-            className={`object-cover transition-opacity duration-500 ${index === activeIndex ? 'opacity-100' : 'opacity-0'
-              }`}
-          />
-        ))}
+        {BUSINESS_CATEGORIES.map((category, index) => {
+          const images = BACKGROUND_IMAGES[index];
+
+          return (
+            <div
+              key={category.title}
+              className={`absolute inset-0 transition-opacity duration-500 ${index === activeIndex ? 'opacity-100' : 'opacity-0'
+                }`}
+            >
+              <Image
+                src={images?.desktop ?? category.image}
+                alt={category.title}
+                fill
+                sizes="100vw"
+                priority={index === 0}
+                className="hidden object-cover sm:block"
+              />
+              <Image
+                src={images?.mobile ?? category.image}
+                alt={category.title}
+                fill
+                sizes="100vw"
+                priority={index === 0}
+                className="block object-cover sm:hidden"
+              />
+            </div>
+          );
+        })}
         <div className="absolute inset-0 bg-black/40" />
       </div>
 

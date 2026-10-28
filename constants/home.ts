@@ -1,7 +1,6 @@
 export const HERO_SLIDES = [
   '/images/main-banner-1.png',
   '/images/main-banner-2.png',
-  '/images/main-banner-3.png',
 ];
 
 export const COMPANY_STATS = [

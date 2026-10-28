@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
-import { AdminButton as Button } from '@/components/domain/admin/AdminButton';
-import AdminVideoList from '@/components/domain/admin/AdminVideoList';
+import { AdminButton as Button } from '@/components/domain/admin/shared/AdminButton';
+import AdminVideoList from '@/components/domain/admin/videos/AdminVideoList';
 import { getVideoList } from '@/lib/videos';
 
 export default async function AdminVideosListPage() {

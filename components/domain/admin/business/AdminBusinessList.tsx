@@ -25,11 +25,11 @@ import Pagination from '@/components/common/Pagination';
 import { useIsClient } from '@/hooks/useIsClient';
 import { usePagination } from '@/hooks/usePagination';
 
-import { AdminButton as Button } from '@/components/domain/admin/AdminButton';
-import ConfirmDeleteButton from '@/components/domain/admin/ConfirmDeleteButton';
-import CreateBusinessCategoryDialog from '@/components/domain/admin/CreateBusinessCategoryDialog';
-import { GripIcon, TrashIcon } from '@/components/domain/admin/icons';
-import StatusDropdown from '@/components/domain/admin/StatusDropdown';
+import { AdminButton as Button } from '@/components/domain/admin/shared/AdminButton';
+import ConfirmDeleteButton from '@/components/domain/admin/shared/ConfirmDeleteButton';
+import CreateBusinessCategoryDialog from '@/components/domain/admin/business/CreateBusinessCategoryDialog';
+import { GripIcon, TrashIcon } from '@/components/domain/admin/shared/icons';
+import StatusDropdown from '@/components/domain/admin/shared/StatusDropdown';
 
 const ITEMS_PER_PAGE = 12;
 const GRID_COLS = 'grid-cols-[2rem_1fr_6rem_8rem_12rem]';

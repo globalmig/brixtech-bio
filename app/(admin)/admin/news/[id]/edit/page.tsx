@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
-import NewsForm from '@/components/domain/admin/NewsForm';
+import NewsForm from '@/components/domain/admin/news/NewsForm';
 import { getNewsById } from '@/lib/news';
 
 interface EditNewsPageProps {

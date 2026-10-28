@@ -9,7 +9,7 @@ import {
   DialogHeader,
 } from '@/components/common/Dialog';
 
-import { AdminButton as Button } from '@/components/domain/admin/AdminButton';
+import { AdminButton as Button } from '@/components/domain/admin/shared/AdminButton';
 
 interface ConfirmDeleteButtonProps {
   /** 확인 다이얼로그에서 "삭제"를 눌렀을 때 실행할 작업(서버 액션 또는 로컬 상태 변경 모두 가능) */

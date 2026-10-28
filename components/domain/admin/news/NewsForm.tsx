@@ -10,11 +10,11 @@ import { Input } from '@/components/common/Input';
 import { newsPayloadSchema } from '@/lib/admin/schemas/news';
 import type { News } from '@/types/news';
 
-import { AdminButton as Button } from '@/components/domain/admin/AdminButton';
-import AdminMessageDialog from '@/components/domain/admin/AdminMessageDialog';
+import { AdminButton as Button } from '@/components/domain/admin/shared/AdminButton';
+import AdminMessageDialog from '@/components/domain/admin/shared/AdminMessageDialog';
 
 const RichTextEditor = dynamic(
-  () => import('@/components/domain/admin/RichTextEditor'),
+  () => import('@/components/domain/admin/shared/RichTextEditor'),
   { ssr: false }
 );
 
