@@ -102,7 +102,7 @@ export async function submitInquiry(
 
   // TODO: 이메일 생성 후, 브릭스텍 메일 주소 변경
   const { error } = await getResendClient().emails.send({
-    from: 'BRIXTECHBIO <ryanpae@naver.com>',
+    from: 'BRIXTECHBIO <onboarding@resend.dev>',
     to: [receiver],
     replyTo: email,
     subject,
