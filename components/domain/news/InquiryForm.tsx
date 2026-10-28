@@ -57,6 +57,9 @@ export default function InquiryForm() {
           inputMode="numeric"
           placeholder="연락처를 입력해주세요. (숫자만)"
           defaultValue={state.values?.contact}
+          onChange={(e) => {
+            e.target.value = e.target.value.replace(/\D/g, '');
+          }}
           className={fieldClassName}
         />
       </div>

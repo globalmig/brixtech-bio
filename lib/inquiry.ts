@@ -24,6 +24,7 @@ export interface InquiryFormState {
 }
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const CONTACT_PATTERN = /^[0-9]+$/;
 const MAX_FIELD_LENGTH = 200;
 const MAX_CONTENT_LENGTH = 5000;
 
@@ -53,6 +54,10 @@ export async function submitInquiry(
 
   if (!company || !contact || !email || !title || !content) {
     return { error: '필수 항목을 모두 입력해주세요.', values };
+  }
+
+  if (!CONTACT_PATTERN.test(contact)) {
+    return { error: '연락처는 숫자만 입력해주세요.', values };
   }
 
   if (inquiryType !== 'product' && inquiryType !== 'partnership') {
@@ -97,7 +102,7 @@ export async function submitInquiry(
 
   // TODO: 이메일 생성 후, 브릭스텍 메일 주소 변경
   const { error } = await getResendClient().emails.send({
-    from: 'BRIXTECHBIO <onboarding@resend.dev>',
+    from: 'BRIXTECHBIO <ryanpae@naver.com>',
     to: [receiver],
     replyTo: email,
     subject,

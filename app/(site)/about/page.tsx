@@ -4,38 +4,11 @@ import Image from 'next/image';
 import BusinessCoreValues from '@/components/domain/about/BusinessCoreValues';
 import HeroBanner from '@/components/domain/page/HeroBanner';
 import PageIntro from '@/components/domain/page/PageIntro';
+import { COMPETENCY_ITEMS } from '@/constants/about';
 
 export const metadata: Metadata = {
   title: '기업소개 | BRIXTECHBIO',
 };
-
-const COMPETENCY_ITEMS = [
-  {
-    title: '특허 기반 배양기술',
-    label: 'PATENTED TECHNOLOGY',
-    description: '관련 특허 11건을 기반으로 안정적인 배양 기술을 보유하고 있습니다.',
-  },
-  {
-    title: '저비용·저에너지 시스템',
-    label: 'LOW-COST ENERGY',
-    description: '저비용·저에너지 대량배양 시스템으로 생산 효율을 높입니다.',
-  },
-  {
-    title: '통합 사업화 구조',
-    label: 'INTEGRATED STRUCTURE',
-    description: '배양부터 원료화·제품화까지 이어지는 통합 사업화 구조를 갖추고 있습니다.',
-  },
-  {
-    title: '다각화된 제품군',
-    label: 'DIVERSE PORTFOLIO',
-    description: '건강기능식품·화장품·펫푸드·공기정화기·스마트팜 등 다양한 제품을 선보입니다.',
-  },
-  {
-    title: '전문 인력 구성',
-    label: 'EXPERT TEAM',
-    description: '기술·운영·재무·유통 전문 인력이 하나의 팀으로 함께합니다.',
-  },
-];
 
 export default function AboutPage() {
   return (

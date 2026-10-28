@@ -32,13 +32,9 @@ export const NAV_ITEMS: NavItem[] = [
   {
     label: 'BUSINESS',
     href: '/business',
-    children: [
-      { label: '건강기능식품', href: '/business/supplements' },
-      { label: '화장품', href: '/business/cosmetics' },
-      { label: '반려동물 푸드', href: '/business/pet-food' },
-      { label: '공기정화기', href: '/business/air-purification' },
-      { label: '스마트팜', href: '/business/smart-farm' },
-    ],
+    // 각 사업 카테고리 페이지가 아직 미완성이라 사용자에게 노출하면 안 되므로,
+    // 실제 콘텐츠로 연결하지 않고 준비중 안내만 하드코딩합니다.
+    children: [{ label: '준비중입니다', href: '/business/wait' }],
   },
   {
     label: 'BRAND',

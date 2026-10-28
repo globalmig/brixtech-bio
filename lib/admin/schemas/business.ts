@@ -1,22 +1,5 @@
 import { z } from 'zod';
 
-export const BUSINESS_CATEGORY_SLUG_PATTERN = /^[a-z0-9]+(-[a-z0-9]+)*$/;
-
-export const businessCategoryCreateSchema = z.object({
-  category: z
-    .string()
-    .trim()
-    .min(1, '슬러그를 입력해주세요.')
-    .regex(
-      BUSINESS_CATEGORY_SLUG_PATTERN,
-      '슬러그는 영문 소문자, 숫자, 하이픈(-)만 사용할 수 있습니다.'
-    ),
-  title: z.string().trim().min(1, '이름을 입력해주세요.'),
-  titleEn: z.string().trim().default(''),
-});
-
-export type BusinessCategoryCreateInput = z.infer<typeof businessCategoryCreateSchema>;
-
 const BACKGROUND_COLOR_VALUES = [
   'none',
   'primary-2',

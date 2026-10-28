@@ -25,9 +25,7 @@ import Pagination from '@/components/common/Pagination';
 import { useIsClient } from '@/hooks/useIsClient';
 import { usePagination } from '@/hooks/usePagination';
 
-import { AdminButton as Button } from '@/components/domain/admin/shared/AdminButton';
 import ConfirmDeleteButton from '@/components/domain/admin/shared/ConfirmDeleteButton';
-import CreateBusinessCategoryDialog from '@/components/domain/admin/business/CreateBusinessCategoryDialog';
 import { GripIcon, TrashIcon } from '@/components/domain/admin/shared/icons';
 import StatusDropdown from '@/components/domain/admin/shared/StatusDropdown';
 
@@ -150,7 +148,6 @@ function SortableRow({ item, dragEnabled, onToggleActive, onDelete }: SortableRo
 export default function AdminBusinessList({ items }: AdminBusinessListProps) {
   const router = useRouter();
   const [orderedItems, setOrderedItems] = useState(items);
-  const [isCreateOpen, setIsCreateOpen] = useState(false);
   const isMounted = useIsClient();
 
   const { currentPage, currentItems, totalCount, onPageChange } =
@@ -215,14 +212,9 @@ export default function AdminBusinessList({ items }: AdminBusinessListProps) {
     <div className="overflow-hidden rounded-xl border border-gray-350 bg-white">
       <div className="flex items-center justify-between border-b border-gray-350 px-5 py-4">
         <h2 className="font-semibold">카테고리 목록</h2>
-        <div className="flex items-center gap-3">
-          <span className="text-small text-text-info rounded-full bg-gray-100 px-3 py-1">
-            Total: {totalCount}
-          </span>
-          <Button type="button" size="small" onClick={() => setIsCreateOpen(true)}>
-            + 카테고리 추가
-          </Button>
-        </div>
+        <span className="text-small text-text-info rounded-full bg-gray-100 px-3 py-1">
+          Total: {totalCount}
+        </span>
       </div>
 
       <div
@@ -263,8 +255,6 @@ export default function AdminBusinessList({ items }: AdminBusinessListProps) {
           />
         </div>
       )}
-
-      <CreateBusinessCategoryDialog open={isCreateOpen} onOpenChange={setIsCreateOpen} />
     </div>
   );
 }
