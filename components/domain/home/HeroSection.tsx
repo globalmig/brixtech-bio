@@ -46,11 +46,12 @@ export default function HeroSection() {
         pauseOnHover={false}
         afterChange={setActiveIndex}
       >
-        {HERO_SLIDES.map((src) => (
+        {HERO_SLIDES.map((src) => 
           <div key={src} className="relative h-180 lg:h-230">
             <Image src={src} alt="메인 배너 이미지" width={2560} height={900} className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-linear-to-b from-black/70 via-black/50 to-transparent pointer-events-none" />
           </div>
-        ))}
+        )}
       </Slider>
 
       <div
