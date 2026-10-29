@@ -134,6 +134,7 @@ export default function BusinessSectionRenderer({
             body={section.content.data.body}
             imageSrc={section.image ?? ''}
             imagePosition={section.content.data.imagePosition}
+            aspectRatio={section.content.data.aspectRatio}
           />
           <SectionNote note={section.note} />
         </div>
@@ -161,18 +162,18 @@ export default function BusinessSectionRenderer({
 
   return (
     <section className={backgroundClass} style={backgroundStyle}>
-      <div className="mx-auto w-full max-w-360 px-[3%] canvas:px-0">
+      <div className="mx-auto w-full max-w-360 px-[3%] lg:px-0">
         {section.title ? (
           <PageSection
             eyebrow={resolveTitleEn(section)}
             title={section.title}
             description={resolveLead(section)}
-            className="py-15 lg:py-15 canvas:py-30"
+            className="py-15 lg:py-25"
           >
             {body}
           </PageSection>
         ) : (
-          <div className="py-15 canvas:py-30">{body}</div>
+          <div className="py-15 lg:pb-25">{body}</div>
         )}
       </div>
     </section>

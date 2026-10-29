@@ -24,6 +24,7 @@ export const businessPagePayloadSchema = z.object({
   title: z.string().trim().min(1, '제목과 리드 문구를 입력해주세요.'),
   titleEn: z.string().trim().default(''),
   lead: z.string().trim().min(1, '제목과 리드 문구를 입력해주세요.'),
+  leadHidden: z.boolean().default(false),
   sections: z.array(businessSectionPayloadSchema).default([]),
 });
 

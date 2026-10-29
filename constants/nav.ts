@@ -32,9 +32,15 @@ export const NAV_ITEMS: NavItem[] = [
   {
     label: 'BUSINESS',
     href: '/business',
-    // 각 사업 카테고리 페이지가 아직 미완성이라 사용자에게 노출하면 안 되므로,
-    // 실제 콘텐츠로 연결하지 않고 준비중 안내만 하드코딩합니다.
-    children: [{ label: '준비중입니다', href: '/business/wait' }],
+    // 관리자에서 추가/삭제한 사업 카테고리 목록으로 교체되기 전까지 보여줄
+    // 기본값입니다. 실제 노출 목록은 Header에서 /api/business/order로 불러옵니다.
+    children: [
+      { label: '건강기능식품', href: '/business/supplements' },
+      { label: '화장품', href: '/business/cosmetics' },
+      { label: '반려동물 푸드', href: '/business/pet-food' },
+      { label: '공기정화기', href: '/business/air-purification' },
+      { label: '스마트팜', href: '/business/smart-farm' },
+    ],
   },
   {
     label: 'BRAND',

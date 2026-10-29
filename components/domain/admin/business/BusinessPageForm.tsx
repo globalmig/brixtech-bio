@@ -22,7 +22,11 @@ import { CheckBox } from '@/components/common/CheckBox';
 import { Input } from '@/components/common/Input';
 import { Textarea } from '@/components/common/Textarea';
 import { useIsClient } from '@/hooks/useIsClient';
-import { BLOCK_TYPE_DEFAULTS } from '@/lib/business-block-defaults';
+import {
+  BLOCK_TYPE_DEFAULTS,
+  DEFAULT_IMAGE_ASPECT_RATIO,
+  IMAGE_ASPECT_RATIO_OPTIONS,
+} from '@/lib/business-block-defaults';
 import { cn } from '@/lib/utils';
 import type {
   BusinessCategory,
@@ -30,6 +34,7 @@ import type {
   BusinessSection,
   BusinessSectionBackground,
   BusinessSectionContent,
+  ImageAspectRatio,
 } from '@/types/business';
 import { BUSINESS_SECTION_BACKGROUNDS } from '@/types/business';
 
@@ -93,6 +98,7 @@ interface HeroBannerDraft {
 interface ImageTextDraft {
   body: string;
   imagePosition: 'left' | 'right';
+  aspectRatio: ImageAspectRatio;
 }
 
 interface FeatureGridItemDraft {
@@ -177,7 +183,7 @@ function createEmptySection(type: SectionType = 'paragraph'): SectionDraft {
     reviewRows: [{ quote: '', context: '', image: '' }],
     reviewDisplay: 'text',
     heroBanner: { imageAlt: '' },
-    imageText: { body: '', imagePosition: 'right' },
+    imageText: { body: '', imagePosition: 'right', aspectRatio: DEFAULT_IMAGE_ASPECT_RATIO },
     featureGrid: {
       items: [{ title: '', label: '', description: '' }],
     },
@@ -215,28 +221,28 @@ function sectionFromBusinessSection(section: BusinessSection): SectionDraft {
     case 'roadmapGrid':
       draft.roadmapRows = section.content.data.items.length
         ? section.content.data.items.map((item) => ({
-            year: item.year,
-            yearLabel: item.yearLabel ?? '',
-            description: item.description.join('\n'),
-          }))
+          year: item.year,
+          yearLabel: item.yearLabel ?? '',
+          description: item.description.join('\n'),
+        }))
         : draft.roadmapRows;
       break;
     case 'infoTable':
       draft.infoRows = section.content.data.rows.length
         ? section.content.data.rows.map((row) => ({
-            label: row.label,
-            value: row.value,
-          }))
+          label: row.label,
+          value: row.value,
+        }))
         : draft.infoRows;
       draft.infoShowDisclaimer = section.content.data.showDisclaimer ?? false;
       break;
     case 'customerReviews':
       draft.reviewRows = section.content.data.reviews.length
         ? section.content.data.reviews.map((review) => ({
-            quote: review.quote,
-            context: review.context ?? '',
-            image: review.image ?? '',
-          }))
+          quote: review.quote,
+          context: review.context ?? '',
+          image: review.image ?? '',
+        }))
         : draft.reviewRows;
       draft.reviewDisplay = section.content.data.display ?? 'text';
       break;
@@ -249,16 +255,17 @@ function sectionFromBusinessSection(section: BusinessSection): SectionDraft {
       draft.imageText = {
         body: section.content.data.body,
         imagePosition: section.content.data.imagePosition,
+        aspectRatio: section.content.data.aspectRatio ?? DEFAULT_IMAGE_ASPECT_RATIO,
       };
       break;
     case 'featureGrid':
       draft.featureGrid = {
         items: section.content.data.items.length
           ? section.content.data.items.map((item) => ({
-              title: item.title,
-              label: item.label,
-              description: item.description,
-            }))
+            title: item.title,
+            label: item.label,
+            description: item.description,
+          }))
           : draft.featureGrid.items,
       };
       break;
@@ -273,20 +280,20 @@ function sectionFromBusinessSection(section: BusinessSection): SectionDraft {
       draft.beforeAfter = {
         items: legacyData.items?.length
           ? legacyData.items.map((item) => ({
-              beforeImage: item.beforeImage,
-              afterImage: item.afterImage,
-              beforeLabel: item.beforeLabel ?? '',
-              afterLabel: item.afterLabel ?? '',
-            }))
+            beforeImage: item.beforeImage,
+            afterImage: item.afterImage,
+            beforeLabel: item.beforeLabel ?? '',
+            afterLabel: item.afterLabel ?? '',
+          }))
           : legacyData.beforeImage || legacyData.afterImage
             ? [
-                {
-                  beforeImage: legacyData.beforeImage ?? '',
-                  afterImage: legacyData.afterImage ?? '',
-                  beforeLabel: legacyData.beforeLabel ?? '',
-                  afterLabel: legacyData.afterLabel ?? '',
-                },
-              ]
+              {
+                beforeImage: legacyData.beforeImage ?? '',
+                afterImage: legacyData.afterImage ?? '',
+                beforeLabel: legacyData.beforeLabel ?? '',
+                afterLabel: legacyData.afterLabel ?? '',
+              },
+            ]
             : draft.beforeAfter.items,
       };
       break;
@@ -295,10 +302,10 @@ function sectionFromBusinessSection(section: BusinessSection): SectionDraft {
       draft.processSteps = {
         steps: section.content.data.steps.length
           ? section.content.data.steps.map((step) => ({
-              image: step.image,
-              label: step.label,
-              description: step.description,
-            }))
+            image: step.image,
+            label: step.label,
+            description: step.description,
+          }))
           : draft.processSteps.steps,
       };
       break;
@@ -357,6 +364,7 @@ function toContentData(section: SectionDraft) {
       return {
         body: section.imageText.body.trim(),
         imagePosition: section.imageText.imagePosition,
+        aspectRatio: section.imageText.aspectRatio,
       };
     case 'featureGrid':
       return {
@@ -629,6 +637,7 @@ export default function BusinessPageForm({
   const [title, setTitle] = useState(initialPage?.title ?? '');
   const [titleEn, setTitleEn] = useState(initialPage?.titleEn ?? '');
   const [lead, setLead] = useState(initialPage?.lead ?? '');
+  const [leadHidden, setLeadHidden] = useState(initialPage?.leadHidden ?? false);
   const [sections, setSections] = useState<SectionDraft[]>(() =>
     initialPage && initialPage.sections.length > 0
       ? initialPage.sections.map(sectionFromBusinessSection)
@@ -721,6 +730,7 @@ export default function BusinessPageForm({
           title,
           titleEn,
           lead,
+          leadHidden,
           sections: buildSectionsPayload(),
         }),
       });
@@ -750,6 +760,19 @@ export default function BusinessPageForm({
     >
       <div className="grid grid-cols-[1fr_22rem] gap-6">
         <div className="rounded-2xl border border-gray-350 bg-white p-6 [&>*+*]:mt-5">
+          <div className="flex items-center justify-between">
+            <h2 className="text-h5 font-bold">타이틀 수정</h2>
+            <div className="flex items-center gap-2">
+              <span className="text-text-default">화면에</span>
+              <StatusDropdown
+                isActive={!leadHidden}
+                onChange={(isActive) => setLeadHidden(!isActive)}
+                activeLabel="노출"
+                inactiveLabel="숨김"
+                className="w-24"
+              />
+            </div>
+          </div>
           <div>
             <label className="text-small mb-2 block font-semibold">
               영문 라벨 (선택){' '}
@@ -779,9 +802,12 @@ export default function BusinessPageForm({
           </div>
 
           <div>
-            <label className="text-small mb-2 block font-semibold">
+            <label className="text-small block font-semibold">
               리드 문구
             </label>
+            <p className="text-text-info text-small mb-2">
+              상단의 영문 라벨 · 페이지 제목 · 리드 문구 섹션 전체의 노출 여부입니다.
+            </p>
             <Textarea
               name="lead"
               value={lead}
@@ -793,750 +819,666 @@ export default function BusinessPageForm({
 
           <div className="border-t border-gray-200 pt-5">
             {!selectedSection ? (
-            <p className="text-text-info">
-              왼쪽에서 블록을 선택하거나 추가하세요.
-            </p>
-          ) : (
-            <div className="flex flex-col gap-4">
-              <div className="flex items-center justify-between">
-                <h2 className="text-h5 font-bold">블록 수정</h2>
-                <div className="flex items-center gap-4">
-                  <div className="flex items-center gap-2">
-                    <span className="text-text-default">화면에</span>
-                    <StatusDropdown
-                      isActive={!selectedSection.hidden}
-                      onChange={(isActive) =>
-                        updateSection(selectedSection.key, {
-                          hidden: !isActive,
-                        })
-                      }
-                      activeLabel="노출"
-                      inactiveLabel="숨김"
-                      className="w-24"
-                    />
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => setSelectedKey(null)}
-                    className="cursor-pointer text-text-info hover:text-gray-900"
-                  >
-                    닫기
-                  </button>
-                </div>
-              </div>
-
-              <div className="[&>*+*]:mt-5">
-                <div>
-                  <label className="text-small mb-2 block font-semibold">
-                    블록 타입
-                  </label>
-                  <select
-                    value={selectedSection.type}
-                    onChange={(event) =>
-                      updateSection(selectedSection.key, {
-                        type: event.target.value as SectionType,
-                      })
-                    }
-                    className="h-11 w-full cursor-pointer rounded-lg border border-gray-350 px-3"
-                  >
-                    {Object.entries(TYPE_LABELS).map(([value, label]) => (
-                      <option key={value} value={value}>
-                        {label}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <div>
-                  <label className="text-small mb-2 block font-semibold">
-                    블록 영문 라벨 (선택){' '}
-                    <span className="text-text-info font-normal">
-                      비워두면 &quot;{BLOCK_TYPE_DEFAULTS[selectedSection.type].titleEn}&quot;로
-                      표시됩니다.
-                    </span>
-                  </label>
-                  <Input
-                    value={selectedSection.titleEn}
-                    onChange={(event) =>
-                      updateSection(selectedSection.key, {
-                        titleEn: event.target.value.toUpperCase(),
-                      })
-                    }
-                    placeholder={BLOCK_TYPE_DEFAULTS[selectedSection.type].titleEn}
-                  />
-                </div>
-                <div>
-                  <label className="text-small mb-2 block font-semibold">
-                    블록 제목 (선택)
-                  </label>
-                  <Input
-                    value={selectedSection.title}
-                    onChange={(event) =>
-                      updateSection(selectedSection.key, {
-                        title: event.target.value,
-                      })
-                    }
-                    placeholder="비워두면 제목 없이 표시"
-                  />
-                </div>
-                <div>
-                  <label className="text-small mb-2 block font-semibold">
-                    블록 리드 문구 (선택){' '}
-                    <span className="text-text-info font-normal">
-                      비워두면 표시되지 않습니다.
-                    </span>
-                  </label>
-                  <Textarea
-                    value={selectedSection.lead}
-                    onChange={(event) =>
-                      updateSection(selectedSection.key, {
-                        lead: event.target.value,
-                      })
-                    }
-                    rows={2}
-                    placeholder="리드 문구를 입력하세요"
-                  />
-                </div>
-                <div>
-                  <label className="text-small mb-2 block font-semibold">
-                    블록 배경색
-                  </label>
-                  <div className="flex flex-wrap items-center gap-3">
-                    {BUSINESS_SECTION_BACKGROUNDS.map((option) => {
-                      const isActive = selectedSection.backgroundColor === option.value;
-                      return (
-                        <button
-                          key={option.value}
-                          type="button"
-                          title={option.label}
-                          aria-label={option.label}
-                          aria-pressed={isActive}
-                          onClick={() =>
-                            updateSection(selectedSection.key, {
-                              backgroundColor: option.value,
-                            })
-                          }
-                          style={
-                            option.value === 'primary-2'
-                              ? { backgroundColor: '#173026' }
-                              : option.value === 'none'
-                                ? undefined
-                                : { backgroundColor: option.value }
-                          }
-                          className={cn(
-                            'size-8 shrink-0 cursor-pointer rounded-full border transition-shadow',
-                            option.value === 'none' && 'bg-white',
-                            isActive
-                              ? 'border-primary-2 ring-2 ring-primary-2 ring-offset-2'
-                              : 'border-gray-300 hover:border-gray-500'
-                          )}
-                        />
-                      );
-                    })}
-                  </div>
-                </div>
-              </div>
-
-              {(selectedSection.type === 'heroBanner' ||
-                selectedSection.type === 'imageText' ||
-                selectedSection.type === 'roadmapGrid') && (
-                  <ImageUploadField
-                    label={
-                      selectedSection.type === 'heroBanner'
-                        ? '배너 이미지'
-                        : selectedSection.type === 'imageText'
-                          ? '본문 이미지'
-                          : '블록 이미지 (선택)'
-                    }
-                    name={`section-image-${selectedSection.key}`}
-                    folder="business"
-                    defaultValue={selectedSection.image}
-                    hint={
-                      selectedSection.type === 'heroBanner'
-                        ? '배너 전체를 채우는 배경 이미지입니다. 1920x880px 이상 권장'
-                        : selectedSection.type === 'imageText'
-                          ? '텍스트 옆에 노출되는 이미지입니다. 1200x800px 이상 권장'
-                          : '본문 블록에 16:9 가로 비율로 노출됩니다. 1600x900px 이상, 2MB 이하 권장'
-                    }
-                    onChange={(url) =>
-                      updateSection(selectedSection.key, { image: url })
-                    }
-                  />
-                )}
-
-              {selectedSection.type === 'paragraph' && (
-                <div>
-                  <label className="text-small mb-2 block font-semibold">
-                    본문
-                  </label>
-                  <Textarea
-                    value={selectedSection.paragraphText}
-                    onChange={(event) =>
-                      updateSection(selectedSection.key, {
-                        paragraphText: event.target.value,
-                      })
-                    }
-                    rows={4}
-                    placeholder="본문 내용을 입력하세요"
-                  />
-                </div>
-              )}
-
-              {selectedSection.type === 'bulletList' && (
-                <div>
-                  <label className="text-small mb-2 block font-semibold">
-                    항목{' '}
-                    <span className="text-text-info font-normal">
-                      (한 줄에 하나씩 입력)
-                    </span>
-                  </label>
-                  <Textarea
-                    value={selectedSection.bulletItems}
-                    onChange={(event) =>
-                      updateSection(selectedSection.key, {
-                        bulletItems: event.target.value,
-                      })
-                    }
-                    rows={5}
-                    placeholder={'항목 1\n항목 2\n항목 3'}
-                  />
-                </div>
-              )}
-
-              {selectedSection.type === 'roadmapGrid' && (
-                <div className="flex flex-col gap-3">
-                  <label className="text-small block font-semibold">
-                    로드맵 항목
-                  </label>
-                  {selectedSection.roadmapRows.map((row, rowIndex) => (
-                    <div
-                      key={rowIndex}
-                      className="flex flex-col gap-2 rounded-lg border border-gray-300 p-3"
+              <p className="text-text-info">
+                왼쪽에서 블록을 선택하거나 추가하세요.
+              </p>
+            ) : (
+              <div className="flex flex-col gap-4">
+                <div className="flex items-center justify-between">
+                  <h2 className="text-h5 font-bold">블록 수정</h2>
+                  <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-2">
+                      <span className="text-text-default">화면에</span>
+                      <StatusDropdown
+                        isActive={!selectedSection.hidden}
+                        onChange={(isActive) =>
+                          updateSection(selectedSection.key, {
+                            hidden: !isActive,
+                          })
+                        }
+                        activeLabel="노출"
+                        inactiveLabel="숨김"
+                        className="w-24"
+                      />
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setSelectedKey(null)}
+                      className="cursor-pointer text-text-info hover:text-gray-900"
                     >
-                      <div className="grid grid-cols-2 gap-2">
-                        <Input
-                          value={row.year}
-                          onChange={(event) =>
-                            updateSection(selectedSection.key, {
-                              roadmapRows: selectedSection.roadmapRows.map(
-                                (r, i) =>
-                                  i === rowIndex
-                                    ? { ...r, year: event.target.value }
-                                    : r
-                              ),
-                            })
-                          }
-                          placeholder="연도 (예: 2027)"
-                        />
-                        <Input
-                          value={row.yearLabel}
-                          onChange={(event) =>
-                            updateSection(selectedSection.key, {
-                              roadmapRows: selectedSection.roadmapRows.map(
-                                (r, i) =>
-                                  i === rowIndex
-                                    ? { ...r, yearLabel: event.target.value }
-                                    : r
-                              ),
-                            })
-                          }
-                          placeholder="부가 라벨 (예: 2~3년차)"
-                        />
-                      </div>
-                      <Textarea
-                        value={row.description}
-                        onChange={(event) =>
-                          updateSection(selectedSection.key, {
-                            roadmapRows: selectedSection.roadmapRows.map(
-                              (r, i) =>
-                                i === rowIndex
-                                  ? { ...r, description: event.target.value }
-                                  : r
-                            ),
-                          })
-                        }
-                        rows={2}
-                        placeholder={'설명 (한 줄에 하나씩)'}
-                      />
-                      <Button
-                        type="button"
-                        variant="danger"
-                        size="small"
-                        onClick={() =>
-                          updateSection(selectedSection.key, {
-                            roadmapRows: selectedSection.roadmapRows.filter(
-                              (_, i) => i !== rowIndex
-                            ),
-                          })
-                        }
-                        className={cn('self-start', ITEM_DELETE_BUTTON_CLASS)}
-                      >
-                        항목 삭제
-                      </Button>
-                    </div>
-                  ))}
-                  <Button
-                    type="button"
-                    variant="primary"
-                    size="small"
-                    onClick={() =>
-                      updateSection(selectedSection.key, {
-                        roadmapRows: [
-                          ...selectedSection.roadmapRows,
-                          { year: '', yearLabel: '', description: '' },
-                        ],
-                      })
-                    }
-                    className="self-start bg-primary hover:brightness-110"
-                  >
-                    + 로드맵 항목 추가
-                  </Button>
+                      닫기
+                    </button>
+                  </div>
                 </div>
-              )}
 
-              {selectedSection.type === 'infoTable' && (
-                <div className="flex flex-col gap-3">
-                  <label className="text-small block font-semibold">
-                    표 행 (label / value)
-                  </label>
-                  {selectedSection.infoRows.map((row, rowIndex) => (
-                    <div key={rowIndex} className="flex items-center gap-2">
-                      <Input
-                        value={row.label}
-                        onChange={(event) =>
-                          updateSection(selectedSection.key, {
-                            infoRows: selectedSection.infoRows.map((r, i) =>
-                              i === rowIndex
-                                ? { ...r, label: event.target.value }
-                                : r
-                            ),
-                          })
-                        }
-                        placeholder="예: 1일차"
-                        className="flex-1"
-                      />
-                      <Input
-                        value={row.value}
-                        onChange={(event) =>
-                          updateSection(selectedSection.key, {
-                            infoRows: selectedSection.infoRows.map((r, i) =>
-                              i === rowIndex
-                                ? { ...r, value: event.target.value }
-                                : r
-                            ),
-                          })
-                        }
-                        placeholder="예: 80% 개선"
-                        className="flex-1"
-                      />
-                      <Button
-                        type="button"
-                        variant="danger"
-                        size="small"
-                        onClick={() =>
-                          updateSection(selectedSection.key, {
-                            infoRows: selectedSection.infoRows.filter(
-                              (_, i) => i !== rowIndex
-                            ),
-                          })
-                        }
-                        className={cn('shrink-0', ITEM_DELETE_BUTTON_CLASS)}
-                      >
-                        삭제
-                      </Button>
-                    </div>
-                  ))}
-                  <Button
-                    type="button"
-                    variant="primary"
-                    size="small"
-                    onClick={() =>
-                      updateSection(selectedSection.key, {
-                        infoRows: [
-                          ...selectedSection.infoRows,
-                          { label: '', value: '' },
-                        ],
-                      })
-                    }
-                    className="self-start bg-primary hover:brightness-110"
-                  >
-                    + 행 추가
-                  </Button>
-                  <CheckBox
-                    checked={selectedSection.infoShowDisclaimer}
-                    onCheckedChange={(checked) =>
-                      updateSection(selectedSection.key, {
-                        infoShowDisclaimer: checked,
-                      })
-                    }
-                    label="표 위에 고객 후기 고지 문구 표시"
-                  />
-                </div>
-              )}
-
-              {selectedSection.type === 'customerReviews' && (
-                <div className="flex flex-col gap-3">
+                <div className="[&>*+*]:mt-5">
                   <div>
                     <label className="text-small mb-2 block font-semibold">
-                      표시 방식
+                      블록 타입
                     </label>
                     <select
-                      value={selectedSection.reviewDisplay}
+                      value={selectedSection.type}
                       onChange={(event) =>
                         updateSection(selectedSection.key, {
-                          reviewDisplay: event.target.value as 'text' | 'gallery',
+                          type: event.target.value as SectionType,
                         })
                       }
                       className="h-11 w-full cursor-pointer rounded-lg border border-gray-350 px-3"
                     >
-                      <option value="text">텍스트형 (인용문 카드)</option>
-                      <option value="gallery">갤러리형 (사진 카드)</option>
+                      {Object.entries(TYPE_LABELS).map(([value, label]) => (
+                        <option key={value} value={value}>
+                          {label}
+                        </option>
+                      ))}
                     </select>
                   </div>
-
-                  <label className="text-small block font-semibold">
-                    후기 (고지 문구는 항상 자동으로 표시됩니다)
-                  </label>
-                  {selectedSection.reviewRows.map((row, rowIndex) => (
-                    <div
-                      key={rowIndex}
-                      className="flex flex-col gap-2 rounded-lg border border-gray-300 p-3"
-                    >
-                      {selectedSection.reviewDisplay === 'gallery' && (
-                        <ImageUploadField
-                          label={`${rowIndex + 1}번째 후기 사진`}
-                          name={`review-image-${selectedSection.key}-${rowIndex}`}
-                          folder="business"
-                          defaultValue={row.image}
-                          onChange={(url) =>
-                            updateSection(selectedSection.key, {
-                              reviewRows: selectedSection.reviewRows.map(
-                                (r, i) => (i === rowIndex ? { ...r, image: url } : r)
-                              ),
-                            })
-                          }
-                        />
-                      )}
-                      <Textarea
-                        value={row.quote}
-                        onChange={(event) =>
-                          updateSection(selectedSection.key, {
-                            reviewRows: selectedSection.reviewRows.map(
-                              (r, i) =>
-                                i === rowIndex
-                                  ? { ...r, quote: event.target.value }
-                                  : r
-                            ),
-                          })
-                        }
-                        rows={2}
-                        placeholder="후기 인용문"
-                      />
-                      <Input
-                        value={row.context}
-                        onChange={(event) =>
-                          updateSection(selectedSection.key, {
-                            reviewRows: selectedSection.reviewRows.map(
-                              (r, i) =>
-                                i === rowIndex
-                                  ? { ...r, context: event.target.value }
-                                  : r
-                            ),
-                          })
-                        }
-                        placeholder="부가 설명 (선택, 예: 2개월째 섭취)"
-                      />
-                      <Button
-                        type="button"
-                        variant="danger"
-                        size="small"
-                        onClick={() =>
-                          updateSection(selectedSection.key, {
-                            reviewRows: selectedSection.reviewRows.filter(
-                              (_, i) => i !== rowIndex
-                            ),
-                          })
-                        }
-                        className={cn('self-start', ITEM_DELETE_BUTTON_CLASS)}
-                      >
-                        후기 삭제
-                      </Button>
-                    </div>
-                  ))}
-                  <Button
-                    type="button"
-                    variant="primary"
-                    size="small"
-                    onClick={() =>
-                      updateSection(selectedSection.key, {
-                        reviewRows: [
-                          ...selectedSection.reviewRows,
-                          { quote: '', context: '', image: '' },
-                        ],
-                      })
-                    }
-                    className="self-start bg-primary hover:brightness-110"
-                  >
-                    + 후기 추가
-                  </Button>
-                </div>
-              )}
-
-              {selectedSection.type === 'heroBanner' && (
-                <div className="flex flex-col gap-3">
                   <div>
                     <label className="text-small mb-2 block font-semibold">
-                      이미지 대체 텍스트 (선택)
+                      블록 영문 라벨 (선택){' '}
+                      <span className="text-text-info font-normal">
+                        비워두면 &quot;{BLOCK_TYPE_DEFAULTS[selectedSection.type].titleEn}&quot;로
+                        표시됩니다.
+                      </span>
                     </label>
                     <Input
-                      value={selectedSection.heroBanner.imageAlt}
+                      value={selectedSection.titleEn}
                       onChange={(event) =>
                         updateSection(selectedSection.key, {
-                          heroBanner: {
-                            ...selectedSection.heroBanner,
-                            imageAlt: event.target.value,
-                          },
+                          titleEn: event.target.value.toUpperCase(),
                         })
                       }
-                      placeholder="비워두면 블록 제목을 사용합니다"
+                      placeholder={BLOCK_TYPE_DEFAULTS[selectedSection.type].titleEn}
                     />
                   </div>
-                  <p className="text-small text-text-info">
-                    이미지 위 라벨과 제목 아래 설명은 위 &quot;블록 영문 라벨&quot; /
-                    &quot;블록 제목&quot; / &quot;블록 리드 문구&quot; 입력값을 사용합니다.
-                  </p>
-                </div>
-              )}
-
-              {selectedSection.type === 'imageText' && (
-                <div className="flex flex-col gap-3">
                   <div>
                     <label className="text-small mb-2 block font-semibold">
-                      이미지 위치
+                      블록 제목 (선택)
                     </label>
-                    <select
-                      value={selectedSection.imageText.imagePosition}
+                    <Input
+                      value={selectedSection.title}
                       onChange={(event) =>
                         updateSection(selectedSection.key, {
-                          imageText: {
-                            ...selectedSection.imageText,
-                            imagePosition: event.target.value as 'left' | 'right',
-                          },
+                          title: event.target.value,
                         })
                       }
-                      className="h-11 w-full cursor-pointer rounded-lg border border-gray-350 px-3"
-                    >
-                      <option value="right">텍스트 + 사진 (사진이 오른쪽)</option>
-                      <option value="left">사진 + 텍스트 (사진이 왼쪽)</option>
-                    </select>
+                      placeholder="비워두면 제목 없이 표시"
+                    />
                   </div>
+                  <div>
+                    <label className="text-small mb-2 block font-semibold">
+                      블록 리드 문구 (선택){' '}
+                      <span className="text-text-info font-normal">
+                        비워두면 표시되지 않습니다.
+                      </span>
+                    </label>
+                    <Textarea
+                      value={selectedSection.lead}
+                      onChange={(event) =>
+                        updateSection(selectedSection.key, {
+                          lead: event.target.value,
+                        })
+                      }
+                      rows={2}
+                      placeholder="리드 문구를 입력하세요"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-small mb-2 block font-semibold">
+                      블록 배경색
+                    </label>
+                    <div className="flex flex-wrap items-center gap-3">
+                      {BUSINESS_SECTION_BACKGROUNDS.map((option) => {
+                        const isActive = selectedSection.backgroundColor === option.value;
+                        return (
+                          <button
+                            key={option.value}
+                            type="button"
+                            title={option.label}
+                            aria-label={option.label}
+                            aria-pressed={isActive}
+                            onClick={() =>
+                              updateSection(selectedSection.key, {
+                                backgroundColor: option.value,
+                              })
+                            }
+                            style={
+                              option.value === 'primary-2'
+                                ? { backgroundColor: '#173026' }
+                                : option.value === 'none'
+                                  ? undefined
+                                  : { backgroundColor: option.value }
+                            }
+                            className={cn(
+                              'size-8 shrink-0 cursor-pointer rounded-full border transition-shadow',
+                              option.value === 'none' && 'bg-white',
+                              isActive
+                                ? 'border-primary-2 ring-2 ring-primary-2 ring-offset-2'
+                                : 'border-gray-300 hover:border-gray-500'
+                            )}
+                          />
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
+
+                {(selectedSection.type === 'heroBanner' ||
+                  selectedSection.type === 'imageText' ||
+                  selectedSection.type === 'roadmapGrid') && (
+                    <ImageUploadField
+                      label={
+                        selectedSection.type === 'heroBanner'
+                          ? '배너 이미지'
+                          : selectedSection.type === 'imageText'
+                            ? '본문 이미지'
+                            : '블록 이미지 (선택)'
+                      }
+                      name={`section-image-${selectedSection.key}`}
+                      folder="business"
+                      defaultValue={selectedSection.image}
+                      hint={
+                        selectedSection.type === 'heroBanner'
+                          ? '배너 전체를 채우는 배경 이미지입니다. 1920x880px 이상 권장'
+                          : selectedSection.type === 'imageText'
+                            ? '텍스트 옆에 노출되는 이미지입니다. 1200x800px 이상 권장'
+                            : '본문 블록에 16:9 가로 비율로 노출됩니다. 1600x900px 이상, 2MB 이하 권장'
+                      }
+                      onChange={(url) =>
+                        updateSection(selectedSection.key, { image: url })
+                      }
+                    />
+                  )}
+
+                {selectedSection.type === 'paragraph' && (
                   <div>
                     <label className="text-small mb-2 block font-semibold">
                       본문
                     </label>
                     <Textarea
-                      value={selectedSection.imageText.body}
+                      value={selectedSection.paragraphText}
                       onChange={(event) =>
                         updateSection(selectedSection.key, {
-                          imageText: {
-                            ...selectedSection.imageText,
-                            body: event.target.value,
-                          },
+                          paragraphText: event.target.value,
                         })
                       }
-                      rows={5}
+                      rows={4}
                       placeholder="본문 내용을 입력하세요"
                     />
                   </div>
-                  <p className="text-small text-text-info">
-                    작은 라벨·제목·리드 문구는 위 &quot;블록 영문 라벨&quot; /
-                    &quot;블록 제목&quot; / &quot;블록 리드 문구&quot; 입력값을 사용합니다.
-                  </p>
-                </div>
-              )}
+                )}
 
-              {selectedSection.type === 'featureGrid' && (
-                <div className="flex flex-col gap-3">
-                  <label className="text-small block font-semibold">카드 항목</label>
-                  {selectedSection.featureGrid.items.map((item, itemIndex) => (
-                    <div
-                      key={itemIndex}
-                      className="flex flex-col gap-2 rounded-lg border border-gray-300 p-3"
-                    >
-                      <Input
-                        value={item.title}
-                        onChange={(event) =>
-                          updateSection(selectedSection.key, {
-                            featureGrid: {
-                              ...selectedSection.featureGrid,
-                              items: selectedSection.featureGrid.items.map((it, i) =>
-                                i === itemIndex ? { ...it, title: event.target.value } : it
-                              ),
-                            },
-                          })
-                        }
-                        placeholder="제목 (예: 특허 기반 배양기술)"
-                      />
-                      <Input
-                        value={item.label}
-                        onChange={(event) =>
-                          updateSection(selectedSection.key, {
-                            featureGrid: {
-                              ...selectedSection.featureGrid,
-                              items: selectedSection.featureGrid.items.map((it, i) =>
-                                i === itemIndex
-                                  ? { ...it, label: event.target.value.toUpperCase() }
-                                  : it
-                              ),
-                            },
-                          })
-                        }
-                        placeholder="영문 라벨 (예: PATENTED TECHNOLOGY)"
-                      />
-                      <Textarea
-                        value={item.description}
-                        onChange={(event) =>
-                          updateSection(selectedSection.key, {
-                            featureGrid: {
-                              ...selectedSection.featureGrid,
-                              items: selectedSection.featureGrid.items.map((it, i) =>
-                                i === itemIndex
-                                  ? { ...it, description: event.target.value }
-                                  : it
-                              ),
-                            },
-                          })
-                        }
-                        rows={2}
-                        placeholder="설명"
-                      />
-                      <Button
-                        type="button"
-                        variant="danger"
-                        size="small"
-                        onClick={() =>
-                          updateSection(selectedSection.key, {
-                            featureGrid: {
-                              ...selectedSection.featureGrid,
-                              items: selectedSection.featureGrid.items.filter(
-                                (_, i) => i !== itemIndex
-                              ),
-                            },
-                          })
-                        }
-                        className={cn('self-start', ITEM_DELETE_BUTTON_CLASS)}
+                {selectedSection.type === 'bulletList' && (
+                  <div>
+                    <label className="text-small mb-2 block font-semibold">
+                      항목{' '}
+                      <span className="text-text-info font-normal">
+                        (한 줄에 하나씩 입력)
+                      </span>
+                    </label>
+                    <Textarea
+                      value={selectedSection.bulletItems}
+                      onChange={(event) =>
+                        updateSection(selectedSection.key, {
+                          bulletItems: event.target.value,
+                        })
+                      }
+                      rows={5}
+                      placeholder={'항목 1\n항목 2\n항목 3'}
+                    />
+                  </div>
+                )}
+
+                {selectedSection.type === 'roadmapGrid' && (
+                  <div className="flex flex-col gap-3">
+                    <label className="text-small block font-semibold">
+                      로드맵 항목
+                    </label>
+                    {selectedSection.roadmapRows.map((row, rowIndex) => (
+                      <div
+                        key={rowIndex}
+                        className="flex flex-col gap-2 rounded-lg border border-gray-300 p-3"
                       >
-                        항목 삭제
-                      </Button>
-                    </div>
-                  ))}
-                  <Button
-                    type="button"
-                    variant="primary"
-                    size="small"
-                    onClick={() =>
-                      updateSection(selectedSection.key, {
-                        featureGrid: {
-                          ...selectedSection.featureGrid,
-                          items: [
-                            ...selectedSection.featureGrid.items,
-                            { title: '', label: '', description: '' },
-                          ],
-                        },
-                      })
-                    }
-                    className="self-start bg-primary hover:brightness-110"
-                  >
-                    + 카드 추가
-                  </Button>
-                </div>
-              )}
-
-              {selectedSection.type === 'beforeAfter' && (
-                <div className="flex flex-col gap-3">
-                  <label className="text-small block font-semibold">
-                    변화 사례{' '}
-                    <span className="text-text-info font-normal">
-                      (최소 {MIN_BEFORE_AFTER_ITEMS}개 이상 등록)
-                    </span>
-                  </label>
-                  {selectedSection.beforeAfter.items.map((item, itemIndex) => (
-                    <div
-                      key={itemIndex}
-                      className="flex flex-col gap-4 rounded-lg border border-gray-300 p-3"
-                    >
-                      <div className="flex flex-col gap-2">
-                        <ImageUploadField
-                          label={`${itemIndex + 1}번째 사례 Before 이미지`}
-                          name={`beforeafter-before-${selectedSection.key}-${itemIndex}`}
-                          folder="business"
-                          defaultValue={item.beforeImage}
-                          onChange={(url) =>
-                            updateSection(selectedSection.key, {
-                              beforeAfter: {
-                                items: selectedSection.beforeAfter.items.map((it, i) =>
-                                  i === itemIndex ? { ...it, beforeImage: url } : it
+                        <div className="grid grid-cols-2 gap-2">
+                          <Input
+                            value={row.year}
+                            onChange={(event) =>
+                              updateSection(selectedSection.key, {
+                                roadmapRows: selectedSection.roadmapRows.map(
+                                  (r, i) =>
+                                    i === rowIndex
+                                      ? { ...r, year: event.target.value }
+                                      : r
                                 ),
-                              },
-                            })
-                          }
-                        />
-                        <Input
-                          value={item.beforeLabel}
+                              })
+                            }
+                            placeholder="연도 (예: 2027)"
+                          />
+                          <Input
+                            value={row.yearLabel}
+                            onChange={(event) =>
+                              updateSection(selectedSection.key, {
+                                roadmapRows: selectedSection.roadmapRows.map(
+                                  (r, i) =>
+                                    i === rowIndex
+                                      ? { ...r, yearLabel: event.target.value }
+                                      : r
+                                ),
+                              })
+                            }
+                            placeholder="부가 라벨 (예: 2~3년차)"
+                          />
+                        </div>
+                        <Textarea
+                          value={row.description}
                           onChange={(event) =>
                             updateSection(selectedSection.key, {
-                              beforeAfter: {
-                                items: selectedSection.beforeAfter.items.map((it, i) =>
-                                  i === itemIndex
-                                    ? { ...it, beforeLabel: event.target.value }
-                                    : it
-                                ),
-                              },
+                              roadmapRows: selectedSection.roadmapRows.map(
+                                (r, i) =>
+                                  i === rowIndex
+                                    ? { ...r, description: event.target.value }
+                                    : r
+                              ),
                             })
                           }
-                          placeholder="Before 라벨 (기본값: BEFORE)"
+                          rows={2}
+                          placeholder={'설명 (한 줄에 하나씩)'}
                         />
-                      </div>
-                      <div className="flex flex-col gap-2">
-                        <ImageUploadField
-                          label={`${itemIndex + 1}번째 사례 After 이미지`}
-                          name={`beforeafter-after-${selectedSection.key}-${itemIndex}`}
-                          folder="business"
-                          defaultValue={item.afterImage}
-                          onChange={(url) =>
-                            updateSection(selectedSection.key, {
-                              beforeAfter: {
-                                items: selectedSection.beforeAfter.items.map((it, i) =>
-                                  i === itemIndex ? { ...it, afterImage: url } : it
-                                ),
-                              },
-                            })
-                          }
-                        />
-                        <Input
-                          value={item.afterLabel}
-                          onChange={(event) =>
-                            updateSection(selectedSection.key, {
-                              beforeAfter: {
-                                items: selectedSection.beforeAfter.items.map((it, i) =>
-                                  i === itemIndex
-                                    ? { ...it, afterLabel: event.target.value }
-                                    : it
-                                ),
-                              },
-                            })
-                          }
-                          placeholder="After 라벨 (기본값: AFTER)"
-                        />
-                      </div>
-                      {selectedSection.beforeAfter.items.length > MIN_BEFORE_AFTER_ITEMS && (
                         <Button
                           type="button"
                           variant="danger"
                           size="small"
                           onClick={() =>
                             updateSection(selectedSection.key, {
-                              beforeAfter: {
-                                items: selectedSection.beforeAfter.items.filter(
+                              roadmapRows: selectedSection.roadmapRows.filter(
+                                (_, i) => i !== rowIndex
+                              ),
+                            })
+                          }
+                          className={cn('self-start', ITEM_DELETE_BUTTON_CLASS)}
+                        >
+                          항목 삭제
+                        </Button>
+                      </div>
+                    ))}
+                    <Button
+                      type="button"
+                      variant="primary"
+                      size="small"
+                      onClick={() =>
+                        updateSection(selectedSection.key, {
+                          roadmapRows: [
+                            ...selectedSection.roadmapRows,
+                            { year: '', yearLabel: '', description: '' },
+                          ],
+                        })
+                      }
+                      className="self-start bg-primary hover:brightness-110"
+                    >
+                      + 로드맵 항목 추가
+                    </Button>
+                  </div>
+                )}
+
+                {selectedSection.type === 'infoTable' && (
+                  <div className="flex flex-col gap-3">
+                    <label className="text-small block font-semibold">
+                      표 행 (label / value)
+                    </label>
+                    {selectedSection.infoRows.map((row, rowIndex) => (
+                      <div key={rowIndex} className="flex items-center gap-2">
+                        <Input
+                          value={row.label}
+                          onChange={(event) =>
+                            updateSection(selectedSection.key, {
+                              infoRows: selectedSection.infoRows.map((r, i) =>
+                                i === rowIndex
+                                  ? { ...r, label: event.target.value }
+                                  : r
+                              ),
+                            })
+                          }
+                          placeholder="예: 1일차"
+                          className="flex-1"
+                        />
+                        <Input
+                          value={row.value}
+                          onChange={(event) =>
+                            updateSection(selectedSection.key, {
+                              infoRows: selectedSection.infoRows.map((r, i) =>
+                                i === rowIndex
+                                  ? { ...r, value: event.target.value }
+                                  : r
+                              ),
+                            })
+                          }
+                          placeholder="예: 80% 개선"
+                          className="flex-1"
+                        />
+                        <Button
+                          type="button"
+                          variant="danger"
+                          size="small"
+                          onClick={() =>
+                            updateSection(selectedSection.key, {
+                              infoRows: selectedSection.infoRows.filter(
+                                (_, i) => i !== rowIndex
+                              ),
+                            })
+                          }
+                          className={cn('shrink-0', ITEM_DELETE_BUTTON_CLASS)}
+                        >
+                          삭제
+                        </Button>
+                      </div>
+                    ))}
+                    <Button
+                      type="button"
+                      variant="primary"
+                      size="small"
+                      onClick={() =>
+                        updateSection(selectedSection.key, {
+                          infoRows: [
+                            ...selectedSection.infoRows,
+                            { label: '', value: '' },
+                          ],
+                        })
+                      }
+                      className="self-start bg-primary hover:brightness-110"
+                    >
+                      + 행 추가
+                    </Button>
+                    <CheckBox
+                      checked={selectedSection.infoShowDisclaimer}
+                      onCheckedChange={(checked) =>
+                        updateSection(selectedSection.key, {
+                          infoShowDisclaimer: checked,
+                        })
+                      }
+                      label="표 위에 고객 후기 고지 문구 표시"
+                    />
+                  </div>
+                )}
+
+                {selectedSection.type === 'customerReviews' && (
+                  <div className="flex flex-col gap-3">
+                    <div>
+                      <label className="text-small mb-2 block font-semibold">
+                        표시 방식
+                      </label>
+                      <select
+                        value={selectedSection.reviewDisplay}
+                        onChange={(event) =>
+                          updateSection(selectedSection.key, {
+                            reviewDisplay: event.target.value as 'text' | 'gallery',
+                          })
+                        }
+                        className="h-11 w-full cursor-pointer rounded-lg border border-gray-350 px-3"
+                      >
+                        <option value="text">텍스트형 (인용문 카드)</option>
+                        <option value="gallery">갤러리형 (사진 카드)</option>
+                      </select>
+                    </div>
+
+                    <label className="text-small block font-semibold">
+                      후기 (고지 문구는 항상 자동으로 표시됩니다)
+                    </label>
+                    {selectedSection.reviewRows.map((row, rowIndex) => (
+                      <div
+                        key={rowIndex}
+                        className="flex flex-col gap-2 rounded-lg border border-gray-300 p-3"
+                      >
+                        {selectedSection.reviewDisplay === 'gallery' && (
+                          <ImageUploadField
+                            label={`${rowIndex + 1}번째 후기 사진`}
+                            name={`review-image-${selectedSection.key}-${rowIndex}`}
+                            folder="business"
+                            defaultValue={row.image}
+                            onChange={(url) =>
+                              updateSection(selectedSection.key, {
+                                reviewRows: selectedSection.reviewRows.map(
+                                  (r, i) => (i === rowIndex ? { ...r, image: url } : r)
+                                ),
+                              })
+                            }
+                          />
+                        )}
+                        <Textarea
+                          value={row.quote}
+                          onChange={(event) =>
+                            updateSection(selectedSection.key, {
+                              reviewRows: selectedSection.reviewRows.map(
+                                (r, i) =>
+                                  i === rowIndex
+                                    ? { ...r, quote: event.target.value }
+                                    : r
+                              ),
+                            })
+                          }
+                          rows={2}
+                          placeholder="후기 인용문"
+                        />
+                        <Input
+                          value={row.context}
+                          onChange={(event) =>
+                            updateSection(selectedSection.key, {
+                              reviewRows: selectedSection.reviewRows.map(
+                                (r, i) =>
+                                  i === rowIndex
+                                    ? { ...r, context: event.target.value }
+                                    : r
+                              ),
+                            })
+                          }
+                          placeholder="부가 설명 (선택, 예: 2개월째 섭취)"
+                        />
+                        <Button
+                          type="button"
+                          variant="danger"
+                          size="small"
+                          onClick={() =>
+                            updateSection(selectedSection.key, {
+                              reviewRows: selectedSection.reviewRows.filter(
+                                (_, i) => i !== rowIndex
+                              ),
+                            })
+                          }
+                          className={cn('self-start', ITEM_DELETE_BUTTON_CLASS)}
+                        >
+                          후기 삭제
+                        </Button>
+                      </div>
+                    ))}
+                    <Button
+                      type="button"
+                      variant="primary"
+                      size="small"
+                      onClick={() =>
+                        updateSection(selectedSection.key, {
+                          reviewRows: [
+                            ...selectedSection.reviewRows,
+                            { quote: '', context: '', image: '' },
+                          ],
+                        })
+                      }
+                      className="self-start bg-primary hover:brightness-110"
+                    >
+                      + 후기 추가
+                    </Button>
+                  </div>
+                )}
+
+                {selectedSection.type === 'heroBanner' && (
+                  <div className="flex flex-col gap-3">
+                    <div>
+                      <label className="text-small mb-2 block font-semibold">
+                        이미지 대체 텍스트 (선택)
+                      </label>
+                      <Input
+                        value={selectedSection.heroBanner.imageAlt}
+                        onChange={(event) =>
+                          updateSection(selectedSection.key, {
+                            heroBanner: {
+                              ...selectedSection.heroBanner,
+                              imageAlt: event.target.value,
+                            },
+                          })
+                        }
+                        placeholder="비워두면 블록 제목을 사용합니다"
+                      />
+                    </div>
+                    <p className="text-small text-text-info">
+                      이미지 위 라벨과 제목 아래 설명은 위 &quot;블록 영문 라벨&quot; /
+                      &quot;블록 제목&quot; / &quot;블록 리드 문구&quot; 입력값을 사용합니다.
+                    </p>
+                  </div>
+                )}
+
+                {selectedSection.type === 'imageText' && (
+                  <div className="flex flex-col gap-3">
+                    <div>
+                      <label className="text-small mb-2 block font-semibold">
+                        이미지 위치
+                      </label>
+                      <select
+                        value={selectedSection.imageText.imagePosition}
+                        onChange={(event) =>
+                          updateSection(selectedSection.key, {
+                            imageText: {
+                              ...selectedSection.imageText,
+                              imagePosition: event.target.value as 'left' | 'right',
+                            },
+                          })
+                        }
+                        className="h-11 w-full cursor-pointer rounded-lg border border-gray-350 px-3"
+                      >
+                        <option value="right">텍스트 + 사진 (사진이 오른쪽)</option>
+                        <option value="left">사진 + 텍스트 (사진이 왼쪽)</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="text-small mb-2 block font-semibold">
+                        이미지 비율
+                      </label>
+                      <div className="flex flex-wrap gap-3">
+                        {IMAGE_ASPECT_RATIO_OPTIONS.map((option) => {
+                          const isActive =
+                            selectedSection.imageText.aspectRatio === option.value;
+                          return (
+                            <button
+                              key={option.value}
+                              type="button"
+                              onClick={() =>
+                                updateSection(selectedSection.key, {
+                                  imageText: {
+                                    ...selectedSection.imageText,
+                                    aspectRatio: option.value,
+                                  },
+                                })
+                              }
+                              className={cn(
+                                'flex cursor-pointer flex-col items-center gap-2 rounded-lg border px-3 py-2',
+                                isActive
+                                  ? 'border-primary bg-primary/5'
+                                  : 'border-gray-350 hover:border-gray-500',
+                              )}
+                            >
+                              <span
+                                className={cn(
+                                  'bg-gray-350 rounded-sm',
+                                  option.previewClassName,
+                                )}
+                              />
+                              <span className="text-small">{option.value}</span>
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+                    <div>
+                      <label className="text-small mb-2 block font-semibold">
+                        본문
+                      </label>
+                      <Textarea
+                        value={selectedSection.imageText.body}
+                        onChange={(event) =>
+                          updateSection(selectedSection.key, {
+                            imageText: {
+                              ...selectedSection.imageText,
+                              body: event.target.value,
+                            },
+                          })
+                        }
+                        rows={5}
+                        placeholder="본문 내용을 입력하세요"
+                      />
+                    </div>
+                  </div>
+                )}
+
+                {selectedSection.type === 'featureGrid' && (
+                  <div className="flex flex-col gap-3">
+                    <label className="text-small block font-semibold">카드 항목</label>
+                    {selectedSection.featureGrid.items.map((item, itemIndex) => (
+                      <div
+                        key={itemIndex}
+                        className="flex flex-col gap-2 rounded-lg border border-gray-300 p-3"
+                      >
+                        <Input
+                          value={item.title}
+                          onChange={(event) =>
+                            updateSection(selectedSection.key, {
+                              featureGrid: {
+                                ...selectedSection.featureGrid,
+                                items: selectedSection.featureGrid.items.map((it, i) =>
+                                  i === itemIndex ? { ...it, title: event.target.value } : it
+                                ),
+                              },
+                            })
+                          }
+                          placeholder="제목 (예: 특허 기반 배양기술)"
+                        />
+                        <Input
+                          value={item.label}
+                          onChange={(event) =>
+                            updateSection(selectedSection.key, {
+                              featureGrid: {
+                                ...selectedSection.featureGrid,
+                                items: selectedSection.featureGrid.items.map((it, i) =>
+                                  i === itemIndex
+                                    ? { ...it, label: event.target.value.toUpperCase() }
+                                    : it
+                                ),
+                              },
+                            })
+                          }
+                          placeholder="영문 라벨 (예: PATENTED TECHNOLOGY)"
+                        />
+                        <Textarea
+                          value={item.description}
+                          onChange={(event) =>
+                            updateSection(selectedSection.key, {
+                              featureGrid: {
+                                ...selectedSection.featureGrid,
+                                items: selectedSection.featureGrid.items.map((it, i) =>
+                                  i === itemIndex
+                                    ? { ...it, description: event.target.value }
+                                    : it
+                                ),
+                              },
+                            })
+                          }
+                          rows={2}
+                          placeholder="설명"
+                        />
+                        <Button
+                          type="button"
+                          variant="danger"
+                          size="small"
+                          onClick={() =>
+                            updateSection(selectedSection.key, {
+                              featureGrid: {
+                                ...selectedSection.featureGrid,
+                                items: selectedSection.featureGrid.items.filter(
                                   (_, i) => i !== itemIndex
                                 ),
                               },
@@ -1544,156 +1486,275 @@ export default function BusinessPageForm({
                           }
                           className={cn('self-start', ITEM_DELETE_BUTTON_CLASS)}
                         >
-                          사례 삭제
+                          항목 삭제
                         </Button>
-                      )}
-                    </div>
-                  ))}
-                  <Button
-                    type="button"
-                    variant="primary"
-                    size="small"
-                    onClick={() =>
-                      updateSection(selectedSection.key, {
-                        beforeAfter: {
-                          items: [
-                            ...selectedSection.beforeAfter.items,
-                            { beforeImage: '', afterImage: '', beforeLabel: '', afterLabel: '' },
-                          ],
-                        },
-                      })
-                    }
-                    className="self-start bg-primary hover:brightness-110"
-                  >
-                    + 사례 추가
-                  </Button>
-                </div>
-              )}
-
-              {selectedSection.type === 'processSteps' && (
-                <div className="flex flex-col gap-3">
-                  <label className="text-small block font-semibold">변화 과정 단계</label>
-                  {selectedSection.processSteps.steps.map((step, stepIndex) => (
-                    <div
-                      key={stepIndex}
-                      className="flex flex-col gap-2 rounded-lg border border-gray-300 p-3"
+                      </div>
+                    ))}
+                    <Button
+                      type="button"
+                      variant="primary"
+                      size="small"
+                      onClick={() =>
+                        updateSection(selectedSection.key, {
+                          featureGrid: {
+                            ...selectedSection.featureGrid,
+                            items: [
+                              ...selectedSection.featureGrid.items,
+                              { title: '', label: '', description: '' },
+                            ],
+                          },
+                        })
+                      }
+                      className="self-start bg-primary hover:brightness-110"
                     >
-                      <ImageUploadField
-                        label={`${stepIndex + 1}번째 단계 이미지`}
-                        name={`processstep-image-${selectedSection.key}-${stepIndex}`}
-                        folder="business"
-                        defaultValue={step.image}
-                        onChange={(url) =>
-                          updateSection(selectedSection.key, {
-                            processSteps: {
-                              steps: selectedSection.processSteps.steps.map((s, i) =>
-                                i === stepIndex ? { ...s, image: url } : s
-                              ),
-                            },
-                          })
-                        }
-                      />
-                      <Input
-                        value={step.label}
-                        onChange={(event) =>
-                          updateSection(selectedSection.key, {
-                            processSteps: {
-                              steps: selectedSection.processSteps.steps.map((s, i) =>
-                                i === stepIndex ? { ...s, label: event.target.value } : s
-                              ),
-                            },
-                          })
-                        }
-                        placeholder="단계 라벨 (예: 1일차)"
-                      />
-                      <Textarea
-                        value={step.description}
-                        onChange={(event) =>
-                          updateSection(selectedSection.key, {
-                            processSteps: {
-                              steps: selectedSection.processSteps.steps.map((s, i) =>
-                                i === stepIndex
-                                  ? { ...s, description: event.target.value }
-                                  : s
-                              ),
-                            },
-                          })
-                        }
-                        rows={2}
-                        placeholder="설명 (예: 귀 주변 피부 발적과 긁는 행동 관찰)"
-                      />
-                      <Button
-                        type="button"
-                        variant="danger"
-                        size="small"
-                        onClick={() =>
-                          updateSection(selectedSection.key, {
-                            processSteps: {
-                              steps: selectedSection.processSteps.steps.filter(
-                                (_, i) => i !== stepIndex
-                              ),
-                            },
-                          })
-                        }
-                        className={cn('self-start', ITEM_DELETE_BUTTON_CLASS)}
+                      + 카드 추가
+                    </Button>
+                  </div>
+                )}
+
+                {selectedSection.type === 'beforeAfter' && (
+                  <div className="flex flex-col gap-3">
+                    <label className="text-small block font-semibold">
+                      변화 사례{' '}
+                      <span className="text-text-info font-normal">
+                        (최소 {MIN_BEFORE_AFTER_ITEMS}개 이상 등록)
+                      </span>
+                    </label>
+                    {selectedSection.beforeAfter.items.map((item, itemIndex) => (
+                      <div
+                        key={itemIndex}
+                        className="flex flex-col gap-4 rounded-lg border border-gray-300 p-3"
                       >
-                        단계 삭제
-                      </Button>
-                    </div>
-                  ))}
-                  <Button
-                    type="button"
-                    variant="primary"
-                    size="small"
-                    onClick={() =>
+                        <div className="flex flex-col gap-2">
+                          <ImageUploadField
+                            label={`${itemIndex + 1}번째 사례 Before 이미지`}
+                            name={`beforeafter-before-${selectedSection.key}-${itemIndex}`}
+                            folder="business"
+                            defaultValue={item.beforeImage}
+                            onChange={(url) =>
+                              updateSection(selectedSection.key, {
+                                beforeAfter: {
+                                  items: selectedSection.beforeAfter.items.map((it, i) =>
+                                    i === itemIndex ? { ...it, beforeImage: url } : it
+                                  ),
+                                },
+                              })
+                            }
+                          />
+                          <Input
+                            value={item.beforeLabel}
+                            onChange={(event) =>
+                              updateSection(selectedSection.key, {
+                                beforeAfter: {
+                                  items: selectedSection.beforeAfter.items.map((it, i) =>
+                                    i === itemIndex
+                                      ? { ...it, beforeLabel: event.target.value }
+                                      : it
+                                  ),
+                                },
+                              })
+                            }
+                            placeholder="Before 라벨 (기본값: BEFORE)"
+                          />
+                        </div>
+                        <div className="flex flex-col gap-2">
+                          <ImageUploadField
+                            label={`${itemIndex + 1}번째 사례 After 이미지`}
+                            name={`beforeafter-after-${selectedSection.key}-${itemIndex}`}
+                            folder="business"
+                            defaultValue={item.afterImage}
+                            onChange={(url) =>
+                              updateSection(selectedSection.key, {
+                                beforeAfter: {
+                                  items: selectedSection.beforeAfter.items.map((it, i) =>
+                                    i === itemIndex ? { ...it, afterImage: url } : it
+                                  ),
+                                },
+                              })
+                            }
+                          />
+                          <Input
+                            value={item.afterLabel}
+                            onChange={(event) =>
+                              updateSection(selectedSection.key, {
+                                beforeAfter: {
+                                  items: selectedSection.beforeAfter.items.map((it, i) =>
+                                    i === itemIndex
+                                      ? { ...it, afterLabel: event.target.value }
+                                      : it
+                                  ),
+                                },
+                              })
+                            }
+                            placeholder="After 라벨 (기본값: AFTER)"
+                          />
+                        </div>
+                        {selectedSection.beforeAfter.items.length > MIN_BEFORE_AFTER_ITEMS && (
+                          <Button
+                            type="button"
+                            variant="danger"
+                            size="small"
+                            onClick={() =>
+                              updateSection(selectedSection.key, {
+                                beforeAfter: {
+                                  items: selectedSection.beforeAfter.items.filter(
+                                    (_, i) => i !== itemIndex
+                                  ),
+                                },
+                              })
+                            }
+                            className={cn('self-start', ITEM_DELETE_BUTTON_CLASS)}
+                          >
+                            사례 삭제
+                          </Button>
+                        )}
+                      </div>
+                    ))}
+                    <Button
+                      type="button"
+                      variant="primary"
+                      size="small"
+                      onClick={() =>
+                        updateSection(selectedSection.key, {
+                          beforeAfter: {
+                            items: [
+                              ...selectedSection.beforeAfter.items,
+                              { beforeImage: '', afterImage: '', beforeLabel: '', afterLabel: '' },
+                            ],
+                          },
+                        })
+                      }
+                      className="self-start bg-primary hover:brightness-110"
+                    >
+                      + 사례 추가
+                    </Button>
+                  </div>
+                )}
+
+                {selectedSection.type === 'processSteps' && (
+                  <div className="flex flex-col gap-3">
+                    <label className="text-small block font-semibold">변화 과정 단계</label>
+                    {selectedSection.processSteps.steps.map((step, stepIndex) => (
+                      <div
+                        key={stepIndex}
+                        className="flex flex-col gap-2 rounded-lg border border-gray-300 p-3"
+                      >
+                        <ImageUploadField
+                          label={`${stepIndex + 1}번째 단계 이미지`}
+                          name={`processstep-image-${selectedSection.key}-${stepIndex}`}
+                          folder="business"
+                          defaultValue={step.image}
+                          onChange={(url) =>
+                            updateSection(selectedSection.key, {
+                              processSteps: {
+                                steps: selectedSection.processSteps.steps.map((s, i) =>
+                                  i === stepIndex ? { ...s, image: url } : s
+                                ),
+                              },
+                            })
+                          }
+                        />
+                        <Input
+                          value={step.label}
+                          onChange={(event) =>
+                            updateSection(selectedSection.key, {
+                              processSteps: {
+                                steps: selectedSection.processSteps.steps.map((s, i) =>
+                                  i === stepIndex ? { ...s, label: event.target.value } : s
+                                ),
+                              },
+                            })
+                          }
+                          placeholder="단계 라벨 (예: 1일차)"
+                        />
+                        <Textarea
+                          value={step.description}
+                          onChange={(event) =>
+                            updateSection(selectedSection.key, {
+                              processSteps: {
+                                steps: selectedSection.processSteps.steps.map((s, i) =>
+                                  i === stepIndex
+                                    ? { ...s, description: event.target.value }
+                                    : s
+                                ),
+                              },
+                            })
+                          }
+                          rows={2}
+                          placeholder="설명 (예: 귀 주변 피부 발적과 긁는 행동 관찰)"
+                        />
+                        <Button
+                          type="button"
+                          variant="danger"
+                          size="small"
+                          onClick={() =>
+                            updateSection(selectedSection.key, {
+                              processSteps: {
+                                steps: selectedSection.processSteps.steps.filter(
+                                  (_, i) => i !== stepIndex
+                                ),
+                              },
+                            })
+                          }
+                          className={cn('self-start', ITEM_DELETE_BUTTON_CLASS)}
+                        >
+                          단계 삭제
+                        </Button>
+                      </div>
+                    ))}
+                    <Button
+                      type="button"
+                      variant="primary"
+                      size="small"
+                      onClick={() =>
+                        updateSection(selectedSection.key, {
+                          processSteps: {
+                            steps: [
+                              ...selectedSection.processSteps.steps,
+                              { image: '', label: '', description: '' },
+                            ],
+                          },
+                        })
+                      }
+                      className="self-start bg-primary hover:brightness-110"
+                    >
+                      + 단계 추가
+                    </Button>
+                  </div>
+                )}
+
+                <div>
+                  <label className="text-small mb-2 block font-semibold">
+                    보조 설명 (선택){' '}
+                    <span className="text-text-info font-normal">
+                      작은 이탤릭체로 블록 아래에 표시됩니다.
+                    </span>
+                  </label>
+                  <Textarea
+                    value={selectedSection.note}
+                    onChange={(event) =>
                       updateSection(selectedSection.key, {
-                        processSteps: {
-                          steps: [
-                            ...selectedSection.processSteps.steps,
-                            { image: '', label: '', description: '' },
-                          ],
-                        },
+                        note: event.target.value,
                       })
                     }
-                    className="self-start bg-primary hover:brightness-110"
-                  >
-                    + 단계 추가
-                  </Button>
+                    rows={2}
+                    placeholder="보조 설명이 필요한 경우, 작은 텍스트를 표시합니다."
+                  />
                 </div>
-              )}
 
-              <div>
-                <label className="text-small mb-2 block font-semibold">
-                  보조 설명 (선택){' '}
-                  <span className="text-text-info font-normal">
-                    작은 이탤릭체로 블록 아래에 표시됩니다.
-                  </span>
-                </label>
-                <Textarea
-                  value={selectedSection.note}
-                  onChange={(event) =>
-                    updateSection(selectedSection.key, {
-                      note: event.target.value,
-                    })
-                  }
-                  rows={2}
-                  placeholder="보조 설명이 필요한 경우, 작은 텍스트를 표시합니다."
-                />
-              </div>
-
-              <div className="border-t border-gray-200 pt-5">
-                <p className="text-small mb-3 font-semibold">
-                  미리보기{' '}
-                  <span className="text-text-info font-normal">
-                    실제 사이트에 적용되는 모습입니다 (좁은 화면 기준)
-                  </span>
-                </p>
-                <div className="overflow-hidden rounded-xl border border-gray-200">
-                  <BusinessSectionRenderer section={toPreviewSection(selectedSection)} />
+                <div className="border-t border-gray-200 pt-5">
+                  <p className="text-small mb-3 font-semibold">
+                    미리보기{' '}
+                    <span className="text-text-info font-normal">
+                      실제 사이트에 적용되는 모습입니다 (좁은 화면 기준)
+                    </span>
+                  </p>
+                  <div className="overflow-hidden rounded-xl border border-gray-200">
+                    <BusinessSectionRenderer section={toPreviewSection(selectedSection)} />
+                  </div>
                 </div>
               </div>
-            </div>
-          )}
+            )}
           </div>
         </div>
 

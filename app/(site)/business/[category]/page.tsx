@@ -34,7 +34,12 @@ export default async function BusinessCategoryPage({
   const visibleSections = page.sections.filter((section) => !section.hidden);
 
   return (
-    <BusinessPageTemplate title={page.title} titleEn={page.titleEn} lead={page.lead}>
+    <BusinessPageTemplate
+      title={page.title}
+      titleEn={page.titleEn}
+      lead={page.lead}
+      leadHidden={page.leadHidden}
+    >
       {visibleSections.map((section) => (
         <BusinessSectionRenderer key={section.id} section={section} />
       ))}

@@ -15,7 +15,7 @@ export default function VideoDetail({ item, prevItem, nextItem }: VideoDetailPro
         <p className="text-primary-4 mt-3">{item.date}</p>
       </div>
 
-      <div className="mt-10 overflow-hidden rounded-2xl max-w-200 lg:mx-auto lg:mt-15">
+      <div className="mt-10 overflow-hidden max-w-200 lg:mx-auto lg:mt-15">
         <video
           key={item.id}
           controls

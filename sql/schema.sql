@@ -93,6 +93,7 @@ create table if not exists business_pages (
   title_en text, -- 제목 위에 표시되는 영문 라벨 (선택, 예: PET FOOD)
   lead text not null default '',
   is_active boolean not null default true, -- 실제 사이트 노출 여부
+  lead_hidden boolean not null default false, -- 상단 제목/리드 문구 섹션 노출 여부
   sort_order integer not null default 0, -- 관리자 목록/헤더 BUSINESS 하위 메뉴 노출 순서
   updated_at timestamptz not null default now()
 );
@@ -171,3 +172,8 @@ alter table business_pages add column if not exists title_en text;
 -- 마이그레이션: BUSINESS 카테고리 자유 추가 (고정 5종 제약 해제) -----------------
 -- 이미 생성된 DB라면 sql/migrations/010_business_pages_dynamic_category.sql을
 -- Supabase SQL Editor에서 한 번만 실행하세요. (고정 목록 체크 제약을 형식 체크로 교체)
+
+-- 마이그레이션: BUSINESS 상세 페이지 제목/리드 섹션 노출 토글 -------------------
+-- 이미 생성된 DB라면 sql/migrations/011_business_pages_lead_hidden.sql을
+-- Supabase SQL Editor에서 한 번만 실행하세요.
+alter table business_pages add column if not exists lead_hidden boolean not null default false;

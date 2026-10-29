@@ -28,12 +28,13 @@ interface BusinessPageRow {
   title_en: string | null;
   lead: string;
   is_active: boolean;
+  lead_hidden: boolean;
   sort_order: number;
   business_sections: BusinessSectionRow[];
 }
 
 const SELECT_COLUMNS = `
-  id, category, title, title_en, lead, is_active, sort_order,
+  id, category, title, title_en, lead, is_active, lead_hidden, sort_order,
   business_sections ( id, title, title_en, image, note, lead, background_color, hidden, block_type, sort_order, content )
 `;
 
@@ -65,6 +66,7 @@ function fromRow(row: BusinessPageRow): BusinessPage {
     titleEn: row.title_en,
     lead: row.lead,
     isActive: row.is_active,
+    leadHidden: row.lead_hidden,
     sortOrder: row.sort_order,
     sections,
   };

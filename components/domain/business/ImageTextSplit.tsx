@@ -1,5 +1,11 @@
 import Image from 'next/image';
 
+import {
+  DEFAULT_IMAGE_ASPECT_RATIO,
+  IMAGE_ASPECT_RATIO_OPTIONS,
+} from '@/lib/business-block-defaults';
+import type { ImageAspectRatio } from '@/types/business';
+
 interface ImageTextSplitProps {
   eyebrow?: string;
   heading: string;
@@ -8,6 +14,7 @@ interface ImageTextSplitProps {
   imageSrc: string;
   imageAlt?: string;
   imagePosition: 'left' | 'right';
+  aspectRatio?: ImageAspectRatio;
 }
 
 export default function ImageTextSplit({
@@ -18,7 +25,11 @@ export default function ImageTextSplit({
   imageSrc,
   imageAlt,
   imagePosition,
+  aspectRatio = DEFAULT_IMAGE_ASPECT_RATIO,
 }: ImageTextSplitProps) {
+  const aspectClassName =
+    IMAGE_ASPECT_RATIO_OPTIONS.find((option) => option.value === aspectRatio)
+      ?.imageClassName ?? 'aspect-6/4';
   return (
     <div
       className={`flex flex-col gap-10 lg:justify-between lg:gap-16 ${
@@ -42,7 +53,9 @@ export default function ImageTextSplit({
         </p>
       </div>
 
-      <div className="relative aspect-6/4 w-full overflow-hidden bg-gray-100 lg:w-150">
+      <div
+        className={`relative ${aspectClassName} w-full overflow-hidden bg-gray-100 lg:w-150`}
+      >
         {imageSrc ? (
           <Image
             src={imageSrc}

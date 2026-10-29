@@ -84,9 +84,13 @@ export interface HeroBannerContent {
   imageAlt?: string;
 }
 
+export type ImageAspectRatio = '1:1' | '4:5' | '4:6' | '6:4';
+
 export interface ImageTextContent {
   body: string;
   imagePosition: 'left' | 'right';
+  /** 비워두면 '6:4'(가로형)로 표시됩니다. */
+  aspectRatio?: ImageAspectRatio;
 }
 
 export interface FeatureGridItem {
@@ -160,6 +164,8 @@ export interface BusinessPage {
   lead: string;
   /** false면 실제 사이트에서 숨겨집니다(관리자 화면에서는 계속 보이고 편집 가능). */
   isActive: boolean;
+  /** true면 상단 제목/리드 문구 섹션이 공개 페이지에서 숨겨집니다(관리자 화면에서는 계속 보이고 편집 가능). */
+  leadHidden: boolean;
   /** 관리자 목록과 헤더 BUSINESS 하위 메뉴에서의 노출 순서 (오름차순) */
   sortOrder: number;
   sections: BusinessSection[];

@@ -48,6 +48,7 @@ export async function PUT(request: Request, { params }: RouteParams) {
         title: input.title,
         title_en: input.titleEn || null,
         lead: input.lead,
+        lead_hidden: input.leadHidden,
         updated_at: new Date().toISOString(),
       },
       { onConflict: 'category' }

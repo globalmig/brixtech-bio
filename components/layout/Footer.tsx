@@ -84,7 +84,7 @@ export default function Footer() {
             <Button
               onClick={() => setIsComingSoonOpen(false)}
               size={'small'}
-              className="bg-primary-2 text-sm"
+              className="text-sm"
             >
               확인
             </Button>

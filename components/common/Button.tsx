@@ -12,7 +12,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         primary: 
-          'bg-primary [color:var(--color-gray-50)] disabled:bg-gray-200 disabled:[color:var(--color-gray-500)]',
+          'bg-primary-2 [color:var(--color-gray-50)] disabled:bg-gray-200 disabled:[color:var(--color-gray-500)]',
         secondary:
           'bg-white [color:var(--color-primary)] border border-primary disabled:bg-gray-100 disabled:[color:var(--color-gray-500)] disabled:border-gray-300',
         outline:

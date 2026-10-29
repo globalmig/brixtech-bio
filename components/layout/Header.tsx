@@ -13,11 +13,14 @@ export default function Header() {
   const pathname = usePathname();
   const isHome = pathname === '/';
   const [brandList, setBrandList] = useState<{ slug: string; name: string }[] | null>(null);
+  const [businessList, setBusinessList] = useState<
+    { slug: string; label: string }[] | null
+  >(null);
 
   useEffect(() => {
     // Header는 레이아웃에 고정돼 있어 페이지 이동만으로는 다시 마운트되지 않습니다.
-    // 관리자에서 브랜드를 추가/삭제한 뒤 링크로 이동했을 때도 최신 상태가 보이도록
-    // pathname이 바뀔 때마다(=페이지를 이동할 때마다) 다시 불러옵니다.
+    // 관리자에서 브랜드/사업 카테고리를 추가/삭제한 뒤 링크로 이동했을 때도 최신
+    // 상태가 보이도록 pathname이 바뀔 때마다(=페이지를 이동할 때마다) 다시 불러옵니다.
     let isMounted = true;
     fetch('/api/brands/order', { cache: 'no-store' })
       .then((response) => (response.ok ? response.json() : null))
@@ -25,31 +28,44 @@ export default function Header() {
         if (isMounted && data?.brands) setBrandList(data.brands);
       })
       .catch(() => {});
+    fetch('/api/business/order', { cache: 'no-store' })
+      .then((response) => (response.ok ? response.json() : null))
+      .then((data: { categories?: { slug: string; label: string }[] } | null) => {
+        if (isMounted && data?.categories) setBusinessList(data.categories);
+      })
+      .catch(() => {});
     return () => {
       isMounted = false;
     };
   }, [pathname]);
 
-  // 관리자에서 추가/삭제한 브랜드 목록을 BRAND 하위 메뉴에 반영합니다. 목록을
-  // 아직 못 불러왔으면 constants/nav.ts에 적힌 기본 목록을 그대로 보여줍니다.
-  // BUSINESS 하위 메뉴는 아직 미완성 페이지라 "준비중입니다" 안내를 그대로
-  // 하드코딩해서 쓰고, 관리자 카테고리 상태를 따라가지 않습니다.
-  const navItems: NavItem[] = brandList
-    ? NAV_ITEMS.map((item) =>
-        item.label === 'BRAND'
-          ? {
-              ...item,
-              children: [
-                { label: '브랜드 전체보기', href: '/brand' },
-                ...brandList.map((brand) => ({
-                  label: brand.name,
-                  href: `/brand/${brand.slug}`,
-                })),
-              ],
-            }
-          : item
-      )
-    : NAV_ITEMS;
+  // 관리자에서 추가/삭제한 브랜드·사업 카테고리 목록을 각각 BRAND/BUSINESS 하위
+  // 메뉴에 반영합니다. 목록을 아직 못 불러왔으면 constants/nav.ts에 적힌 기본
+  // 목록을 그대로 보여줍니다.
+  const navItems: NavItem[] = NAV_ITEMS.map((item) => {
+    if (item.label === 'BRAND' && brandList) {
+      return {
+        ...item,
+        children: [
+          { label: '브랜드 전체보기', href: '/brand' },
+          ...brandList.map((brand) => ({
+            label: brand.name,
+            href: `/brand/${brand.slug}`,
+          })),
+        ],
+      };
+    }
+    if (item.label === 'BUSINESS' && businessList) {
+      return {
+        ...item,
+        children: businessList.map((category) => ({
+          label: category.label,
+          href: `/business/${category.slug}`,
+        })),
+      };
+    }
+    return item;
+  });
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDesktopNavOpen, setIsDesktopNavOpen] = useState(false);
   const [hoveredNavItem, setHoveredNavItem] = useState<string | null>(null);
@@ -334,7 +350,7 @@ export default function Header() {
             <Button
               onClick={() => setIsComingSoonOpen(false)}
               size={'small'}
-              className="bg-primary-2 text-sm"
+              className="text-sm"
             >
               확인
             </Button>
