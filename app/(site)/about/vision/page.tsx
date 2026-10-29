@@ -128,7 +128,7 @@ export default function AboutVisionPage() {
             <div className="lg:w-[42%] lg:shrink-0">
               <p className="text-small text-black mb-4 font-bold lg:mb-8">VISION</p>
               <h2 className="text-h4 lg:text-h2 text-black mb-5">왜 미세조류인가요?</h2>
-              <p className="text-[1rem] leading-7 text-gray-750">
+              <p>
                 미세조류는 빠르게 성장하고 적은 자원으로도 높은 생산성을 내며, 단백질·비타민·항산화물질
                 등 다양한 고부가 성분을 함유하고 있습니다. 식량작물과 경작지를 두고 경쟁하지 않으면서도
                 염수·고알칼리 환경에서 안정적으로 생존하는 배양 적응성을 바탕으로, 지속가능한 바이오
@@ -166,7 +166,7 @@ export default function AboutVisionPage() {
             <div className="lg:w-[50%] lg:shrink-0">
               <p className="text-small text-black mb-4 font-bold lg:mb-8">VISION</p>
               <h2 className="text-h4 lg:text-h2 text-black mb-5">국제기구가 주목하는 원료</h2>
-              <p className="text-[1rem] leading-7 text-gray-750">
+              <p>
                 WHO(2019)는 'Alternative food and feed products'에서 영양이 풍부한 식품 자원으로
                 소개했으며, 미국 FDA(2012)는 GRAS 등재 심사에서 특정 용도의 사용에 이의 없음(no
                 questions) 입장을 밝혔습니다. 건조중량 기준 단백질 55~70%, 탄수화물 15~20%, 지질 5%,
@@ -192,7 +192,7 @@ export default function AboutVisionPage() {
         <div className="mx-auto w-full max-w-360">
           <p className="text-small text-black mb-4 font-bold lg:mb-8">TECHNOLOGY</p>
           <h2 className="text-h4 lg:text-h2 text-black mb-5">미세조류가 가치가 되는 순간</h2>
-          <p className="text-body mb-10 max-w-2xl text-gray-750 lg:mb-16">
+          <p className="text-body mb-10 max-w-2xl lg:mb-16">
             분말·추출물·배양액 등 고기능 원료로 표준화하며, 건강기능식품·화장품·펫푸드·바이오스티뮬런트로
             제품화됩니다. 완제품뿐 아니라 바이오·화장품·식품 분야의 외부 파트너에게 미세조류 소재를
             직접 개발·공급하는 B2B 원료 공급도 함께 추진합니다.
@@ -236,7 +236,7 @@ export default function AboutVisionPage() {
             <div className="lg:w-[42%] lg:shrink-0">
               <p className="text-small text-black mb-4 font-bold lg:mb-8">ROADMAP</p>
               <h2 className="text-h4 lg:text-h2 text-black mb-5">사업 로드맵</h2>
-              <p className="text-body mb-10 max-w-2xl text-gray-750 lg:mb-16">
+              <p className="text-body mb-10 max-w-2xl lg:mb-16">
                 2026년 대량생산 체계 구축을 시작으로, <br/> 2029년까지 화장품·펫푸드·스마트팜 전 영역의
                 기술을 단계적으로 고도화합니다.
               </p>

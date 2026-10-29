@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Fragment } from 'react';
 import Image from 'next/image';
 import FaqAccordion from '@/components/domain/page/FaqAccordion';
 import PageIntro from '@/components/domain/page/PageIntro';
@@ -16,6 +17,22 @@ import {
 export const metadata: Metadata = {
   title: '스피루리나 소개 | BRIXTECHBIO',
 };
+
+function renderWithHighlights(text: string, highlights: readonly string[]) {
+  if (highlights.length === 0) return text;
+
+  const pattern = new RegExp(`(${highlights.map((h) => h.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|')})`, 'g');
+
+  return text.split(pattern).map((part, index) =>
+    highlights.includes(part) ? (
+      <span key={index} className="font-semibold text-black">
+        {part}
+      </span>
+    ) : (
+      <Fragment key={index}>{part}</Fragment>
+    ),
+  );
+}
 
 export default function TechPage() {
   return (
@@ -43,7 +60,7 @@ export default function TechPage() {
             <h2 className="text-h4 mb-5 lg:text-h2">
               3대 핵심 활성 성분
             </h2>
-            <p className="text-body mb-10 lg:mb-25 text-gray-750">
+            <p className="text-body mb-10 lg:mb-25">
               스피루리나를 특별하게 만드는 3가지 핵심 활성
               성분이 항산화와 보습, 세포 재생에 이르는 피부 건강을 다각도로 책임집니다.
             </p>
@@ -53,7 +70,9 @@ export default function TechPage() {
                 <p className="text-h5 lg:text-h4 text-black mb-2 font-bold">{ingredient.title}</p>
                 <p className="text-base font-semibold text-text-sub mb-6">{ingredient.label}</p>
                 <div className="mb-6 border-t border-gray-300 lg:mb-8" />
-                <p className="text-body text-text-sub leading-6">{ingredient.description}</p>
+                <p className="text-body text-text-sub leading-6">
+                  {renderWithHighlights(ingredient.description, ingredient.highlights)}
+                </p>
               </article>
             ))}
           </div>
@@ -62,7 +81,7 @@ export default function TechPage() {
         <section className="mx-auto w-full max-w-360 px-[3%] py-15 canvas:px-0 lg:py-30">
           <p className="text-small mb-4 font-bold">NUTRITION</p>
           <h2 className="text-h4 mb-5 lg:text-h2">영양 성분</h2>
-          <p className="text-body mb-10 lg:mb-16 text-gray-750">
+          <p className="text-body mb-10 lg:mb-16">
             단백질과 필수아미노산, 비타민, 미네랄, 지방산까지.<br/> 스피루리나 한 스푼에 담긴 50여
             종의 영양소를 6가지 카테고리로 체계화하여,<br/> 고순도 원료가 지닌 영양학적 가치를
             과학적 데이터로 증명합니다.
@@ -103,7 +122,7 @@ export default function TechPage() {
 
             <div className="absolute top-1/2 left-1/2 aspect-square w-[30%] -translate-x-1/2 -translate-y-1/2">
               <Image
-                src="/images/tech/영양성분.png"
+                src="/images/tech/nutrition-ingredients.png"
                 alt="스피루리나 영양 성분 제품 이미지"
                 fill
                 sizes="340px"
@@ -141,27 +160,30 @@ export default function TechPage() {
             ))}
           </div>
 
-          {/* 모바일/태블릿: 이미지 + 그리드 */}
+          {/* 모바일/태블릿: 이미지 + 리스트 */}
           <div className="lg:hidden">
             <div className="relative mx-auto mb-10 aspect-square w-full max-w-64">
               <Image
-                src="/images/tech/영양성분.png"
+                src="/images/tech/nutrition-ingredients.png"
                 alt="스피루리나 영양 성분 제품 이미지"
                 fill
                 sizes="256px"
                 className="object-contain"
               />
             </div>
-            <div className="grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-3">
-              {NUTRITION_FACTS.map((fact) => (
-                <div key={fact.label} className="flex flex-col items-center gap-2 text-center">
-                  <span
-                    className={`flex size-24 flex-col items-center justify-center rounded-full text-center shadow-sm ${NUTRITION_STYLE[fact.style]}`}
-                  >
-                    <span className="text-base leading-tight font-bold">{fact.count}</span>
-                    <span className="text-small leading-tight font-semibold">{fact.label}</span>
-                  </span>
-                  <span className="text-text-sub text-[0.78rem] leading-5">{fact.detail}</span>
+            <div className="flex flex-col gap-3">
+              {NUTRITION_FACTS.map((fact, index) => (
+                <div
+                  key={fact.label}
+                  className={`flex flex-col gap-1.5 rounded-xl p-4 ${
+                    index % 2 === 0 ? 'bg-primary-5' : 'border border-gray-300 bg-white'
+                  }`}
+                >
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-primary-2 text-base font-bold">{fact.count}</span>
+                    <span className="text-small font-semibold">{fact.label}</span>
+                  </div>
+                  <p className="text-text-sub text-[0.85rem] leading-6">{fact.detail}</p>
                 </div>
               ))}
             </div>
@@ -174,7 +196,7 @@ export default function TechPage() {
               <div className="lg:w-[42%] lg:shrink-0">
                 <p className="text-small text-black mb-4 font-bold lg:mb-8">RECOGNITION</p>
                 <h2 className="text-h4 lg:text-h2 text-black mb-5">국제 공인 연혁</h2>
-                <p className="text-body mb-10 max-w-2xl text-gray-750 lg:mb-16">
+                <p className="text-body mb-10 max-w-2xl lg:mb-16">
                   스피루리나는 한 기업의 주장이 아니라, UN·FAO·미국 FDA·WHO 등 국제기구가 지난
                   수십 년에 걸쳐 안전성과 영양 가치를 공식적으로 인정해온 식품입니다. 1974년,
                   미래 식량으로 지목된 이후 반복적으로 이어진 국제적 공인의 흐름을 통해,
@@ -216,7 +238,7 @@ export default function TechPage() {
               FAQ
             </p>
           <h2 className="text-h4 lg:text-h2 text-black mb-5">스피루리나가 더 궁금하신가요?</h2>
-          <p className="text-text-sub text-[0.95rem] leading-6 mb-12 lg:mb-20">
+          <p className="text-body mb-12 lg:mb-20">
             섭취 방법부터 활용 분야까지, 건강기능식품·화장품·반려동물 푸드·스마트팜 분야별 궁금증을 모았습니다.
           </p>
           <FaqAccordion items={FAQ_ITEMS} categories={FAQ_CATEGORIES} itemsPerPage={5} />

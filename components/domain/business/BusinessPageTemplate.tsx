@@ -28,7 +28,7 @@ export default function BusinessPageTemplate({
             {titleEn || 'BUSINESS'}
           </p>
           <h2 className="text-h4 lg:text-h2 text-black mb-5">{title}</h2>
-          <p className="text-body text-gray-750">{lead}</p>
+          <p className="text-body">{lead}</p>
         </div>
       </section>
       {children}

@@ -59,7 +59,7 @@ export default function BrandSection() {
               <br />
               건강한 변화
             </h2>
-            <p className="text-body mb-10 text-gray-750">
+            <p className="text-body mb-10">
               건강을 위한 기능성 제품부터 반려동물과 환경을 위한 다양한
               솔루션까지 생활 가까이에서 새로운 가능성을 만들어갑니다.
             </p>
@@ -121,7 +121,7 @@ export default function BrandSection() {
               <br />
               건강한 변화
             </h2>
-            <p className="text-body text-gray-750 mb-10 lg:mb-20">
+            <p className="text-body mb-10 lg:mb-20">
               건강을 위한 기능성 제품부터
               <br />
               반려동물과 환경을 위한 다양한 솔루션까지

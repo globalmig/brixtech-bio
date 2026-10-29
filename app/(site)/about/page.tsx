@@ -34,18 +34,18 @@ export default function AboutPage() {
             </h2>
 
             <div className="flex flex-col gap-6">
-              <p className="text-[1rem] leading-7 text-gray-750">
+              <p>
                 저희 브릭스텍바이오는 미세조류 기반 기능성 원료와 친환경 바이오 응용제품을 개발하는
                 바이오혁신기업입니다. 전라남도 나주의 자체 연구실에서 마이크로 알지를 직접 배양하며,
                 특허 기반 배양기술(관련 특허 11건)과 저비용·저에너지 대량배양 시스템을 바탕으로
                 배양부터 원료화·제품화까지 이어지는 통합 사업화 구조를 갖추고 있습니다.
               </p>
-              <p className="text-[1rem] leading-7 text-gray-750">
+              <p>
                 고순도 마이크로 알지 원료는 건강기능식품과 화장품을 비롯해 반려동물 푸드, 공기정화기,
                 스마트팜까지 다섯 가지 영역으로 확장되고 있으며, 기술·운영·재무·유통 전문 인력이 하나의
                 팀으로 함께하고 있습니다.
               </p>
-              <p className="text-[1rem] leading-7 text-gray-750">
+              <p>
                 앞으로도 작은 미세조류의 가능성을 믿고, 사람과 환경이 함께 건강해지는 지속가능한
                 바이오 산업을 만들어가겠습니다. 변함없는 관심과 성원 부탁드립니다. 감사합니다.
               </p>
@@ -74,7 +74,7 @@ export default function AboutPage() {
                 <br />
                 배양 현장을 영상으로
               </h2>
-              <p className="text-[1rem] leading-7 text-gray-750">
+              <p>
                 브릭스텍바이오의 자체 배양시설은 폐쇄형 광생물반응기(PBR)로<br/> 배양액의 pH·온도·광량을
                 정밀 제어해 균주 순도와 생산 수율을 관리합니다.<br/>수확 이후에는 저온 건조와 정제
                 공정을 거쳐 고순도 원료로 완성됩니다.
@@ -101,7 +101,7 @@ export default function AboutPage() {
         <div className="mx-auto w-full max-w-360 px-[3%] canvas:px-0">
           <p className="text-small text-black mb-4 font-bold lg:mb-8">BUSINESS</p>
           <h2 className="text-h4 lg:text-h2 text-black mb-5">주요 사업 영역</h2>
-          <p className="text-body mb-10 text-gray-750 lg:mb-20">
+          <p className="text-body mb-10 lg:mb-20">
             브릭스텍바이오는 자체 배양·정제 기술로 생산한 고순도 마이크로 알지 원료를 기반으로,<br/>
             건강기능식품·화장품·반려동물 푸드·공기정화기·스마트팜 5개 사업 영역에 적용하고
             있습니다.
@@ -115,7 +115,7 @@ export default function AboutPage() {
         <section className="py-10 lg:py-12">
           <p className="text-small text-black mb-4 font-bold lg:mb-8">COMPETENCY</p>
           <h2 className="text-h4 lg:text-h2 text-black mb-5">경쟁력</h2>
-          <p className="text-body mb-10 text-gray-750 lg:mb-20">
+          <p className="text-body mb-10 lg:mb-20">
             빠른 확장보다 본질에 집중해 온 시간이 브릭스텍바이오의 경쟁력이 되었습니다.
             <br />
             특허로 쌓은 배양 기술부터 저비용·저에너지 시스템, 배양부터 제품화까지 이어지는 통합
@@ -145,7 +145,7 @@ export default function AboutPage() {
           </p>
 
           <h2 className="text-h4 lg:text-h2 text-black">자연의 속도로, 꾸준히</h2>
-          <p className="text-[1rem] leading-7 text-gray-750">
+          <p>
             작은 미세조류에서 시작해 사람과 환경이 함께 건강해지는 내일을 만들어가겠습니다.
           </p>
         </div>

@@ -32,12 +32,7 @@ export default function BrandForm({
   const router = useRouter();
   const [submitError, setSubmitError] = useState('');
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
-  const [images, setImages] = useState({
-    logo: initialBrand?.logo ?? '',
-    logoWhite: initialBrand?.logoWhite ?? '',
-    bgImage: initialBrand?.bgImage ?? '',
-    bannerImage: initialBrand?.bannerImage ?? '',
-  });
+  const [validationMessage, setValidationMessage] = useState<string | null>(null);
 
   const {
     register,
@@ -51,6 +46,10 @@ export default function BrandForm({
       name: initialBrand?.name ?? '',
       category: initialBrand?.category ?? '',
       businessCategory: initialBrand?.businessCategory ?? '',
+      logo: initialBrand?.logo ?? '',
+      logoWhite: initialBrand?.logoWhite ?? '',
+      bgImage: initialBrand?.bgImage ?? '',
+      bannerImage: initialBrand?.bannerImage ?? '',
       tagline: initialBrand?.tagline ?? '',
       cardDescription: initialBrand?.cardDescription ?? '',
       comingSoonCount: initialBrand?.comingSoonCount ?? 0,
@@ -65,7 +64,7 @@ export default function BrandForm({
       {
         method: brandId ? 'PUT' : 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...values, ...images }),
+        body: JSON.stringify(values),
       }
     );
     const data = await response.json().catch(() => ({}));
@@ -78,6 +77,13 @@ export default function BrandForm({
     setSuccessMessage(brandId ? '수정 완료되었습니다.' : '등록되었습니다.');
   };
 
+  const onInvalid = (formErrors: typeof errors) => {
+    const firstMessage = Object.values(formErrors).find(
+      (error) => typeof error?.message === 'string' && error.message
+    )?.message as string | undefined;
+    setValidationMessage(firstMessage ?? '필수 항목을 모두 입력해주세요.');
+  };
+
   const handleSuccessClose = () => {
     setSuccessMessage(null);
     router.push('/admin/brands');
@@ -86,7 +92,7 @@ export default function BrandForm({
 
   return (
     <form
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={handleSubmit(onSubmit, onInvalid)}
       className="mx-auto flex w-full max-w-2xl flex-col [&>*+*]:mt-5"
     >
       <div>
@@ -189,36 +195,46 @@ export default function BrandForm({
         />
       </div>
 
-      <ImageUploadField
-        label="로고 (어두운 톤)"
-        name="logo"
-        folder="brands"
-        defaultValue={images.logo}
-        onChange={(url) => setImages((prev) => ({ ...prev, logo: url }))}
-        hint="밝은 배경에 올라가는 가로형 로고. 투명 배경 PNG/SVG, 비율 약 459:158(2.9:1), 500KB 이하 권장"
-      />
-      <ImageUploadField
-        label="로고 (화이트)"
-        name="logoWhite"
-        folder="brands"
-        defaultValue={images.logoWhite}
-        onChange={(url) => setImages((prev) => ({ ...prev, logoWhite: url }))}
-        hint="어두운 배경(상세 배너)에 올라가는 가로형 로고. 투명 배경 PNG/SVG, 비율 약 459:158(2.9:1), 500KB 이하 권장"
-      />
+      <div>
+        <ImageUploadField
+          label="로고 (어두운 톤) *"
+          name="logo"
+          folder="brands"
+          defaultValue={initialBrand?.logo}
+          onChange={(url) => setValue('logo', url, { shouldValidate: true })}
+          hint="밝은 배경에 올라가는 가로형 로고. 투명 배경 PNG/SVG, 비율 약 459:158(2.9:1), 500KB 이하 권장"
+        />
+        {errors.logo && (
+          <p className="text-small text-system-alert mt-1">{errors.logo.message}</p>
+        )}
+      </div>
+      <div>
+        <ImageUploadField
+          label="로고 (화이트) *"
+          name="logoWhite"
+          folder="brands"
+          defaultValue={initialBrand?.logoWhite}
+          onChange={(url) => setValue('logoWhite', url, { shouldValidate: true })}
+          hint="어두운 배경(상세 배너)에 올라가는 가로형 로고. 투명 배경 PNG/SVG, 비율 약 459:158(2.9:1), 500KB 이하 권장"
+        />
+        {errors.logoWhite && (
+          <p className="text-small text-system-alert mt-1">{errors.logoWhite.message}</p>
+        )}
+      </div>
       <ImageUploadField
         label="쇼케이스 배경 이미지"
         name="bgImage"
         folder="brands"
-        defaultValue={images.bgImage}
-        onChange={(url) => setImages((prev) => ({ ...prev, bgImage: url }))}
+        defaultValue={initialBrand?.bgImage}
+        onChange={(url) => setValue('bgImage', url, { shouldValidate: true })}
         hint="브랜드 목록 카드에 정사각형으로 꽉 채워 노출됩니다. 1:1 비율, 800x800px 이상, 2MB 이하 권장"
       />
       <ImageUploadField
         label="상세 배너 이미지"
         name="bannerImage"
         folder="brands"
-        defaultValue={images.bannerImage}
-        onChange={(url) => setImages((prev) => ({ ...prev, bannerImage: url }))}
+        defaultValue={initialBrand?.bannerImage}
+        onChange={(url) => setValue('bannerImage', url, { shouldValidate: true })}
         hint="브랜드 상세 페이지 상단에 화면 전체 너비로 노출됩니다. 가로형(와이드), 1920x800px 이상, 2MB 이하 권장"
       />
 
@@ -233,6 +249,10 @@ export default function BrandForm({
       <AdminMessageDialog
         message={successMessage}
         onClose={handleSuccessClose}
+      />
+      <AdminMessageDialog
+        message={validationMessage}
+        onClose={() => setValidationMessage(null)}
       />
     </form>
   );

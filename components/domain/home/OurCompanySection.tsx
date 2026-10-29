@@ -21,7 +21,7 @@ export default function OurCompanySection() {
         <h2 className="text-h4 text-black mb-5 whitespace-pre-line lg:text-h2">
           {'미세조류에서 시작해\n지속가능한 바이오 산업을 만들어갑니다.'}
         </h2>
-        <p className="text-body text-gray-750 mb-10 lg:mb-20">
+        <p className="text-body mb-10 lg:mb-20">
           브릭스텍바이오는 미세조류 기반 기능성 원료와<br />친환경 바이오 응용
           제품을 개발합니다.
         </p>

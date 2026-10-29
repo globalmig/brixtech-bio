@@ -83,7 +83,7 @@ export default function TechCultivationPage() {
         title={'브릭스텍바이오의 독자 배양 기술'}
         description="외부 오염원을 완벽히 차단하는 밀폐형 광생물반응기를 기반으로 고순도·고품질의 마이크로 알지를 안정적으로 생산합니다. 설비 구조를 단순화·소형화해 초기 투자 비용과 운영비를 대폭 절감한 브릭스텍바이오만의 배양 시스템입니다."
         imageAlt="밀폐형 배양 시스템 이미지"
-        imageSrc=''
+        imageSrc='/images/tech/cultivation-banner.png'
       />
 
       <div className="mx-auto w-full max-w-360 px-[3%] py-15 canvas:px-0 canvas:py-30 lg:pb-10">
@@ -93,18 +93,18 @@ export default function TechCultivationPage() {
             <h2 className="text-h4 lg:text-h2 text-black mb-5">독자 배양 기술</h2>
 
             <div className="flex flex-col gap-6">
-              <p className="text-[1rem] leading-7 text-gray-750">
+              <p>
                 브릭스텍바이오는 완전 밀폐형 광생물반응기를 기반으로 외부 오염원을 철저히
                 차단해 고순도 마이크로 알지를 안정적으로 배양합니다. 장치 구조를
                 단순화·소형화해 초기 설비 구축비용을 대폭 절감했으며, 온도·광·순환·가스를
                 정밀하게 제어해 운영비까지 효율적으로 관리하고 있습니다.
               </p>
-              <p className="text-[1rem] leading-7 text-gray-750">
+              <p>
                 특허 출원 중인 &apos;에어 포켓형 미세조류 광 배양 시스템&apos;은 액체순환
                 대신 에어순환 방식을 적용해 에너지 절감, 운영비 절감, 탄소 저감, 공기정화를
                 동시에 구현하는 브릭스텍바이오만의 독자 기술입니다.
               </p>
-              <p className="text-[1rem] leading-7 text-gray-750">
+              <p>
                 이러한 독자 기술을 바탕으로 농업·축산업·수산업은 물론 식품·화장품·사료 등
                 다양한 산업에 적용 가능한 고순도 원료를 지속적으로 공급하고 있습니다.
               </p>
@@ -113,7 +113,7 @@ export default function TechCultivationPage() {
 
           <div className="relative aspect-[745.06/880.43] w-full lg:w-150 overflow-hidden bg-gray-100">
             <Image
-              src="/#"
+              src="/images/tech/closed-cultivation-system.png"
               alt="브릭스텍바이오 밀폐형 배양 시스템"
               fill
               sizes="(min-width: 1024px) 55vw, 100vw"
@@ -126,7 +126,7 @@ export default function TechCultivationPage() {
       <section className="mx-auto w-full max-w-360 px-[3%] py-10 canvas:px-0 lg:py-12">
         <p className="text-small text-black mb-5 font-bold">COMPARISON</p>
         <h2 className="text-h4 lg:text-h2 text-black mb-5">배양 방식 비교</h2>
-        <p className="text-body mb-8 max-w-2xl text-gray-750">
+        <p className="text-body mb-10 lg:mb-20 max-w-2xl">
           전 세계 마이크로 알지의 83% 이상이 개방형 방식으로 생산되지만, 브릭스텍바이오는
           고순도·고부가가치 원료 생산을 위해 밀폐형 방식을 채택했습니다. 외부 오염원으로부터
           안전하게 차단된 무균 공정으로 고효율 생산성을 유지하고, 타물질 혼입 없이 안정적인
@@ -135,7 +135,7 @@ export default function TechCultivationPage() {
         <ImageCompareCards
           items={[
             {
-              image:'/#',
+              image:'/images/tech/open-raceway-pond.png',
               title: '개방형 레이스웨이 폰드',
               rows: [
                 '초기 설비 투자 비용 낮음',
@@ -147,7 +147,7 @@ export default function TechCultivationPage() {
               ],
             },
             {
-              image:'/#',
+              image:'/images/tech/closed-photobioreactor.png',
               title: '밀폐형 광생물반응기 (브릭스텍바이오)',
               rows: [
                 '초기 설비 투자 비용 높음',
@@ -165,13 +165,13 @@ export default function TechCultivationPage() {
       <section className="mx-auto w-full max-w-360 px-[3%] py-10 canvas:px-0 canvas:py-30">
         <p className="text-small text-black mb-5 font-bold">FACILITY</p>
         <h2 className="text-h4 lg:text-h2 text-black mb-5">보급형 미세조류 생산설비</h2>
-        <p className="text-body mb-8 max-w-2xl text-gray-750">
+        <p className="text-body mb-10 lg:mb-20 max-w-2xl">
           식품·비료·사료용 미세조류 생산에 맞춰 배양 공정을 단순화·소형화한 보급형 설비입니다.
         </p>
         <ImageCompareCards
           items={[
             {
-              image: '/#',
+              image: '/images/tech/cultivation-facility-issues.png',
               title: '기존 국내(나주시 소재) 배양 설비의 문제점',
               description: [
                 <>
@@ -193,7 +193,7 @@ export default function TechCultivationPage() {
               ],
             },
             {
-              image: '/#',
+              image: '/images/tech/compact-cultivation-module.png',
               title: '초기 설비 구축 비용 대폭 절감',
               description: [
                 <>농업, 축산업, 수산업 등 1차 산업에 직접 적용을 위한</>,
@@ -217,7 +217,7 @@ export default function TechCultivationPage() {
         <section className="mx-auto w-full max-w-360 px-[3%] py-15 canvas:px-0 canvas:py-30">
           <p className="text-small text-black mb-4 font-bold lg:mb-8">PRODUCTION</p>
           <h2 className="text-h4 lg:text-h2 text-black mb-5">기술에서 생산으로</h2>
-          <p className="text-body mb-10 text-gray-750 lg:mb-20">
+          <p className="text-body mb-10 lg:mb-20">
             독자적인 배양 기술은 종균 배양부터 대량배양, 수확·농축·건조, 원료화까지 이어지는
             4단계 생산 체계로 완성됩니다.
             <br />

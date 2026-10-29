@@ -30,8 +30,12 @@ export default function BrandShowcaseCard({
       />
       <div className="absolute inset-0 bg-black/30" aria-hidden />
       <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 p-8 text-center">
-        <div className="relative aspect-459/158 w-40 lg:w-56">
-          <Image src={logo} alt={logoAlt} fill sizes="240px" className="object-contain" />
+        <div className="relative flex aspect-459/158 w-40 items-center justify-center lg:w-56">
+          {logo ? (
+            <Image src={logo} alt={logoAlt} fill sizes="240px" className="object-contain" />
+          ) : (
+            <span className="text-h4 lg:text-h3 font-bold text-white">{logoAlt}</span>
+          )}
         </div>
         <p className="text-small lg:text-[1rem] leading-6 whitespace-pre-line text-white">
           {description}

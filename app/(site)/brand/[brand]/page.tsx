@@ -48,14 +48,18 @@ export default async function BrandDetailPage({ params }: BrandDetailPageProps) 
         <p className="text-small relative mb-4 font-bold tracking-[0.2em] text-white uppercase lg:mb-6">
           {brand.category}
         </p>
-        <div className="relative h-14 w-52 lg:h-20 lg:w-76">
-          <Image
-            src={brand.logoWhite}
-            alt={brand.name}
-            fill
-            sizes="300px"
-            className="object-contain"
-          />
+        <div className="relative flex h-14 w-52 items-center justify-center lg:h-20 lg:w-76">
+          {brand.logoWhite ? (
+            <Image
+              src={brand.logoWhite}
+              alt={brand.name}
+              fill
+              sizes="300px"
+              className="object-contain"
+            />
+          ) : (
+            <span className="text-h4 lg:text-h3 font-bold text-white">{brand.name}</span>
+          )}
         </div>
         <p className="relative mt-6 text-body text-white lg:mt-8">{brand.tagline}</p>
       </div>
@@ -64,7 +68,7 @@ export default async function BrandDetailPage({ params }: BrandDetailPageProps) 
         <div className="mx-auto w-full max-w-360 px-[3%] canvas:px-0">
           <p className="text-small text-black mb-4 font-bold lg:mb-8">OUR PRODUCTS</p>
           <h2 className="text-h4 lg:text-h2 text-black mb-5">{brand.name}의 제품을 만나보세요</h2>
-          <p className="text-body mb-10 text-gray-750 lg:mb-20">
+          <p className="text-body mb-10 lg:mb-20">
             엄선된 성분과 세심한 기획으로 완성한 제품들을 소개합니다.
           </p>
         </div>

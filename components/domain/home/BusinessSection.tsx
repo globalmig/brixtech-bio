@@ -13,7 +13,7 @@ export default function BusinessSection() {
         <h2 className="text-h4 text-black mb-5 lg:text-h2">
           하나로 이어지는 <br/>바이오 비즈니스
         </h2>
-        <p className="text-body text-gray-750">
+        <p className="text-body">
           5가지 핵심 사업 영역의 유기적인 시너지를 통해<br/>
           지속가능한 미래 바이오 시장을 선도합니다.
         </p>

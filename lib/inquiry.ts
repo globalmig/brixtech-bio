@@ -101,6 +101,7 @@ export async function submitInquiry(
   });
 
   // TODO: 이메일 생성 후, 브릭스텍 메일 주소 변경
+  // 도메인 구매 후 DNS 인증해서 EMAIL_USER 도 변경
   const { error } = await getResendClient().emails.send({
     from: 'BRIXTECHBIO <onboarding@resend.dev>',
     to: [receiver],

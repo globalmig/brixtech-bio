@@ -96,7 +96,7 @@ function BrandRow({ brand, draggable, onDelete }: BrandRowProps) {
         href={`/admin/brands/${brand.id}/products`}
         className="group flex items-center gap-3 overflow-hidden"
       >
-        <span className="relative size-12 shrink-0 overflow-hidden rounded-lg border border-gray-350 bg-gray-50">
+        <span className="relative flex size-12 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-gray-350 bg-gray-50">
           {brand.logo ? (
             <Image
               src={brand.logo}
@@ -105,7 +105,11 @@ function BrandRow({ brand, draggable, onDelete }: BrandRowProps) {
               sizes="48px"
               className="object-contain"
             />
-          ) : null}
+          ) : (
+            <span className="text-small line-clamp-2 px-1 text-center leading-tight text-text-info">
+              {brand.name}
+            </span>
+          )}
         </span>
         <span className="truncate group-hover:text-primary-2 group-hover:underline">
           {brand.name}
