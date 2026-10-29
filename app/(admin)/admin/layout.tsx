@@ -24,9 +24,6 @@ export default async function AdminLayout({
           BRIXTECH <span className="text-primary">ADMIN</span>
         </Link>
         <div className="flex items-center gap-4">
-          <p className="text-small truncate text-text-info">
-            관리자 {user.email}
-          </p>
           <Link href="/" className="text-text-info hover:text-primary-2">
             사이트 돌아가기
           </Link>
