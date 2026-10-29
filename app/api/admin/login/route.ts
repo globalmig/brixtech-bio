@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 
 import { loginFormSchema } from '@/lib/admin/schemas/login';
 import { getClientIp, isRateLimited } from '@/lib/rate-limit';
+import { createAdminClient } from '@/lib/supabase/admin';
 import { createClient } from '@/lib/supabase/server';
 
 const LOGIN_LIMIT = 10;
@@ -12,7 +13,7 @@ export async function POST(request: Request) {
   const parsed = loginFormSchema.safeParse(json);
   if (!parsed.success) {
     return NextResponse.json(
-      { error: parsed.error.issues[0]?.message ?? '이메일과 비밀번호를 입력해주세요.' },
+      { error: parsed.error.issues[0]?.message ?? '아이디와 비밀번호를 입력해주세요.' },
       { status: 400 }
     );
   }
@@ -25,15 +26,29 @@ export async function POST(request: Request) {
     );
   }
 
+  const admin = createAdminClient();
+  const { data: account } = await admin
+    .from('admin_accounts')
+    .select('email')
+    .eq('username', parsed.data.username)
+    .maybeSingle();
+
+  if (!account) {
+    return NextResponse.json(
+      { error: '아이디 또는 비밀번호가 올바르지 않습니다.' },
+      { status: 401 }
+    );
+  }
+
   const supabase = await createClient();
   const { error } = await supabase.auth.signInWithPassword({
-    email: parsed.data.email,
+    email: account.email,
     password: parsed.data.password,
   });
 
   if (error) {
     return NextResponse.json(
-      { error: '이메일 또는 비밀번호가 올바르지 않습니다.' },
+      { error: '아이디 또는 비밀번호가 올바르지 않습니다.' },
       { status: 401 }
     );
   }

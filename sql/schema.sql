@@ -1,8 +1,19 @@
 -- 테이블 첫 생성
 -- 브릭스텍 관리자페이지 스키마. Supabase 대시보드 > SQL Editor에서 1회 실행하세요.
--- 인증은 Supabase Auth(auth.users)를 그대로 사용하므로 별도 관리자 테이블은 두지 않습니다.
+-- 인증(비밀번호 검증)은 Supabase Auth(auth.users)를 그대로 사용합니다.
+-- admin_accounts는 "아이디 로그인" UX를 위해 username -> email만 매핑하는 테이블입니다.
 
 create extension if not exists pgcrypto;
+
+-- 관리자 아이디 매핑 ---------------------------------------------------------
+-- 비밀번호는 저장하지 않습니다. 로그인 시 username으로 email을 조회한 뒤
+-- 그 email로 Supabase Auth의 signInWithPassword를 호출해 검증합니다.
+create table if not exists admin_accounts (
+  id uuid primary key default gen_random_uuid(),
+  username text not null unique check (username ~ '^[a-z0-9_]+$'),
+  email text not null unique,
+  created_at timestamptz not null default now()
+);
 
 -- 기업 소식 ---------------------------------------------------------------
 create table if not exists news (
@@ -144,6 +155,7 @@ alter table product_features enable row level security;
 alter table product_nutrients enable row level security;
 alter table business_pages enable row level security;
 alter table business_sections enable row level security;
+alter table admin_accounts enable row level security; -- 정책 없음: Service Role(서버)만 접근
 
 create policy "public read news" on news for select using (true);
 create policy "public read videos" on videos for select using (true);
@@ -177,3 +189,9 @@ alter table business_pages add column if not exists title_en text;
 -- 이미 생성된 DB라면 sql/migrations/011_business_pages_lead_hidden.sql을
 -- Supabase SQL Editor에서 한 번만 실행하세요.
 alter table business_pages add column if not exists lead_hidden boolean not null default false;
+
+-- 마이그레이션: 관리자 로그인을 아이디/비밀번호 방식으로 변경 -----------------
+-- 이미 생성된 DB라면 sql/migrations/012_admin_accounts.sql을
+-- Supabase SQL Editor에서 한 번만 실행한 뒤, 관리자 계정 수만큼
+-- insert into admin_accounts (username, email) values ('관리자아이디', '기존 Auth 이메일')
+-- 를 직접 등록해주세요.

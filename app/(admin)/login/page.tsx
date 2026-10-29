@@ -20,7 +20,7 @@ export default function AdminLoginPage() {
     formState: { isSubmitting },
   } = useForm<LoginFormValues>({
     resolver: zodResolver(loginFormSchema),
-    defaultValues: { email: '', password: '' },
+    defaultValues: { username: '', password: '' },
   });
 
   const onSubmit = handleSubmit(async (values) => {
@@ -52,11 +52,11 @@ export default function AdminLoginPage() {
 
         <div className="flex flex-col gap-4">
           <Input
-            type="email"
-            placeholder="이메일"
+            type="text"
+            placeholder="아이디"
             autoComplete="username"
             state={submitError ? 'error' : 'default'}
-            {...register('email')}
+            {...register('username')}
           />
           <Input
             type="password"
