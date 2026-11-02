@@ -1,10 +1,35 @@
-# 홈페이지명 (기업명)
+# BRIXTECHBIO (브릭스텍바이오)
 
-> 간단 description
+> 미세조류(스피루리나) 기반 기능성 원료와 친환경 바이오 응용 제품을 개발하는 마이크로알지 바이오 플랫폼 기업의 공식 홈페이지입니다.
 
-상세 설명 (3-5줄 이내)
+브릭스텍바이오는 자체 배양 기술로 생산한 스피루리나 등 미세조류 원료를 바탕으로 건강기능식품, 화장품, 반려동물 푸드, 스마트팜 등 다양한 분야의 브랜드와 제품을 선보입니다. 이 사이트에서는 회사 소개, 보유 기술, 사업 영역, 브랜드/제품, 뉴스 및 문의 채널을 확인할 수 있습니다.
 
+## 회사 소개
 
-## 페이지명
+- [회사 소개](https://www.brixtech-bio.co.kr/about): 브릭스텍바이오 기업 개요
+- [비전](https://www.brixtech-bio.co.kr/about/vision): 기업 비전 및 목표
+- [오시는 길](https://www.brixtech-bio.co.kr/about/location): 본사/사업장 위치 안내
+- [홍보 영상](https://www.brixtech-bio.co.kr/about/video): 기업 및 제품 홍보 영상
 
-- [페이지이름](/경로): 설명
+## 기술
+
+- [배양기술](https://www.brixtech-bio.co.kr/tech): 스피루리나 소개 및 핵심 배양 기술
+- [배양 공정](https://www.brixtech-bio.co.kr/tech/cultivation): 미세조류 배양 공정 상세
+
+## 사업 영역
+
+- [사업 영역](https://www.brixtech-bio.co.kr/business): 건강기능식품, 화장품, 반려동물 푸드, 스마트팜 등 사업 카테고리별 소개
+
+## 브랜드 및 제품
+
+- [브랜드 소개](https://www.brixtech-bio.co.kr/brand): 브릭스텍바이오가 선보이는 브랜드와 제품 목록
+
+## 뉴스 및 문의
+
+- [뉴스](https://www.brixtech-bio.co.kr/news): 기업 소식 및 보도자료
+- [문의하기](https://www.brixtech-bio.co.kr/news/inquiry): 제품/사업 제휴 문의
+
+## 정책
+
+- [이용약관](https://www.brixtech-bio.co.kr/terms): 서비스 이용약관
+- [개인정보처리방침](https://www.brixtech-bio.co.kr/privacy): 개인정보 수집 및 처리 방침

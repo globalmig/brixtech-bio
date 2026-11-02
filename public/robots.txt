@@ -20,5 +20,4 @@ User-agent: Applebot-Extended
 Allow: /
 Disallow: /admin
 
-# TODO: 실제 배포 도메인으로 교체
-Sitemap: https://www.example.com/sitemap.xml
+Sitemap: https://www.brixtech-bio.co.kr/sitemap.xml
