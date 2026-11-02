@@ -1,5 +1,8 @@
 import type { Metadata } from 'next';
 
+import LocationMap from '@/components/domain/page/LocationMap';
+import { LocationMapProvider, type LocationMapTab } from '@/components/domain/page/LocationMapContext';
+import LocationMapTabButtons from '@/components/domain/page/LocationMapTabButtons';
 import PageIntro from '@/components/domain/page/PageIntro';
 import PageSection from '@/components/domain/page/PageSection';
 
@@ -8,9 +11,23 @@ export const metadata: Metadata = {
 };
 
 const SEOUL_OFFICE_ADDRESS = '서울시 강남대로 101안길 13';
-const MAP_EMBED_SRC = `https://maps.google.com/maps?q=${encodeURIComponent(
-  SEOUL_OFFICE_ADDRESS,
-)}&z=16&output=embed`;
+const LAB_ADDRESS = '전남 나주시 빛가람로 737, 203호·303호';
+
+const MAP_TABS: LocationMapTab[] = [
+  {
+    key: 'seoul',
+    label: '서울 사무소',
+    address: SEOUL_OFFICE_ADDRESS,
+    mapTitle: '브릭스텍바이오 서울 사무소 위치 지도',
+  },
+  {
+    key: 'lab',
+    label: 'Lab. 연구실',
+    address: LAB_ADDRESS,
+    mapQuery: '전남 나주시 빛가람로 737',
+    mapTitle: '브릭스텍바이오 연구실 위치 지도',
+  },
+];
 
 function SubwayIcon() {
   return (
@@ -50,25 +67,18 @@ const DIRECTIONS = [
 
 export default function AboutLocationPage() {
   return (
-    <>
+    <LocationMapProvider tabs={MAP_TABS}>
       <PageIntro eyebrow="ABOUT" title="오시는길" />
 
-      <div className="relative h-80 w-full overflow-hidden bg-gray-100 md:h-112 lg:h-128">
-        <iframe
-          src={MAP_EMBED_SRC}
-          title="브릭스텍바이오 서울 사무소 위치 지도"
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-          className="h-full w-full border-0"
-        />
-      </div>
+      <LocationMap />
 
       <div className="mx-auto w-full max-w-360 px-[3%] pt-10 pb-15 canvas:px-0 canvas:pt-15 canvas:pb-30">
         <PageSection>
           <div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:gap-16">
-            <h2 className="text-[2rem] shrink-0 font-bold lg:w-60">
-              브릭스텍바이오
-            </h2>
+            <div className="flex shrink-0 flex-col gap-6 lg:w-60">
+              <h2 className="text-[2rem] font-bold">브릭스텍바이오</h2>
+              <LocationMapTabButtons />
+            </div>
 
             <div className="flex flex-1 flex-col gap-8">
               <div className="flex flex-col gap-4 sm:flex-row sm:gap-6">
@@ -114,6 +124,6 @@ export default function AboutLocationPage() {
           </div>
         </PageSection>
       </div>
-    </>
+    </LocationMapProvider>
   );
 }

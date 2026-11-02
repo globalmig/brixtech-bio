@@ -32,6 +32,9 @@ export default async function BrandProductsPage({
             ← 브랜드 목록으로 이동
           </Link>
           <h1 className="text-h3 mt-6">{brand.name} 제품 관리</h1>
+          <p className="text-text-info mt-1 text-sm">
+            {brand.name} 브랜드에 등록된 제품 목록입니다. 드래그하여 노출 순서를 변경할 수 있습니다.
+          </p>
         </div>
         <Button
           render={<Link href={`/admin/brands/${id}/products/new`} />}

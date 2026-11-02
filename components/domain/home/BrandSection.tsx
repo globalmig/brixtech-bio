@@ -13,6 +13,7 @@ import 'slick-carousel/slick/slick-theme.css';
 const Slider = dynamic(() => import('react-slick'), { ssr: false });
 
 const SLIDE_INTERVAL_MS = 4000;
+const SLIDE_TRANSITION_MS = 700;
 
 function ArrowRightIcon({ className = 'text-text-default' }: { className?: string }) {
   return (
@@ -34,16 +35,39 @@ function ArrowRightIcon({ className = 'text-text-default' }: { className?: strin
 }
 
 export default function BrandSection() {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const productCount = BRAND_SHOWCASE_PRODUCT.length;
+  const pcTrackSlides = [...BRAND_SHOWCASE_PRODUCT, BRAND_SHOWCASE_PRODUCT[0]];
+
+  const [trackIndex, setTrackIndex] = useState(0);
+  const [trackTransitionEnabled, setTrackTransitionEnabled] = useState(true);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % BRAND_SHOWCASE_PRODUCT.length);
+      setTrackIndex((prev) => prev + 1);
     }, SLIDE_INTERVAL_MS);
 
     return () => clearInterval(timer);
   }, []);
 
+  useEffect(() => {
+    if (trackIndex !== productCount) return;
+
+    const timeout = setTimeout(() => {
+      setTrackTransitionEnabled(false);
+      setTrackIndex(0);
+    }, SLIDE_TRANSITION_MS);
+
+    return () => clearTimeout(timeout);
+  }, [trackIndex, productCount]);
+
+  useEffect(() => {
+    if (trackTransitionEnabled) return;
+
+    const raf = requestAnimationFrame(() => setTrackTransitionEnabled(true));
+    return () => cancelAnimationFrame(raf);
+  }, [trackTransitionEnabled]);
+
+  const activeIndex = trackIndex % productCount;
   const product = BRAND_SHOWCASE_PRODUCT[activeIndex];
 
   return (
@@ -78,12 +102,12 @@ export default function BrandSection() {
             infinite
             autoplay
             autoplaySpeed={SLIDE_INTERVAL_MS}
-            speed={600}
+            speed={1000}
             pauseOnHover={false}
           >
             {BRAND_SHOWCASE_PRODUCT.map((item, index) => (
               <div key={`mo-slide-${index}`}>
-                <div className="relative aspect-4/5 w-full overflow-hidden">
+                <div className="relative aspect-4/6 w-full overflow-hidden">
                   <Image
                     src={item.image}
                     alt={item.name}
@@ -138,17 +162,33 @@ export default function BrandSection() {
           </div>
 
           <div className="flex items-end gap-5">
-            <div
-              key={`pc-image-${activeIndex}`}
-              className="relative h-180 w-138 shrink-0 overflow-hidden"
-            >
-              <Image
-                src={product.image}
-                alt={product.name}
-                fill
-                sizes="600px"
-                className="object-bottom object-cover"
-              />
+            <div className="relative h-180 w-138 shrink-0 overflow-hidden">
+              <div
+                className="flex h-full"
+                style={{
+                  width: `${pcTrackSlides.length * 100}%`,
+                  transform: `translateX(-${trackIndex * (100 / pcTrackSlides.length)}%)`,
+                  transition: trackTransitionEnabled
+                    ? `transform ${SLIDE_TRANSITION_MS}ms ease-in-out`
+                    : 'none',
+                }}
+              >
+                {pcTrackSlides.map((item, index) => (
+                  <div
+                    key={`pc-track-${index}`}
+                    className="relative h-full shrink-0"
+                    style={{ width: `${100 / pcTrackSlides.length}%` }}
+                  >
+                    <Image
+                      src={item.image}
+                      alt={item.name}
+                      fill
+                      sizes="600px"
+                      className="object-bottom object-cover"
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
             <div key={`pc-info-${activeIndex}`} className="w-fit shrink-0">
               <p className="text-small text-black mb-1 font-bold">

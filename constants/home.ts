@@ -111,21 +111,9 @@ export const BRAND_SHOWCASE_PRODUCT = [
   description: '반려동물의 건강을 위한\n프리미엄 기능성 펫푸드',
 },
  {
-  image: '/images/home-brand-banner-2-mo.png',
-  brand: 'Spione',
-  name: 'DOG oneshot',
-  description: '반려동물의 건강을 위한\n프리미엄 기능성 펫푸드',
-},
- {
-  image: '/images/home-brand-banner-2-mo.png',
-  brand: 'Spione',
-  name: 'DOG oneshot',
-  description: '반려동물의 건강을 위한\n프리미엄 기능성 펫푸드',
-},
- {
-  image: '/images/home-brand-banner-2-mo.png',
-  brand: 'Spione',
-  name: 'DOG oneshot',
-  description: '반려동물의 건강을 위한\n프리미엄 기능성 펫푸드',
+  image: '/images/home-brand-banner-1-mo.png',
+  brand: '生',
+  name: '스피루리나 농축액',
+  description: '우리 농산물로 만들어\n더 건강한 농축액',
 },
 ];
