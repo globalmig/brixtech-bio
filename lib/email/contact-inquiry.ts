@@ -88,11 +88,6 @@ export function buildContactInquiryEmail(data: ContactInquiryData) {
             <div style="padding:20px;background:${COLOR_GRAY_50};border:1px solid ${COLOR_GRAY_300};border-radius:12px;font-size:14px;line-height:1.7;color:#171717;white-space:pre-wrap;">${contentHtml}</div>
           </td>
         </tr>
-        <tr>
-          <td style="padding:16px 32px 28px;border-top:1px solid ${COLOR_GRAY_300};">
-            <p style="margin:0;font-size:12px;color:#a0a0a0;">이 메일에 회신하면 고객의 이메일(${escapeHtml(data.email)})로 바로 전송됩니다.</p>
-          </td>
-        </tr>
       </table>
     </body>
   </html>
