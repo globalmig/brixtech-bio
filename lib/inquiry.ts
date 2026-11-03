@@ -85,9 +85,9 @@ export async function submitInquiry(
     return { error: '개인정보 수집 및 이용에 동의해주세요.', values };
   }
 
-  const receiver = process.env.EMAIL_USER;
+  const receiver = process.env.RECEIVER_EMAIL;
   if (!receiver) {
-    console.error('EMAIL_USER 환경변수가 설정되지 않았습니다.');
+    console.error('RECEIVER_EMAIL 환경변수가 설정되지 않았습니다.');
     return { error: '메일 전송에 실패했습니다. 잠시 후 다시 시도해주세요.', values };
   }
 
@@ -100,10 +100,8 @@ export async function submitInquiry(
     content,
   });
 
-  // TODO: 이메일 생성 후, 브릭스텍 메일 주소 변경
-  // 도메인 구매 후 DNS 인증해서 EMAIL_USER 도 변경
   const { error } = await getResendClient().emails.send({
-    from: 'BRIXTECHBIO <onboarding@resend.dev>',
+    from: 'BRIXTECHBIO <admin@brixtech-bio.co.kr>',
     to: [receiver],
     replyTo: email,
     subject,
