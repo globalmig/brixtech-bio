@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     type: 'website',
   },
   other: {
-    'naver-site-verification': 'search- advider',
+    'naver-site-verification': 'f522bb90e196439746e7d5147578d0f1d9a1fa8e',
   }
 };
 
