@@ -75,7 +75,7 @@ export default function Footer() {
             Lab. 연구실: 전남 나주시 빛가람로 737, 203호·303호
           </li>
           <li className="text-small text-white/40">
-            대표자: 김선영 · 사업자등록번호: 858-81-04141 · 이메일: ryanpae@naver.com
+            대표자: 김선영 · 사업자등록번호: 858-81-04141 · 이메일: admin@brixtech-bio.co.kr
           </li>
         </ul>
 
