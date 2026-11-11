@@ -38,7 +38,7 @@ export default async function BrandDetailPage({ params }: BrandDetailPageProps) 
       <div className="relative flex flex-col items-center justify-center px-5 py-20 text-center lg:py-32">
         <Image
           src={brand.bannerImage}
-          alt=""
+          alt={brand.name}
           fill
           sizes="100vw"
           className="object-cover"

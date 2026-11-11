@@ -83,7 +83,7 @@ export default function TechCultivationPage() {
         title={'브릭스텍바이오의 독자 배양 기술'}
         description="외부 오염원을 완벽히 차단하는 밀폐형 광생물반응기를 기반으로 고순도·고품질의 마이크로 알지를 안정적으로 생산합니다. 설비 구조를 단순화·소형화해 초기 투자 비용과 운영비를 대폭 절감한 브릭스텍바이오만의 배양 시스템입니다."
         imageAlt="밀폐형 배양 시스템 이미지"
-        imageSrc='/images/tech/cultivation-banner.png'
+        imageSrc='/images/tech/cultivation-banner.webp'
       />
 
       <div className="mx-auto w-full max-w-360 px-[3%] py-15 canvas:px-0 canvas:py-30 lg:pb-10">
@@ -113,7 +113,7 @@ export default function TechCultivationPage() {
 
           <div className="relative aspect-[745.06/880.43] w-full lg:w-150 overflow-hidden bg-gray-100">
             <Image
-              src="/images/tech/closed-cultivation-system.png"
+              src="/images/tech/closed-cultivation-system.webp"
               alt="브릭스텍바이오 밀폐형 배양 시스템"
               fill
               sizes="(min-width: 1024px) 55vw, 100vw"
@@ -135,7 +135,7 @@ export default function TechCultivationPage() {
         <ImageCompareCards
           items={[
             {
-              image:'/images/tech/open-raceway-pond.png',
+              image:'/images/tech/open-raceway-pond.webp',
               title: '개방형 레이스웨이 폰드',
               rows: [
                 '초기 설비 투자 비용 낮음',
@@ -147,7 +147,7 @@ export default function TechCultivationPage() {
               ],
             },
             {
-              image:'/images/tech/closed-photobioreactor.png',
+              image:'/images/tech/closed-photobioreactor.webp',
               title: '밀폐형 광생물반응기 (브릭스텍바이오)',
               rows: [
                 '초기 설비 투자 비용 높음',
@@ -171,7 +171,7 @@ export default function TechCultivationPage() {
         <ImageCompareCards
           items={[
             {
-              image: '/images/tech/cultivation-facility-issues.png',
+              image: '/images/tech/cultivation-facility-issues.webp',
               title: '기존 국내(나주시 소재) 배양 설비의 문제점',
               description: [
                 <>
@@ -193,7 +193,7 @@ export default function TechCultivationPage() {
               ],
             },
             {
-              image: '/images/tech/compact-cultivation-module.png',
+              image: '/images/tech/compact-cultivation-module.webp',
               title: '초기 설비 구축 비용 대폭 절감',
               description: [
                 <>농업, 축산업, 수산업 등 1차 산업에 직접 적용을 위한</>,

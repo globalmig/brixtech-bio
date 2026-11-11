@@ -59,7 +59,7 @@ export default function AdminNewsList({ newsList }: AdminNewsListProps) {
               icon={
                 <Image
                   src="/icons/search.svg"
-                  alt=""
+                  alt="검색"
                   width={16}
                   height={16}
                   aria-hidden

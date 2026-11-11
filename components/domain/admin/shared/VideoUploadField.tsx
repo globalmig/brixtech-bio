@@ -179,7 +179,7 @@ export default function VideoUploadField({
             {thumbnailUrl ? (
               <Image
                 src={thumbnailUrl}
-                alt=""
+                alt="대표 이미지"
                 fill
                 sizes="80px"
                 className="object-cover"

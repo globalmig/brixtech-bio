@@ -20,7 +20,7 @@ export default function AboutPage() {
         title={'미세조류에서 시작해\n지속가능한 바이오 산업을 만들어갑니다.'}
         description="브릭스텍바이오는 미세조류 기반 기능성 원료와 친환경 바이오 응용 제품을 개발합니다."
         imageAlt="배양 현장 또는 미세조류 클로즈업 사진"
-        imageSrc='/images/about/about-banner.png'
+        imageSrc='/images/about/about-banner.webp'
       />
 
       <div className="mx-auto w-full max-w-360 px-[3%] py-15 canvas:px-0 canvas:py-30 lg:pb-10">
@@ -54,7 +54,7 @@ export default function AboutPage() {
 
           <div className="relative aspect-[745.06/880.43] w-full lg:w-150 overflow-hidden bg-gray-100">
             <Image
-              src="/images/about/company.png"
+              src="/images/about/company.webp"
               alt="브릭스텍바이오 인사말"
               fill
               sizes="(min-width: 1024px) 55vw, 100vw"

@@ -50,7 +50,7 @@ export default function TechPage() {
               보이지 않으며, 알칼리성 염호에서 자생합니다. 1927년 독일 과학자에 의해 처음
               명명되었습니다."
               imageAlt="스피루리나 이미지"
-              imageSrc='/images/tech/tech-spirulina-banner2.png'
+              imageSrc='/images/tech/tech-spirulina-banner2.webp'
             />
 
         <section className="mx-auto w-full max-w-360 px-[3%] py-15 canvas:px-0 lg:pt-30">
@@ -122,7 +122,7 @@ export default function TechPage() {
 
             <div className="absolute top-1/2 left-1/2 aspect-square w-[30%] -translate-x-1/2 -translate-y-1/2">
               <Image
-                src="/images/tech/nutrition-ingredients.png"
+                src="/images/tech/nutrition-ingredients.webp"
                 alt="스피루리나 영양 성분 제품 이미지"
                 fill
                 sizes="340px"
@@ -164,7 +164,7 @@ export default function TechPage() {
           <div className="lg:hidden">
             <div className="relative mx-auto mb-10 aspect-square w-full max-w-64">
               <Image
-                src="/images/tech/nutrition-ingredients.png"
+                src="/images/tech/nutrition-ingredients.webp"
                 alt="스피루리나 영양 성분 제품 이미지"
                 fill
                 sizes="256px"

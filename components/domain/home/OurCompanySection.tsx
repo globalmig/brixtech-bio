@@ -38,7 +38,7 @@ export default function OurCompanySection() {
 
           <div className="shrink-0 lg:flex-[1.7]">
             <Image
-              src="/images/home-innovation.png"
+              src="/images/home-innovation.webp"
               alt="BIO INNOVATION"
               width={800}
               height={1000}

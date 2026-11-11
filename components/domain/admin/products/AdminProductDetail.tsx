@@ -101,7 +101,7 @@ export default function AdminProductDetail({
             {product.image ? (
               <Image
                 src={product.image}
-                alt=""
+                alt={product.name}
                 fill
                 sizes="160px"
                 className="object-cover"

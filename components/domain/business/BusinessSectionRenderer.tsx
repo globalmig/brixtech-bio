@@ -148,7 +148,7 @@ export default function BusinessSectionRenderer({
         <div className="relative mb-6 aspect-video w-full overflow-hidden rounded-2xl">
           <Image
             src={section.image}
-            alt=""
+            alt="이미지"
             fill
             sizes="(min-width: 1024px) 800px, 100vw"
             className="object-cover"

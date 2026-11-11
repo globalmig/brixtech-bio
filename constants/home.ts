@@ -1,6 +1,6 @@
 export const HERO_SLIDES = [
-  '/images/main-banner-1.png',
-  '/images/main-banner-2.png',
+  '/images/main-banner-1.webp',
+  '/images/main-banner-2.webp',
 ];
 
 export const COMPANY_STATS = [
@@ -62,7 +62,7 @@ export const PROCESS_STEPS = [
 
 export const BUSINESS_CATEGORIES = [
   {
-    image: '/images/건강기능식품2.png',
+    image: '/images/건강기능식품2.webp',
     icon: '/icons/value-health.svg',
     label: 'HEALTH SUPPLEMENTS',
     title: '건강기능식품',
@@ -70,7 +70,7 @@ export const BUSINESS_CATEGORIES = [
     href: '/business/supplements',
   },
   {
-    image: '/images/화장품2.png',
+    image: '/images/화장품2.webp',
     icon: '/icons/value-cosmetics.svg',
     label: 'COSMETICS',
     title: '화장품',
@@ -78,7 +78,7 @@ export const BUSINESS_CATEGORIES = [
     href: '/business/cosmetics',
   },
   {
-    image: '/images/반려동물식품2.png',
+    image: '/images/반려동물식품2.webp',
     icon: '/icons/value-petfood.svg',
     label: 'PET FOOD',
     title: '반려동물 푸드',
@@ -86,7 +86,7 @@ export const BUSINESS_CATEGORIES = [
     href: '/business/pet-food',
   },
   {
-    image: '/images/공기정화기2.png',
+    image: '/images/공기정화기2.webp',
     icon: '/icons/value-air.svg',
     label: 'AIR PURIFICATION',
     title: '공기정화기',
@@ -94,7 +94,7 @@ export const BUSINESS_CATEGORIES = [
     href: '/business/air-purification',
   },
   {
-    image: '/images/스마트팜2.png',
+    image: '/images/스마트팜2.webp',
     icon: '/icons/value-smartfarm.svg',
     label: 'SMART FARM',
     title: '스마트팜',
@@ -105,13 +105,13 @@ export const BUSINESS_CATEGORIES = [
 
 export const BRAND_SHOWCASE_PRODUCT = [
   {
-  image: '/images/home-brand-banner-2-mo.png',
+  image: '/images/home-brand-banner-2-mo.webp',
   brand: 'Spione',
   name: 'DOG oneshot',
   description: '반려동물의 건강을 위한\n프리미엄 기능성 펫푸드',
 },
  {
-  image: '/images/home-brand-banner-1-mo.png',
+  image: '/images/home-brand-banner-1-mo.webp',
   brand: '生',
   name: '스피루리나 농축액',
   description: '우리 농산물로 만들어\n더 건강한 농축액',

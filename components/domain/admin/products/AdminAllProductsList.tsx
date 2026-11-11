@@ -76,7 +76,7 @@ function ProductRow({ brand, product, onDelete, onSetActive }: ProductRowProps) 
         {product.image ? (
           <Image
             src={product.image}
-            alt=""
+            alt={product.name}
             fill
             sizes="48px"
             className="object-cover"
@@ -161,7 +161,7 @@ export default function AdminAllProductsList({
               icon={
                 <Image
                   src="/icons/search.svg"
-                  alt=""
+                  alt="검색"
                   width={16}
                   height={16}
                   aria-hidden

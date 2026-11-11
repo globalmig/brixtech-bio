@@ -35,7 +35,7 @@ function DropdownTrigger({
       <SelectPrimitive.Icon className="flex shrink-0 transition-transform group-data-popup-open/dropdown:rotate-180">
         <Image
           src="/icons/chevron-down.svg"
-          alt=""
+          alt="아이콘"
           width={20}
           height={20}
           aria-hidden

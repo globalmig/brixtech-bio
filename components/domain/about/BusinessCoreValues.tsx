@@ -9,24 +9,24 @@ const AUTOPLAY_INTERVAL = 3000;
 
 const BACKGROUND_IMAGES = [
   {
-    desktop: '/images/about/about-health.png',
-    mobile: '/images/about/about-health-mo.png',
+    desktop: '/images/about/about-health.webp',
+    mobile: '/images/about/about-health-mo.webp',
   },
   {
-    desktop: '/images/about/about-cosmetics.png',
-    mobile: '/images/about/about-cosmetics-mo.png',
+    desktop: '/images/about/about-cosmetics.webp',
+    mobile: '/images/about/about-cosmetics-mo.webp',
   },
   {
-    desktop: '/images/about/about-pet-food.png',
-    mobile: '/images/about/about-pet-food-mo.png',
+    desktop: '/images/about/about-pet-food.webp',
+    mobile: '/images/about/about-pet-food-mo.webp',
   },
   {
-    desktop: '/images/about/about-air.png',
-    mobile: '/images/about/about-air-mo.png',
+    desktop: '/images/about/about-air.webp',
+    mobile: '/images/about/about-air-mo.webp',
   },
   {
-    desktop: '/images/about/about-smart-farm.png',
-    mobile: '/images/about/about-smart-farm-mo.png',
+    desktop: '/images/about/about-smart-farm.webp',
+    mobile: '/images/about/about-smart-farm-mo.webp',
   },
 ];
 

@@ -99,7 +99,7 @@ export default function ImageUploadField({
         <div className="flex items-center gap-3">
           <Image
             src={url}
-            alt=""
+            alt="파일 업로드"
             width={80}
             height={80}
             className="size-20 shrink-0 rounded-lg border border-gray-350 bg-gray-50 object-contain"

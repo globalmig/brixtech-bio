@@ -100,7 +100,7 @@ function BrandRow({ brand, draggable, onDelete }: BrandRowProps) {
           {brand.logo ? (
             <Image
               src={brand.logo}
-              alt=""
+              alt={brand.name}
               fill
               sizes="48px"
               className="object-contain"
@@ -202,7 +202,7 @@ export default function AdminBrandList({ brands }: AdminBrandListProps) {
               icon={
                 <Image
                   src="/icons/search.svg"
-                  alt=""
+                  alt="검색"
                   width={16}
                   height={16}
                   aria-hidden

@@ -99,7 +99,7 @@ export default function AdminVideoList({ videoList }: AdminVideoListProps) {
               icon={
                 <Image
                   src="/icons/search.svg"
-                  alt=""
+                  alt="검색"
                   width={16}
                   height={16}
                   aria-hidden
