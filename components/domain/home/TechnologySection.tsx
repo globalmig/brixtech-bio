@@ -47,7 +47,7 @@ export default function TechnologySection() {
             <p className="text-small text-black mb-4 flex items-center gap-3 font-bold lg:mb-8">
               TECHNOLOGY
             </p>
-            <h2 className="text-h4 text-black mb-5 whitespace-pre-line lg:text-h2">
+            <h2 id="home-technology" className="text-h4 text-black mb-5 whitespace-pre-line lg:text-h2">
               {'마이크로 알지 배양 기술을\n사업의 출발점으로'}
             </h2>
             <p className="text-body mb-10 lg:mb-25">
@@ -69,7 +69,7 @@ export default function TechnologySection() {
                   {String(index + 1).padStart(2, '0')}
                 </span>
                 <div className={`select-none transition-all duration-1000 ease-out ${visible && activeIndex === index ? 'translate-x-4 pt-5' : 'translate-x-0 pt-0'}`}>
-                  <h3 className={"text-h5 lg:text-h4 text-black mb-2"}>{step.title}</h3>
+                  <h3 id={`home-technology-step-${index + 1}`} className={"text-h5 lg:text-h4 text-black mb-2"}>{step.title}</h3>
                   <p className="text-small lg:text-base text-black/50">
                     {step.label}
                   </p>

@@ -169,4 +169,5 @@ export interface BusinessPage {
   /** 관리자 목록과 헤더 BUSINESS 하위 메뉴에서의 노출 순서 (오름차순) */
   sortOrder: number;
   sections: BusinessSection[];
+  updatedAt: string;
 }

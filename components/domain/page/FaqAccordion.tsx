@@ -87,7 +87,7 @@ export default function FaqAccordion({
         <Accordion.Root className="divide-gray-300 border-gray-300 divide-y border-y">
           {pagedItems.map((item) => (
             <Accordion.Item key={item.id} value={item.id}>
-              <Accordion.Header>
+              <Accordion.Header id={`faq-item-${item.id}`}>
                 <Accordion.Trigger className="group flex w-full cursor-pointer items-center justify-between gap-4 py-3.75 text-left lg:py-7">
                   <span className="text-text-default lg:text-[1.2rem] font-semibold">
                     <span className="text-text-disabled mr-1.5 font-normal">Q.</span>

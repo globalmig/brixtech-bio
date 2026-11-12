@@ -9,7 +9,7 @@ export default function ContactSection() {
           <p className="text-small mb-6 font-bold lg:mb-10">
             CONTACT
           </p>
-          <h2 className="text-h4 mb-5 lg:text-h2">
+          <h2 id="home-contact" className="text-h4 mb-5 lg:text-h2">
             미세조류 바이오 기술 및 <br/>사업 협력에 대해 문의주세요.
           </h2>
           <p className="text-[1rem] text-black/50 mb-10">

@@ -12,7 +12,7 @@ export default async function NewsSection() {
       <p className="text-small text-black mb-4 font-bold lg:mb-8">
         NEWS
       </p>
-      <h2 className="text-h4 text-black mb-10 whitespace-pre-line lg:mb-20 lg:text-h2">
+      <h2 id="home-news" className="text-h4 text-black mb-10 whitespace-pre-line lg:mb-20 lg:text-h2">
         {'브릭스텍바이오의\n새로운 소식을 전합니다.'}
       </h2>
 

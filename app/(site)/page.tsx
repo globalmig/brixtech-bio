@@ -1,3 +1,4 @@
+import AosInit from '@/components/common/AosInit';
 import BrandSection from '@/components/domain/home/BrandSection';
 import BusinessSection from '@/components/domain/home/BusinessSection';
 import ContactSection from '@/components/domain/home/ContactSection';
@@ -10,6 +11,7 @@ import TechnologySection from '@/components/domain/home/TechnologySection';
 export default function HomePage() {
   return (
     <>
+      <AosInit />
       <HeroSection />
       <OurCompanySection />
       <ProductSection />

@@ -33,13 +33,16 @@ interface ProductRow {
   is_active: boolean;
   product_features: ProductFeatureRow[];
   product_nutrients: ProductNutrientRow[];
+  created_at: string;
+  updated_at: string;
 }
 
 const SELECT_COLUMNS = `
   id, brand_id, slug, name, thumbnail, description,
   weight, feeding_target, recommended_target, ingredients, is_active,
   product_features ( label, sort_order ),
-  product_nutrients ( label, value, sort_order )
+  product_nutrients ( label, value, sort_order ),
+  created_at, updated_at
 `;
 
 function pairNutrients(
@@ -92,6 +95,8 @@ function fromRow(row: ProductRow): BrandProduct {
     ingredients: row.ingredients ?? '',
     nutrients: pairNutrients(row.product_nutrients),
     isActive: row.is_active,
+    createdAt: row.created_at,
+    updatedAt: row.updated_at,
   };
 }
 

@@ -5,9 +5,13 @@ import ImageCompareCards from '@/components/domain/page/ImageCompareCards';
 import PageIntro from '@/components/domain/page/PageIntro';
 import TechExpansionSection from '@/components/domain/page/TechExpansionSection';
 import HeroBanner from '@/components/domain/page/HeroBanner';
+import BreadcrumbJsonLd from '@/components/common/BreadcrumbJsonLd';
 
 export const metadata: Metadata = {
   title: '배양 기술 | BRIXTECHBIO',
+  alternates: {
+    canonical: '/tech/cultivation',
+  },
 };
 
 const PRODUCTION_STAGES = [
@@ -73,12 +77,20 @@ const EXPANSION_GOALS = [
 export default function TechCultivationPage() {
   return (
     <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: '홈', path: '/' },
+          { name: '스피루리나 소개', path: '/tech' },
+          { name: '배양 기술', path: '/tech/cultivation' },
+        ]}
+      />
       <PageIntro
         eyebrow="TECH"
         title="배양 기술"
       />
 
       <HeroBanner
+        id="hero-cultivation"
         eyebrow="CULTIVATION"
         title={'브릭스텍바이오의 독자 배양 기술'}
         description="외부 오염원을 완벽히 차단하는 밀폐형 광생물반응기를 기반으로 고순도·고품질의 마이크로 알지를 안정적으로 생산합니다. 설비 구조를 단순화·소형화해 초기 투자 비용과 운영비를 대폭 절감한 브릭스텍바이오만의 배양 시스템입니다."
@@ -90,7 +102,7 @@ export default function TechCultivationPage() {
         <section className="flex flex-col gap-10 lg:flex-row lg:justify-between lg:gap-16">
           <div className="lg:w-[42%] lg:shrink-0">
             <p className="text-small text-black mb-4 font-bold lg:mb-8">TECHNOLOGY</p>
-            <h2 className="text-h4 lg:text-h2 text-black mb-5">독자 배양 기술</h2>
+            <h2 id="cultivation-technology" className="text-h4 lg:text-h2 text-black mb-5">독자 배양 기술</h2>
 
             <div className="flex flex-col gap-6">
               <p>
@@ -125,7 +137,7 @@ export default function TechCultivationPage() {
 
       <section className="mx-auto w-full max-w-360 px-[3%] py-10 canvas:px-0 lg:py-12">
         <p className="text-small text-black mb-5 font-bold">COMPARISON</p>
-        <h2 className="text-h4 lg:text-h2 text-black mb-5">배양 방식 비교</h2>
+        <h2 id="cultivation-comparison" className="text-h4 lg:text-h2 text-black mb-5">배양 방식 비교</h2>
         <p className="text-body mb-10 lg:mb-20 max-w-2xl">
           전 세계 마이크로 알지의 83% 이상이 개방형 방식으로 생산되지만, 브릭스텍바이오는
           고순도·고부가가치 원료 생산을 위해 밀폐형 방식을 채택했습니다. 외부 오염원으로부터
@@ -164,7 +176,7 @@ export default function TechCultivationPage() {
 
       <section className="mx-auto w-full max-w-360 px-[3%] py-10 canvas:px-0 canvas:py-30">
         <p className="text-small text-black mb-5 font-bold">FACILITY</p>
-        <h2 className="text-h4 lg:text-h2 text-black mb-5">보급형 미세조류 생산설비</h2>
+        <h2 id="cultivation-facility" className="text-h4 lg:text-h2 text-black mb-5">보급형 미세조류 생산설비</h2>
         <p className="text-body mb-10 lg:mb-20 max-w-2xl">
           식품·비료·사료용 미세조류 생산에 맞춰 배양 공정을 단순화·소형화한 보급형 설비입니다.
         </p>
@@ -216,7 +228,7 @@ export default function TechCultivationPage() {
       <div className="bg-[#F6F9EF]">
         <section className="mx-auto w-full max-w-360 px-[3%] py-15 canvas:px-0 canvas:py-30">
           <p className="text-small text-black mb-4 font-bold lg:mb-8">PRODUCTION</p>
-          <h2 className="text-h4 lg:text-h2 text-black mb-5">기술에서 생산으로</h2>
+          <h2 id="cultivation-to-production" className="text-h4 lg:text-h2 text-black mb-5">기술에서 생산으로</h2>
           <p className="text-body mb-10 lg:mb-20">
             독자적인 배양 기술은 종균 배양부터 대량배양, 수확·농축·건조, 원료화까지 이어지는
             4단계 생산 체계로 완성됩니다.

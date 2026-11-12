@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 
 interface HeroBannerProps {
+  id?: string;
   eyebrow: string;
   title: string;
   description?: string;
@@ -11,6 +12,7 @@ interface HeroBannerProps {
 }
 
 export default function HeroBanner({
+  id,
   eyebrow,
   title,
   description,
@@ -35,7 +37,7 @@ export default function HeroBanner({
         <p className="text-small mb-4 font-bold text-white uppercase">
           {eyebrow}
         </p>
-        <h2 className="text-h4 lg:text-h1 mb-5 font-bold whitespace-pre-line text-white">
+        <h2 id={id} className="text-h4 lg:text-h1 mb-5 font-bold whitespace-pre-line text-white">
           {title}
         </h2>
         {description ? (

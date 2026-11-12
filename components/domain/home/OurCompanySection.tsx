@@ -18,7 +18,7 @@ export default function OurCompanySection() {
         <p className="text-small text-black mb-4 flex items-center gap-3 font-bold lg:mb-8">
           OUR COMPANY
         </p>
-        <h2 className="text-h4 text-black mb-5 whitespace-pre-line lg:text-h2">
+        <h2 id="home-our-company" className="text-h4 text-black mb-5 whitespace-pre-line lg:text-h2">
           {'미세조류에서 시작해\n지속가능한 바이오 산업을 만들어갑니다.'}
         </h2>
         <p className="text-body mb-10 lg:mb-20">
@@ -30,7 +30,7 @@ export default function OurCompanySection() {
       <div className="mt-20 w-full lg:mt-40">
         <div className="flex flex-col gap-10 lg:flex-row lg:items-stretch lg:gap-8">
           <div className="px-[4%] md:px-8 lg:hidden">
-            <h3 className="text-h4 text-black mb-2">BIO INNOVATION</h3>
+            <h3 id="bio-innovation-mobile" className="text-h4 text-black mb-2">BIO INNOVATION</h3>
             <p className="text-small text-gray-750">
               미세조류의 특성과 활용 가능성을 바탕으로 건강과 환경을 아우르는 다양한 바이오 응용 분야를 탐색합니다.
             </p>
@@ -48,7 +48,7 @@ export default function OurCompanySection() {
 
           <div className="flex min-w-0 flex-col gap-10 lg:flex-3 lg:gap-0">
             <div className="hidden px-[4%] md:px-8 lg:block lg:px-0">
-              <h3 className="text-h4 text-black mb-2 lg:mb-4">
+              <h3 id="bio-innovation-desktop" className="text-h4 text-black mb-2 lg:mb-4">
                 BIO INNOVATION
               </h3>
               <p className="text-small text-gray-750 lg:text-base">
@@ -60,7 +60,7 @@ export default function OurCompanySection() {
 
             <div className="flex flex-col gap-4 lg:mt-32 lg:flex-row lg:items-end lg:gap-8">
               <div className="min-w-0 px-[4%] md:px-8 lg:flex-1 lg:px-0 lg:text-right">
-                <h3 className="text-h4 text-black mb-2 lg:mb-4">
+                <h3 id="home-spirulina" className="text-h4 text-black mb-2 lg:mb-4">
                   SPIRULINA
                 </h3>
                 <p className="text-small text-gray-750 lg:text-base">

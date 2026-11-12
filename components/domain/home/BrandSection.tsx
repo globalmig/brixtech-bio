@@ -78,7 +78,7 @@ export default function BrandSection() {
             <p className="text-small mb-4 font-bold">
               BRAND & PRODUCTS
             </p>
-            <h2 className="text-h4 mb-5 lg:text-h2">
+            <h2 id="brand-highlight-mobile" className="text-h4 mb-5 lg:text-h2">
               우리의 일상에 더해지는
               <br />
               건강한 변화
@@ -140,7 +140,7 @@ export default function BrandSection() {
             <p className="text-small text-black mb-4 font-bold lg:mb-8">
               BRAND & PRODUCTS
             </p>
-            <h2 className="text-h3 text-black mb-5 lg:text-h1">
+            <h2 id="brand-highlight-desktop" className="text-h3 text-black mb-5 lg:text-h1">
               우리의 일상에 더해지는
               <br />
               건강한 변화

@@ -1,9 +1,13 @@
 import type { Metadata } from 'next';
 
 import PageIntro from '@/components/domain/page/PageIntro';
+import BreadcrumbJsonLd from '@/components/common/BreadcrumbJsonLd';
 
 export const metadata: Metadata = {
   title: '개인정보처리방침 | BRIXTECHBIO',
+  alternates: {
+    canonical: '/privacy',
+  },
 };
 
 type PrivacyClause = {
@@ -178,6 +182,7 @@ const CLAUSES: PrivacyClause[] = [
 export default function PrivacyPolicyPage() {
   return (
     <>
+      <BreadcrumbJsonLd items={[{ name: '홈', path: '/' }, { name: '개인정보처리방침', path: '/privacy' }]} />
       <PageIntro eyebrow="POLICY" title="개인정보처리방침" />
 
       <div className="mx-auto w-full max-w-360 px-[3%] py-15 canvas:px-0 canvas:py-30">
@@ -190,9 +195,9 @@ export default function PrivacyPolicyPage() {
           </p>
 
           <div className="mt-10 flex flex-col divide-y divide-gray-300">
-            {CLAUSES.map((clause) => (
+            {CLAUSES.map((clause, index) => (
               <section key={clause.title} className="py-8">
-                <h2 className="text-h5 lg:text-h4 mb-4 font-bold text-black">
+                <h2 id={`privacy-clause-${index + 1}`} className="text-h5 lg:text-h4 mb-4 font-bold text-black">
                   {clause.title}
                 </h2>
                 <div className="text-[1rem] leading-7 text-gray-750">{clause.body}</div>

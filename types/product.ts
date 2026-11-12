@@ -27,6 +27,8 @@ export interface BrandProduct {
   nutrients: [BrandProductNutrient, BrandProductNutrient | null][];
   /** false면 실제 사이트에서 숨겨집니다(관리자 화면에서는 계속 보이고 편집 가능). */
   isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export type ProductStatus = 'active' | 'coming-soon';

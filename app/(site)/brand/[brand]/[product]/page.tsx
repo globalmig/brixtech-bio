@@ -6,7 +6,11 @@ import CheckList from '@/components/domain/page/CheckList';
 import InfoTable from '@/components/domain/page/InfoTable';
 import PageIntro from '@/components/domain/page/PageIntro';
 import NutrientTable from '@/components/domain/product/NutrientTable';
+import BreadcrumbJsonLd from '@/components/common/BreadcrumbJsonLd';
+import JsonLd from '@/components/common/JsonLd';
 import { getAllProductsWithBrand, getBrandProduct } from '@/lib/products';
+
+const BASE_URL = 'https://www.brixtech-bio.co.kr';
 
 interface ProductDetailPageProps {
   params: Promise<{ brand: string; product: string }>;
@@ -24,7 +28,12 @@ export async function generateMetadata({ params }: ProductDetailPageProps): Prom
   const { brand: brandSlug, product: productSlug } = await params;
   const found = await getBrandProduct(brandSlug, productSlug);
 
-  return { title: found ? `${found.product.name} | BRIXTECHBIO` : 'BRIXTECHBIO' };
+  return {
+    title: found ? `${found.product.name} | BRIXTECHBIO` : 'BRIXTECHBIO',
+    alternates: {
+      canonical: `/brand/${brandSlug}/${productSlug}`,
+    },
+  };
 }
 
 export default async function ProductDetailPage({ params }: ProductDetailPageProps) {
@@ -35,8 +44,26 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
 
   const { brand, product } = found;
 
+  const webPageJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: product.name,
+    url: `${BASE_URL}/brand/${brandSlug}/${productSlug}`,
+    datePublished: product.createdAt,
+    dateModified: product.updatedAt,
+  };
+
   return (
     <>
+      <JsonLd data={webPageJsonLd} />
+      <BreadcrumbJsonLd
+        items={[
+          { name: '홈', path: '/' },
+          { name: '브랜드 소개', path: '/brand' },
+          { name: brand.name, path: `/brand/${brandSlug}` },
+          { name: product.name, path: `/brand/${brandSlug}/${productSlug}` },
+        ]}
+      />
       <PageIntro eyebrow="제품" title={brand.name} lastCrumb={product.name} />
 
       <div className="mx-auto w-full max-w-360 px-[3%] py-15 canvas:px-0 canvas:py-30">
@@ -74,19 +101,19 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
         </section>
 
         <section className="py-10 lg:py-12">
-          <h2 className="text-h5 lg:text-h4 text-primary-2 mb-6 font-bold lg:mb-8">제품 특징</h2>
+          <h2 id="product-features" className="text-h5 lg:text-h4 text-primary-2 mb-6 font-bold lg:mb-8">제품 특징</h2>
           <CheckList items={product.features} />
         </section>
 
         <section className="py-10 lg:py-12">
-          <h2 className="text-h5 lg:text-h4 text-primary-2 mb-6 font-bold lg:mb-8">원재료명</h2>
+          <h2 id="product-ingredients" className="text-h5 lg:text-h4 text-primary-2 mb-6 font-bold lg:mb-8">원재료명</h2>
           <div className="bg-gray-50 rounded-2xl p-6 lg:p-8">
             <p className="text-text-sub text-body leading-7">{product.ingredients}</p>
           </div>
         </section>
 
         <section className="py-10 lg:py-12">
-          <h2 className="text-h5 lg:text-h4 text-primary-2 mb-6 font-bold lg:mb-8">
+          <h2 id="product-nutrients" className="text-h5 lg:text-h4 text-primary-2 mb-6 font-bold lg:mb-8">
             등록 성분량
           </h2>
           <NutrientTable rows={product.nutrients} />

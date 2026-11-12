@@ -31,7 +31,7 @@ export default function BusinessPageTemplate({
             <p className="text-small text-black mb-4 font-bold lg:mb-8">
               {titleEn || 'BUSINESS'}
             </p>
-            <h2 className="text-h4 lg:text-h2 text-black mb-5">{title}</h2>
+            <h2 id="business-overview" className="text-h4 lg:text-h2 text-black mb-5">{title}</h2>
             <p className="text-body">{lead}</p>
           </div>
         </section>

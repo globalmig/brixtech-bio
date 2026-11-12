@@ -1,6 +1,7 @@
 import { cn } from '@/lib/utils';
 
 interface PageSectionProps {
+  id?: string;
   eyebrow?: string;
   title?: string;
   description?: string;
@@ -9,6 +10,7 @@ interface PageSectionProps {
 }
 
 export default function PageSection({
+  id,
   eyebrow,
   title,
   description,
@@ -25,7 +27,7 @@ export default function PageSection({
             <p className="text-small text-black mb-5 font-bold">{eyebrow}</p>
           ) : null}
           {title ? (
-            <h2 className={"text-h4 lg:text-h2 text-black mb-5"}>
+            <h2 id={id} className={"text-h4 lg:text-h2 text-black mb-5"}>
               {title}
             </h2>
           ) : null}

@@ -15,7 +15,7 @@ export default async function BusinessSection() {
         <p className="text-small text-black mb-4 flex items-center gap-3 font-bold lg:mb-8">
           BUSINESS
         </p>
-        <h2 className="text-h4 text-black mb-5 lg:text-h2">
+        <h2 id="home-business" className="text-h4 text-black mb-5 lg:text-h2">
           하나로 이어지는 <br/>바이오 비즈니스
         </h2>
         <p className="text-body">

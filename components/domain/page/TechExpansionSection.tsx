@@ -94,7 +94,7 @@ export default function TechExpansionSection({
             <p className="text-small text-black mb-4 flex items-center gap-3 font-bold">
               {eyebrow}
             </p>
-            <h2 className="text-h4 text-black mb-5 whitespace-pre-line lg:text-h2">{title}</h2>
+            <h2 id="tech-expansion" className="text-h4 text-black mb-5 whitespace-pre-line lg:text-h2">{title}</h2>
             {description ? (
               <p className="text-body text-black/50 mb-10 lg:mb-25">{description}</p>
             ) : null}
@@ -126,7 +126,7 @@ export default function TechExpansionSection({
                   <div
                     className={`select-none pt-5 transition-transform duration-1000 ease-out ${isActive ? 'translate-x-4' : 'translate-x-0'}`}
                   >
-                    <h3 className="text-h5 text-black mb-2 lg:text-h4">{group.title}</h3>
+                    <h3 id={`tech-expansion-group-${index + 1}`} className="text-h5 text-black mb-2 lg:text-h4">{group.title}</h3>
                   </div>
 
                   <div

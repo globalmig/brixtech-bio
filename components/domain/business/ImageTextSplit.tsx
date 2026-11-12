@@ -7,6 +7,7 @@ import {
 import type { ImageAspectRatio } from '@/types/business';
 
 interface ImageTextSplitProps {
+  id?: string;
   eyebrow?: string;
   heading: string;
   lead?: string;
@@ -18,6 +19,7 @@ interface ImageTextSplitProps {
 }
 
 export default function ImageTextSplit({
+  id,
   eyebrow,
   heading,
   lead,
@@ -41,7 +43,7 @@ export default function ImageTextSplit({
           {eyebrow ? (
             <p className="text-small text-black mb-4 font-bold lg:mb-8">{eyebrow}</p>
           ) : null}
-          <h2 className="text-h4 lg:text-h2 text-black mb-5 whitespace-pre-line">
+          <h2 id={id} className="text-h4 lg:text-h2 text-black mb-5 whitespace-pre-line">
             {heading}
           </h2>
           {lead ? (

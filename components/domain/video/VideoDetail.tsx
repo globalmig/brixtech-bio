@@ -28,7 +28,7 @@ export default function VideoDetail({ item, prevItem, nextItem }: VideoDetailPro
       </div>
 
       {item.content ? (
-        <h2 className="min-h-50 py-10 whitespace-pre-line lg:py-15">
+        <h2 id="video-description" className="min-h-50 py-10 whitespace-pre-line lg:py-15">
           {item.content}
         </h2>
       ) : null}

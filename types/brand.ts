@@ -22,4 +22,6 @@ export interface Brand {
   cardDescription: string;
   /** 실제 제품 외에 추가로 보여줄 "Coming Soon" 자리 수 */
   comingSoonCount?: number;
+  createdAt: string;
+  updatedAt: string;
 }

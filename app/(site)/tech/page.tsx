@@ -5,6 +5,7 @@ import FaqAccordion from '@/components/domain/page/FaqAccordion';
 import PageIntro from '@/components/domain/page/PageIntro';
 import RoadmapGrid from '@/components/domain/page/RoadmapGrid';
 import HeroBanner from '@/components/domain/page/HeroBanner';
+import BreadcrumbJsonLd from '@/components/common/BreadcrumbJsonLd';
 import {
   ACTIVE_INGREDIENTS,
   FAQ_CATEGORIES,
@@ -16,6 +17,9 @@ import {
 
 export const metadata: Metadata = {
   title: '스피루리나 소개 | BRIXTECHBIO',
+  alternates: {
+    canonical: '/tech',
+  },
 };
 
 function renderWithHighlights(text: string, highlights: readonly string[]) {
@@ -37,12 +41,14 @@ function renderWithHighlights(text: string, highlights: readonly string[]) {
 export default function TechPage() {
   return (
     <>
+      <BreadcrumbJsonLd items={[{ name: '홈', path: '/' }, { name: '스피루리나 소개', path: '/tech' }]} />
       <PageIntro
         eyebrow="TECH"
         title="스피루리나 소개"
       />
 
       <HeroBanner
+              id="hero-spirulina"
               eyebrow="SPIRULINA"
               title={'스피루리나란?'}
               description="지구상에서 가장 오래된 생명체 중 하나로, 65% 이상의 풍부한 식물성 단백질과 필수 5대
@@ -57,7 +63,7 @@ export default function TechPage() {
            <p className="text-small mb-4 font-bold">
               ACTIVE INGREDIENT
             </p>
-            <h2 className="text-h4 mb-5 lg:text-h2">
+            <h2 id="active-ingredients" className="text-h4 mb-5 lg:text-h2">
               3대 핵심 활성 성분
             </h2>
             <p className="text-body mb-10 lg:mb-25">
@@ -80,7 +86,7 @@ export default function TechPage() {
 
         <section className="mx-auto w-full max-w-360 px-[3%] py-15 canvas:px-0 lg:py-30">
           <p className="text-small mb-4 font-bold">NUTRITION</p>
-          <h2 className="text-h4 mb-5 lg:text-h2">영양 성분</h2>
+          <h2 id="nutrition" className="text-h4 mb-5 lg:text-h2">영양 성분</h2>
           <p className="text-body mb-10 lg:mb-16">
             단백질과 필수아미노산, 비타민, 미네랄, 지방산까지.<br/> 스피루리나 한 스푼에 담긴 50여
             종의 영양소를 6가지 카테고리로 체계화하여,<br/> 고순도 원료가 지닌 영양학적 가치를
@@ -195,7 +201,7 @@ export default function TechPage() {
             <div className="flex flex-col gap-10 lg:flex-row lg:justify-between lg:gap-16">
               <div className="lg:w-[42%] lg:shrink-0">
                 <p className="text-small text-black mb-4 font-bold lg:mb-8">RECOGNITION</p>
-                <h2 className="text-h4 lg:text-h2 text-black mb-5">국제 공인 연혁</h2>
+                <h2 id="recognition" className="text-h4 lg:text-h2 text-black mb-5">국제 공인 연혁</h2>
                 <p className="text-body mb-10 max-w-2xl lg:mb-16">
                   스피루리나는 한 기업의 주장이 아니라, UN·FAO·미국 FDA·WHO 등 국제기구가 지난
                   수십 년에 걸쳐 안전성과 영양 가치를 공식적으로 인정해온 식품입니다. 1974년,
@@ -237,7 +243,7 @@ export default function TechPage() {
            <p className="text-small mb-4 font-bold">
               FAQ
             </p>
-          <h2 className="text-h4 lg:text-h2 text-black mb-5">스피루리나가 더 궁금하신가요?</h2>
+          <h2 id="faq" className="text-h4 lg:text-h2 text-black mb-5">스피루리나가 더 궁금하신가요?</h2>
           <p className="text-body mb-12 lg:mb-20">
             섭취 방법부터 활용 분야까지, 건강기능식품·화장품·반려동물 푸드·스마트팜 분야별 궁금증을 모았습니다.
           </p>

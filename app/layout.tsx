@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { Noto_Sans_KR } from 'next/font/google';
 
-import AosInit from '@/components/common/AosInit';
 import JsonLd from '@/components/common/JsonLd';
 
 import './globals.css';
@@ -41,14 +40,21 @@ const notoSansKR = Noto_Sans_KR({
 });
 
 export const metadata: Metadata = {
-  title: 'BRIXTECHBIO | 브릭스텍바이오',
+  metadataBase: new URL(BASE_URL),
+  title: '미세조류 스피루리나 전문기업 브릭스텍바이오',
   description:
     '브릭스텍바이오는 미세조류 기반 기능성 원료와 친환경 바이오 응용 제품을 개발하는 마이크로알지 바이오 플랫폼입니다.',
+  alternates: {
+    canonical: '/',
+    types: {
+      'application/rss+xml': '/rss.xml',
+    },
+  },
   keywords: [
     "브릭스텍", "브릭스텍바이오", "미세조류", "스피루리나", "배양", "배양기술", "바이오", "펫푸드", "화장품", "건강식품", "반려동물", "스마트팜",
   ],
   openGraph: {
-    title: "BRIXTECHBIO | 브릭스텍바이오",
+    title: "미세조류 스피루리나 전문기업 브릭스텍바이오",
     description: "브릭스텍바이오는 미세조류 기반 기능성 원료와 친환경 바이오 응용 제품을 개발하는 마이크로알지 바이오 플랫폼입니다.",
     url: "https://www.brixtech-bio.co.kr",
     siteName: "브릭스텍바이오",
@@ -74,7 +80,6 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
       <body>
         <JsonLd data={organizationJsonLd} />
         <JsonLd data={websiteJsonLd} />
-        <AosInit />
         {children}
       </body>
     </html>

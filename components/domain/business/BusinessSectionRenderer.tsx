@@ -11,8 +11,14 @@ import InfoTable from '@/components/domain/page/InfoTable';
 import PageSection from '@/components/domain/page/PageSection';
 import RoadmapGrid from '@/components/domain/page/RoadmapGrid';
 import { BLOCK_TYPE_DEFAULTS } from '@/lib/business-block-defaults';
-import { cn } from '@/lib/utils';
+import { cn, slugify } from '@/lib/utils';
 import type { BusinessSection } from '@/types/business';
+
+/** 섹션 제목 기반 slug + id 일부로, 같은 제목이 여러 섹션에 쓰여도 겹치지 않는 id를 만듭니다. */
+function resolveHeadingId(section: BusinessSection) {
+  const base = section.title ? slugify(section.title) : 'section';
+  return `${base}-${section.id.slice(0, 8)}`;
+}
 
 function resolveTitleEn(section: BusinessSection) {
   return section.titleEn?.trim() || BLOCK_TYPE_DEFAULTS[section.content.type].titleEn;
@@ -105,6 +111,7 @@ export default function BusinessSectionRenderer({
     return (
       <section className={cn('w-full', backgroundClass)} style={backgroundStyle}>
         <HeroBanner
+          id={resolveHeadingId(section)}
           eyebrow={resolveTitleEn(section)}
           title={section.title ?? ''}
           description={resolveLead(section)}
@@ -128,6 +135,7 @@ export default function BusinessSectionRenderer({
       >
         <div className="mx-auto w-full max-w-360 px-[3%] canvas:px-0">
           <ImageTextSplit
+            id={resolveHeadingId(section)}
             eyebrow={resolveTitleEn(section)}
             heading={section.title ?? ''}
             lead={resolveLead(section)}
@@ -165,6 +173,7 @@ export default function BusinessSectionRenderer({
       <div className="mx-auto w-full max-w-360 px-[3%] lg:px-0">
         {section.title ? (
           <PageSection
+            id={resolveHeadingId(section)}
             eyebrow={resolveTitleEn(section)}
             title={section.title}
             description={resolveLead(section)}

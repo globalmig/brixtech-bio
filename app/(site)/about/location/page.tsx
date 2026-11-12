@@ -5,9 +5,13 @@ import { LocationMapProvider, type LocationMapTab } from '@/components/domain/pa
 import LocationMapTabButtons from '@/components/domain/page/LocationMapTabButtons';
 import PageIntro from '@/components/domain/page/PageIntro';
 import PageSection from '@/components/domain/page/PageSection';
+import BreadcrumbJsonLd from '@/components/common/BreadcrumbJsonLd';
 
 export const metadata: Metadata = {
   title: '오시는길 | BRIXTECHBIO',
+  alternates: {
+    canonical: '/about/location',
+  },
 };
 
 const SEOUL_OFFICE_ADDRESS = '서울시 강남대로 101안길 13';
@@ -68,6 +72,13 @@ const DIRECTIONS = [
 export default function AboutLocationPage() {
   return (
     <LocationMapProvider tabs={MAP_TABS}>
+      <BreadcrumbJsonLd
+        items={[
+          { name: '홈', path: '/' },
+          { name: '기업소개', path: '/about' },
+          { name: '오시는길', path: '/about/location' },
+        ]}
+      />
       <PageIntro eyebrow="ABOUT" title="오시는길" />
 
       <LocationMap />
@@ -76,7 +87,7 @@ export default function AboutLocationPage() {
         <PageSection>
           <div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:gap-16">
             <div className="flex shrink-0 flex-col gap-6 lg:w-60">
-              <h2 className="text-[2rem] font-bold">브릭스텍바이오</h2>
+              <h2 id="location-brixtechbio" className="text-[2rem] font-bold">브릭스텍바이오</h2>
               <LocationMapTabButtons />
             </div>
 

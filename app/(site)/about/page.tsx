@@ -4,18 +4,24 @@ import Image from 'next/image';
 import BusinessCoreValues from '@/components/domain/about/BusinessCoreValues';
 import HeroBanner from '@/components/domain/page/HeroBanner';
 import PageIntro from '@/components/domain/page/PageIntro';
+import BreadcrumbJsonLd from '@/components/common/BreadcrumbJsonLd';
 import { COMPETENCY_ITEMS } from '@/constants/about';
 
 export const metadata: Metadata = {
   title: '기업소개 | BRIXTECHBIO',
+  alternates: {
+    canonical: '/about',
+  },
 };
 
 export default function AboutPage() {
   return (
     <>
+      <BreadcrumbJsonLd items={[{ name: '홈', path: '/' }, { name: '기업소개', path: '/about' }]} />
       <PageIntro eyebrow="ABOUT" title="기업소개" />
 
       <HeroBanner
+        id="hero-our-company"
         eyebrow="OUR COMPANY"
         title={'미세조류에서 시작해\n지속가능한 바이오 산업을 만들어갑니다.'}
         description="브릭스텍바이오는 미세조류 기반 기능성 원료와 친환경 바이오 응용 제품을 개발합니다."
@@ -27,7 +33,7 @@ export default function AboutPage() {
         <section className="flex flex-col gap-10 lg:flex-row lg:justify-between lg:gap-16">
           <div className="lg:w-[42%] lg:shrink-0">
             <p className="text-small text-black mb-4 font-bold lg:mb-8">ABOUT</p>
-            <h2 className="text-h4 lg:text-h2 text-black mb-5">
+            <h2 id="about-greeting" className="text-h4 lg:text-h2 text-black mb-5">
               안녕하십니까,
               <br />
               브릭스텍바이오입니다.
@@ -69,7 +75,7 @@ export default function AboutPage() {
           <div className="flex flex-col gap-10 lg:flex-row-reverse lg:justify-between lg:gap-16">
             <div className="lg:w-[45%] lg:shrink-0">
               <p className="text-small text-black mb-4 font-bold lg:mb-8">FACILITY</p>
-              <h2 className="text-h4 lg:text-h2 text-black mb-8">
+              <h2 id="facility" className="text-h4 lg:text-h2 text-black mb-8">
                 미세조류가 자라나는
                 <br />
                 배양 현장을 영상으로
@@ -100,7 +106,7 @@ export default function AboutPage() {
       <section className="py-15 canvas:py-30 lg:pb-0">
         <div className="mx-auto w-full max-w-360 px-[3%] canvas:px-0">
           <p className="text-small text-black mb-4 font-bold lg:mb-8">BUSINESS</p>
-          <h2 className="text-h4 lg:text-h2 text-black mb-5">주요 사업 영역</h2>
+          <h2 id="business-areas" className="text-h4 lg:text-h2 text-black mb-5">주요 사업 영역</h2>
           <p className="text-body mb-10 lg:mb-20">
             브릭스텍바이오는 자체 배양·정제 기술로 생산한 고순도 마이크로 알지 원료를 기반으로,<br/>
             건강기능식품·화장품·반려동물 푸드·공기정화기·스마트팜 5개 사업 영역에 적용하고
@@ -114,7 +120,7 @@ export default function AboutPage() {
       <div className="mx-auto w-full max-w-360 px-[3%] py-15 canvas:px-0 canvas:py-30 lg:pb-0">
         <section className="py-10 lg:py-12">
           <p className="text-small text-black mb-4 font-bold lg:mb-8">COMPETENCY</p>
-          <h2 className="text-h4 lg:text-h2 text-black mb-5">경쟁력</h2>
+          <h2 id="competency" className="text-h4 lg:text-h2 text-black mb-5">경쟁력</h2>
           <p className="text-body mb-10 lg:mb-20">
             빠른 확장보다 본질에 집중해 온 시간이 브릭스텍바이오의 경쟁력이 되었습니다.
             <br />
@@ -144,7 +150,7 @@ export default function AboutPage() {
             BRIXTECHBIO
           </p>
 
-          <h2 className="text-h4 lg:text-h2 text-black">자연의 속도로, 꾸준히</h2>
+          <h2 id="brand-statement" className="text-h4 lg:text-h2 text-black">자연의 속도로, 꾸준히</h2>
           <p>
             작은 미세조류에서 시작해 사람과 환경이 함께 건강해지는 내일을 만들어가겠습니다.
           </p>

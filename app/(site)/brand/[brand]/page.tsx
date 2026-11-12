@@ -4,8 +4,12 @@ import { notFound } from 'next/navigation';
 
 import PageIntro from '@/components/domain/page/PageIntro';
 import ProductGridItem from '@/components/domain/product/ProductGridItem';
+import BreadcrumbJsonLd from '@/components/common/BreadcrumbJsonLd';
+import JsonLd from '@/components/common/JsonLd';
 import { getBrand, getBrands } from '@/lib/brands';
 import { getBrandLineup } from '@/lib/products';
+
+const BASE_URL = 'https://www.brixtech-bio.co.kr';
 
 interface BrandDetailPageProps {
   params: Promise<{ brand: string }>;
@@ -20,7 +24,12 @@ export async function generateMetadata({ params }: BrandDetailPageProps): Promis
   const { brand: slug } = await params;
   const brand = await getBrand(slug);
 
-  return { title: brand ? `${brand.name} | BRIXTECHBIO` : 'BRIXTECHBIO' };
+  return {
+    title: brand ? `${brand.name} | BRIXTECHBIO` : 'BRIXTECHBIO',
+    alternates: {
+      canonical: `/brand/${slug}`,
+    },
+  };
 }
 
 export default async function BrandDetailPage({ params }: BrandDetailPageProps) {
@@ -31,8 +40,25 @@ export default async function BrandDetailPage({ params }: BrandDetailPageProps) 
 
   const lineup = await getBrandLineup(brand);
 
+  const webPageJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: brand.name,
+    url: `${BASE_URL}/brand/${slug}`,
+    datePublished: brand.createdAt,
+    dateModified: brand.updatedAt,
+  };
+
   return (
     <>
+      <JsonLd data={webPageJsonLd} />
+      <BreadcrumbJsonLd
+        items={[
+          { name: '홈', path: '/' },
+          { name: '브랜드 소개', path: '/brand' },
+          { name: brand.name, path: `/brand/${slug}` },
+        ]}
+      />
       <PageIntro eyebrow="브랜드 소개" title={brand.name} />
 
       <div className="relative flex flex-col items-center justify-center px-5 py-20 text-center lg:py-32">
@@ -67,7 +93,7 @@ export default async function BrandDetailPage({ params }: BrandDetailPageProps) 
       <section className="py-15 canvas:py-30">
         <div className="mx-auto w-full max-w-360 px-[3%] canvas:px-0">
           <p className="text-small text-black mb-4 font-bold lg:mb-8">OUR PRODUCTS</p>
-          <h2 className="text-h4 lg:text-h2 text-black mb-5">{brand.name}의 제품을 만나보세요</h2>
+          <h2 id="brand-products" className="text-h4 lg:text-h2 text-black mb-5">{brand.name}의 제품을 만나보세요</h2>
           <p className="text-body mb-10 lg:mb-20">
             엄선된 성분과 세심한 기획으로 완성한 제품들을 소개합니다.
           </p>

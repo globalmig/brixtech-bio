@@ -12,7 +12,7 @@ export default async function ProductSection() {
        <p className="text-small text-black mb-4 font-bold lg:mb-8">
         PRODUCTS
       </p>
-      <h2 className="text-h4 text-black mb-10 whitespace-pre-line lg:mb-20 lg:text-h2">
+      <h2 id="home-products" className="text-h4 text-black mb-10 whitespace-pre-line lg:mb-20 lg:text-h2">
         {'제품의 라인업을 소개합니다.'}
       </h2>
       <Link

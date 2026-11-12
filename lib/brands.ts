@@ -14,10 +14,12 @@ interface BrandRow {
   tagline: string | null;
   card_description: string | null;
   coming_soon_count: number;
+  created_at: string;
+  updated_at: string;
 }
 
 const SELECT_COLUMNS =
-  'id, slug, name, category, business_category, logo, logo_white, bg_image, banner_image, tagline, card_description, coming_soon_count';
+  'id, slug, name, category, business_category, logo, logo_white, bg_image, banner_image, tagline, card_description, coming_soon_count, created_at, updated_at';
 
 function fromRow(row: BrandRow): Brand {
   return {
@@ -33,6 +35,8 @@ function fromRow(row: BrandRow): Brand {
     tagline: row.tagline ?? '',
     cardDescription: row.card_description ?? '',
     comingSoonCount: row.coming_soon_count,
+    createdAt: row.created_at,
+    updatedAt: row.updated_at,
   };
 }
 

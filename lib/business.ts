@@ -31,10 +31,11 @@ interface BusinessPageRow {
   lead_hidden: boolean;
   sort_order: number;
   business_sections: BusinessSectionRow[];
+  updated_at: string;
 }
 
 const SELECT_COLUMNS = `
-  id, category, title, title_en, lead, is_active, lead_hidden, sort_order,
+  id, category, title, title_en, lead, is_active, lead_hidden, sort_order, updated_at,
   business_sections ( id, title, title_en, image, note, lead, background_color, hidden, block_type, sort_order, content )
 `;
 
@@ -69,6 +70,7 @@ function fromRow(row: BusinessPageRow): BusinessPage {
     leadHidden: row.lead_hidden,
     sortOrder: row.sort_order,
     sections,
+    updatedAt: row.updated_at,
   };
 }
 
