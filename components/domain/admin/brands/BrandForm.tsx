@@ -87,7 +87,6 @@ export default function BrandForm({
   const handleSuccessClose = () => {
     setSuccessMessage(null);
     router.push('/admin/brands');
-    router.refresh();
   };
 
   return (

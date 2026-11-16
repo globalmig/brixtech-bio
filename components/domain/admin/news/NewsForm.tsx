@@ -90,7 +90,6 @@ export default function NewsForm({
   const handleSuccessClose = () => {
     setSuccessMessage(null);
     router.push('/admin/news');
-    router.refresh();
   };
 
   return (

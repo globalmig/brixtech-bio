@@ -137,7 +137,6 @@ export default function ProductForm({
   const handleSuccessClose = () => {
     setSuccessMessage(null);
     router.push(`/admin/brands/${brandId}/products`);
-    router.refresh();
   };
 
   return (

@@ -85,7 +85,6 @@ export default function AdminProductDetail({
             onConfirm={async () => {
               await deleteProduct(product.id, brand.id);
               router.push('/admin/products');
-              router.refresh();
             }}
             confirmMessage={`"${product.name}" 제품을 삭제하시겠습니까? 삭제 시 되돌릴 수 없습니다.`}
             className={buttonVariants({ variant: 'danger', size: 'medium' })}

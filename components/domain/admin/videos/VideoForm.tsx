@@ -88,7 +88,6 @@ export default function VideoForm({
   const handleSuccessClose = () => {
     setSuccessMessage(null);
     router.push('/admin/videos');
-    router.refresh();
   };
 
   return (

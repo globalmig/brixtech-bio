@@ -750,7 +750,6 @@ export default function BusinessPageForm({
   const handleSuccessClose = () => {
     setSuccessMessage(null);
     router.push('/admin/business');
-    router.refresh();
   };
 
   return (
