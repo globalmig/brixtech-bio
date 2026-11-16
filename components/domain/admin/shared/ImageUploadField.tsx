@@ -1,6 +1,6 @@
 'use client';
 
-import DOMPurify from 'isomorphic-dompurify';
+import DOMPurify from 'dompurify';
 import Image from 'next/image';
 import { useState, type ChangeEvent } from 'react';
 
