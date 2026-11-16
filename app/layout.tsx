@@ -15,7 +15,7 @@ const organizationJsonLd = {
   url: BASE_URL,
   logo: `${BASE_URL}/images/og_image.png`,
   description:
-    '브릭스텍바이오는 미세조류 기반 기능성 원료와 친환경 바이오 응용 제품을 개발하는 마이크로알지 바이오 플랫폼입니다.',
+    '브릭스텍바이오는 미세조류(Microalgae) 배양기술을 연구하며, 바이오 소재 개발을 중심으로 친환경 농업·스마트팜·반려동물 헬스케어·화장품 등 다양한 산업 분야로 기술의 가치를 확장하는 바이오 전문기업 입니다.',
   address: {
     '@type': 'PostalAddress',
     streetAddress: '강남대로 101안길 13, B1~4F',
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: '미세조류 스피루리나 전문기업 브릭스텍바이오',
   description:
-    '브릭스텍바이오는 미세조류 기반 기능성 원료와 친환경 바이오 응용 제품을 개발하는 마이크로알지 바이오 플랫폼입니다.',
+    '브릭스텍바이오는 미세조류(Microalgae) 배양기술을 연구하며, 바이오 소재 개발을 중심으로 친환경 농업·스마트팜·반려동물 헬스케어·화장품 등 다양한 산업 분야로 기술의 가치를 확장하는 바이오 전문기업 입니다.',
   alternates: {
     canonical: '/',
     types: {
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     title: "미세조류 스피루리나 전문기업 브릭스텍바이오",
-    description: "브릭스텍바이오는 미세조류 기반 기능성 원료와 친환경 바이오 응용 제품을 개발하는 마이크로알지 바이오 플랫폼입니다.",
+    description: "브릭스텍바이오는 미세조류(Microalgae) 배양기술을 연구하며, 바이오 소재 개발을 중심으로 친환경 농업·스마트팜·반려동물 헬스케어·화장품 등 다양한 산업 분야로 기술의 가치를 확장하는 바이오 전문기업 입니다.",
     url: "https://www.brixtech-bio.co.kr",
     siteName: "브릭스텍바이오",
     images: [
