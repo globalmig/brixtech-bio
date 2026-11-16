@@ -62,20 +62,12 @@ export const PROCESS_STEPS = [
 
 export const BUSINESS_CATEGORIES = [
   {
-    image: '/images/건강기능식품2.webp',
-    icon: '/icons/value-health.svg',
-    label: 'HEALTH SUPPLEMENTS',
-    title: '건강기능식품',
-    description: '고순도 스피루리나의 원료를 표준화하여 면역력 증진에 특화된 헬스케어 식품',
-    href: '/business/supplements',
-  },
-  {
-    image: '/images/화장품2.webp',
-    icon: '/icons/value-cosmetics.svg',
-    label: 'COSMETICS',
-    title: '화장품',
-    description: '미세조류 천연 추출물을 바이오 포뮬레이션 기술로 정제한 프리미엄 뷰티 솔루션',
-    href: '/business/cosmetics',
+    image: '/images/스마트팜2.webp',
+    icon: '/icons/value-smartfarm.svg',
+    label: 'SMART FARM',
+    title: '스마트팜',
+    description: '지속 가능한 친환경 도심 순환형 농업 시스템 구축',
+    href: '/business/smart-farm',
   },
   {
     image: '/images/반려동물식품2.webp',
@@ -86,20 +78,28 @@ export const BUSINESS_CATEGORIES = [
     href: '/business/pet-food',
   },
   {
+    image: '/images/화장품2.webp',
+    icon: '/icons/value-cosmetics.svg',
+    label: 'COSMETICS',
+    title: '화장품',
+    description: '미세조류 천연 추출물을 바이오 포뮬레이션 기술로 정제한 프리미엄 뷰티 솔루션',
+    href: '/business/cosmetics',
+  },
+  {
+    image: '/images/건강기능식품2.webp',
+    icon: '/icons/value-health.svg',
+    label: 'HEALTH SUPPLEMENTS',
+    title: '건강기능식품',
+    description: '고순도 스피루리나의 원료를 표준화하여 면역력 증진에 특화된 헬스케어 식품',
+    href: '/business/supplements',
+  },
+  {
     image: '/images/공기정화기2.webp',
     icon: '/icons/value-air.svg',
     label: 'AIR PURIFICATION',
     title: '공기정화기',
     description: '미세조류 기반 친환경 탄소 저감 및 바이오 공기정화 시스템 구현',
     href: '/business/air-purification',
-  },
-  {
-    image: '/images/스마트팜2.webp',
-    icon: '/icons/value-smartfarm.svg',
-    label: 'SMART FARM',
-    title: '스마트팜',
-    description: '지속 가능한 친환경 도심 순환형 농업 시스템 구축',
-    href: '/business/smart-farm',
   },
 ];
 

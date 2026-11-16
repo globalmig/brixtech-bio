@@ -22,7 +22,13 @@ interface ConfirmDeleteButtonProps {
   ariaLabel?: string;
   /** 다이얼로그의 "삭제" 버튼 색상. 기본값은 위험(danger)을 뜻하는 빨강이며, 필요한 곳에서만 primary로 바꿉니다. */
   confirmVariant?: 'danger' | 'primary';
+  /** 삭제 성공 시 보여줄 안내 다이얼로그 문구 */
+  successMessage?: string;
+  /** 성공 다이얼로그를 확인(닫음)한 뒤 실행할 작업 (예: router.refresh()) */
+  onSuccess?: () => void;
 }
+
+type ResultState = { type: 'success' | 'error'; message: string } | null;
 
 /**
  * 관리자 화면 전체에서 공유하는 삭제 확인 버튼. 되돌릴 수 없는 작업(브랜드/제품/
@@ -36,8 +42,17 @@ export default function ConfirmDeleteButton({
   children,
   ariaLabel,
   confirmVariant = 'danger',
+  successMessage = '삭제되었습니다.',
+  onSuccess,
 }: ConfirmDeleteButtonProps) {
   const [open, setOpen] = useState(false);
+  const [result, setResult] = useState<ResultState>(null);
+
+  const closeResult = () => {
+    const wasSuccess = result?.type === 'success';
+    setResult(null);
+    if (wasSuccess) onSuccess?.();
+  };
 
   return (
     <>
@@ -66,10 +81,36 @@ export default function ConfirmDeleteButton({
               variant={confirmVariant}
               onClick={() => {
                 setOpen(false);
-                void onConfirm();
+                void (async () => {
+                  try {
+                    await onConfirm();
+                    setResult({ type: 'success', message: successMessage });
+                  } catch (error) {
+                    setResult({
+                      type: 'error',
+                      message: error instanceof Error ? error.message : '삭제에 실패했습니다.',
+                    });
+                  }
+                })();
               }}
             >
               삭제
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      <Dialog
+        open={result !== null}
+        onOpenChange={(nextOpen) => {
+          if (!nextOpen) closeResult();
+        }}
+      >
+        <DialogContent className="w-100">
+          <DialogHeader title={result?.message ?? ''} />
+          <DialogFooter>
+            <Button type="button" variant="primary" onClick={closeResult}>
+              확인
             </Button>
           </DialogFooter>
         </DialogContent>

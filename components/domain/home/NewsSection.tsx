@@ -5,6 +5,8 @@ import { toNewsItem } from '@/types/news';
 
 export default async function NewsSection() {
   const newsList = await getNewsList();
+  if (newsList.length === 0) return null;
+
   const recentNews = newsList.slice(0, 5).map(toNewsItem);
 
   return (

@@ -102,10 +102,8 @@ export default function AdminNewsList({ newsList }: AdminNewsListProps) {
                   수정
                 </Link>
                 <ConfirmDeleteButton
-                  onConfirm={async () => {
-                    await deleteNews(news.id);
-                    router.refresh();
-                  }}
+                  onConfirm={() => deleteNews(news.id)}
+                  onSuccess={() => router.refresh()}
                   confirmMessage={`"${news.title}" 소식을 삭제하시겠습니까? 삭제 시 되돌릴 수 없습니다.`}
                   className="cursor-pointer text-text-info hover:text-system-alert hover:underline"
                 >
